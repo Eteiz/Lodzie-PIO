@@ -16,7 +16,7 @@ public class Board extends JLabel {
         this.setVerticalTextPosition(JLabel.TOP);
 
 
-        this.setBorder(BorderFactory.createLineBorder(Color.CYAN,3));
+        //this.setBorder(BorderFactory.createLineBorder(Color.CYAN,3));
         this.setIconTextGap(-5);
 
 
