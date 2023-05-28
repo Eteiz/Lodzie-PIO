@@ -11,10 +11,8 @@ public class main {
         Board Player1Board = new Board();
         Player1Board.setBounds(18,10,336,368);
 
-
         Board Player2Board = new Board();
         Player2Board.setBounds(336+18*2,10,336,368);
-
 
         Board Player3Board = new Board();
         Player3Board.setBounds(336*2+18*3,10,336,368);
@@ -23,6 +21,10 @@ public class main {
         MyFrame.add(Player1Board);
         MyFrame.add(Player2Board);
         MyFrame.add(Player3Board);
+
+        BoardPanel ShipPanel = new BoardPanel();
+        ShipPanel.setBounds(18,415,336,328);
+        MyFrame.add(ShipPanel);
 
         MyFrame.setVisible(true);
     }
