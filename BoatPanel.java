@@ -2,8 +2,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class BoardPanel extends JLabel {
-    BoardPanel() {
+public class BoatPanel extends JLabel {
+    BoatPanel() {
 
         // 451 x 401 - original image size
         // 336 x 328 - preferred image size

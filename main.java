@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class main {
@@ -19,7 +17,7 @@ public class main {
         MyFrame.add(Player2Board.Board);
         MyFrame.add(Player3Board.Board);
 
-        BoardPanel ShipPanel = new BoardPanel();
+        BoatPanel ShipPanel = new BoatPanel();
         ShipPanel.setBounds(18,415,336,328);
         MyFrame.add(ShipPanel);
 
