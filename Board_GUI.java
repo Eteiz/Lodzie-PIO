@@ -1,11 +1,8 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.util.*;
 import javax.swing.*;
 
-public class Board{
+public class Board_GUI {
     public JPanel Board = new JPanel();
     private ArrayList<Tile> Fields = new ArrayList<Tile>();
 
@@ -13,7 +10,7 @@ public class Board{
     private int BoardSize;
     private int pos_x, pos_y;
 
-    Board(int x, int y, int BoardSize, boolean Big){
+    Board_GUI(int x, int y, int BoardSize, boolean Big){
         this.pos_x=x;
         this.pos_y=y;
 
