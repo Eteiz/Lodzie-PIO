@@ -3,9 +3,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class Board extends JLabel {
-    /*ImageIcon boardImg = new ImageIcon("src/img/board/SmallBoard.png");
-    String PlayerNick="Gracz";
-    boolean active;*/
 
     final int size = 10;
     int Board[][] = new int[size][size];
