@@ -6,7 +6,7 @@ public class MainFrame extends JFrame {
         this.setTitle("Łodzie");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setSize(1080,800);
+        this.setSize(1165,800);
 
         ImageIcon icon = new ImageIcon("src/img/LodzIco.png");
         this.setIconImage(icon.getImage());
