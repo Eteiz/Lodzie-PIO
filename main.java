@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class main {
     public static void main(String[] args) throws IOException {
-       /* MainFrame MyFrame = new MainFrame();
+        /*MainFrame MyFrame = new MainFrame();
         Board MainBoard = new Board();
         MainBoard.setBounds(1080/2-336/2,380,336,368);
 
@@ -117,6 +117,5 @@ public class main {
         player.shoot(player.playerBoard);
 
         player.playerBoard.printBoard();*/
-
     }
 }
