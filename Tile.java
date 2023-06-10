@@ -9,7 +9,7 @@ public class Tile {
     private boolean Big;
     private int pos_x, pos_y;
 
-    public ArrayList<JLabel> Field = new ArrayList<JLabel>();
+    public ArrayList<JButton> Field = new ArrayList<JButton>();
     private ArrayList<ImageIcon> FieldImg = new ArrayList<ImageIcon>();
 
     public JLayeredPane layeredPane = new JLayeredPane();
@@ -59,15 +59,15 @@ public class Tile {
     private void FieldInit(int pos_x, int pos_y, int FieldSize){
 
         /* Empty Field */
-        JLabel label1= new JLabel();
+        JButton label1= new JButton();
         label1.setBounds(0, 0, FieldSize, FieldSize);
 
         /* Miss */
-        JLabel label2= new JLabel();
+        JButton label2= new JButton();
         label2.setBounds(0, 0, FieldSize, FieldSize);
 
         /* Hit */
-        JLabel label3= new JLabel();
+        JButton label3= new JButton();
         label3.setBounds(0, 0, FieldSize, FieldSize);
 
         /* Adding to Array */
