@@ -59,24 +59,24 @@ public class Tile {
     private void FieldInit(int pos_x, int pos_y, int FieldSize){
 
         /* Empty Field */
-        JButton label1= new JButton();
-        label1.setBounds(0, 0, FieldSize, FieldSize);
-        label1.setVisible(true);
+        JButton efButton= new JButton();
+        efButton.setBounds(0, 0, FieldSize, FieldSize);
+        efButton.setVisible(true);
 
         /* Miss */
-        JButton label2= new JButton();
-        label2.setBounds(0, 0, FieldSize, FieldSize);
-        label2.setVisible(false);
+        JButton mButton= new JButton();
+        mButton.setBounds(0, 0, FieldSize, FieldSize);
+        mButton.setVisible(false);
 
         /* Hit */
-        JButton label3= new JButton();
-        label3.setBounds(0, 0, FieldSize, FieldSize);
-        label3.setVisible(false);
+        JButton hButton= new JButton();
+        hButton.setBounds(0, 0, FieldSize, FieldSize);
+        hButton.setVisible(false);
 
         /* Adding to Array */
-        Field.add(0, label1);
-        Field.add(1, label2);
-        Field.add(2, label3);
+        Field.add(0, efButton);
+        Field.add(1, mButton);
+        Field.add(2, hButton);
     }
 
     public JLayeredPane getJLayeredPane(){
