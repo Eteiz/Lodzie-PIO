@@ -55,20 +55,23 @@ public class Tile {
         FieldImg.add(5, new ImageIcon("src/img/Hit_71x71.png"));
     }
 
-    /* Initialising Array of JLabels */
+    /* Initialising Array of JButtons */
     private void FieldInit(int pos_x, int pos_y, int FieldSize){
 
         /* Empty Field */
         JButton label1= new JButton();
         label1.setBounds(0, 0, FieldSize, FieldSize);
+        label1.setVisible(true);
 
         /* Miss */
         JButton label2= new JButton();
         label2.setBounds(0, 0, FieldSize, FieldSize);
+        label2.setVisible(false);
 
         /* Hit */
         JButton label3= new JButton();
         label3.setBounds(0, 0, FieldSize, FieldSize);
+        label3.setVisible(false);
 
         /* Adding to Array */
         Field.add(0, label1);
