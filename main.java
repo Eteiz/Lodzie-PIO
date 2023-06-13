@@ -1,31 +1,35 @@
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class main {
     public static void main(String[] args) throws IOException {
-        /*MainFrame MyFrame = new MainFrame();
+
+        // Game-Interface
+        MainFrame MyFrame = new MainFrame();
         Board MainBoard = new Board();
-        MainBoard.setBounds(1080/2-336/2,380,336,368);
 
-        Board Player1Board = new Board();
-        Player1Board.setBounds(18,10,336,368);
+        // TBA: Spytac Kuby co robi ta linijka kodu
+        //MainBoard.setBounds(1080/2-336/2,380,336,368);
 
+        Board_GUI mainBoardGUI = new Board_GUI(1165/2-360/2,380, 10, false);
 
-        Board Player2Board = new Board();
-        Player2Board.setBounds(336+18*2,10,336,368);
+        Board_GUI player1BoardGUI = new Board_GUI(18,10, 10, false);
 
+        Board_GUI player2BoardGUI = new Board_GUI(360+18*2,10, 10, false);
 
-        Board Player3Board = new Board();
-        Player3Board.setBounds(336*2+18*3,10,336,368);
+        Board_GUI player3BoardGUI = new Board_GUI(360*2+18*3,10, 10, false);
 
-        MyFrame.add(MainBoard);
-        MyFrame.add(Player1Board);
-        MyFrame.add(Player2Board);
-        MyFrame.add(Player3Board);
+        MyFrame.add(mainBoardGUI.Board);
+        MyFrame.add(player1BoardGUI.Board);
+        MyFrame.add(player2BoardGUI.Board);
+        MyFrame.add(player3BoardGUI.Board);
 
-        MyFrame.setVisible(true);*/
+        BoatPanel ShipPanel = new BoatPanel();
+        ShipPanel.setBounds(18,415,336,328);
+        MyFrame.add(ShipPanel);
 
+        MyFrame.setVisible(true);
+
+        // Game-Logic
         Player player = new Player("player");
 
         //player.setBoats();
@@ -119,3 +123,5 @@ public class main {
         player.playerBoard.printBoard();*/
     }
 }
+
+

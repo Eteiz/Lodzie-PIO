@@ -1,8 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-
 public class Board {
+
     final int size = 10;
     int Board[][] = new int[size][size];
     public void printBoard() {
