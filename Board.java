@@ -2,23 +2,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class Board extends JLabel {
+public class Board {
 
     final int size = 10;
     int Board[][] = new int[size][size];
-
-    /*Board(){
-        this.setText(PlayerNick);
-        this.setIcon(boardImg);
-
-        this.setHorizontalTextPosition(JLabel.CENTER);
-        this.setVerticalTextPosition(JLabel.TOP);
-
-        //this.setBorder(BorderFactory.createLineBorder(Color.CYAN,3));
-        this.setIconTextGap(-5);
-
-        this.setFont(new Font("MV Boli", Font.PLAIN, 20));
-    };*/
 
     public void printBoard() {
         for(int i = 0; i < 10; i++) {

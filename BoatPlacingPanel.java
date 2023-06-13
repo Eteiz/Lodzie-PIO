@@ -10,7 +10,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
     // Buttons for picking ship type
     JButton shipOneH, shipTwoH, shipThreeH, shipFourH, shipTwoV, shipThreeV, shipFourV;
     // Variable that determines which ship is chosen, if no ship is chosen the variable is null
-    public String chosenShip;
+    String chosenShip;
 
     BoatPlacingPanel() {
 
@@ -140,7 +140,17 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
 
         shipFourV.addActionListener(this);
         this.add(shipFourV);
-        // Potential place for buttons
+    }
+
+    void ResetPlacingPanel() {
+        shipOneH.setBorderPainted(false);
+        shipTwoH.setBorderPainted(false);
+        shipThreeH.setBorderPainted(false);
+        shipFourH.setBorderPainted(false);
+        shipTwoV.setBorderPainted(false);
+        shipThreeV.setBorderPainted(false);
+        shipFourV.setBorderPainted(false);
+        chosenShip = null;
     }
 
     @Override
@@ -270,5 +280,9 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
             shipTwoV.setBorderPainted(false);
             shipThreeV.setBorderPainted(false);
         }
+    }
+
+    String GetChosenShipStatus() {
+        return chosenShip;
     }
 }
