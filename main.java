@@ -6,7 +6,9 @@ public class main {
         // Game-Interface
         MainFrame MyFrame = new MainFrame();
         Board MainBoard = new Board();
-        MainBoard.setBounds(1080/2-336/2,380,336,368);
+
+        // TBA: Spytac Kuby co robi ta linijka kodu
+        //MainBoard.setBounds(1080/2-336/2,380,336,368);
 
         Board_GUI mainBoardGUI = new Board_GUI(1165/2-360/2,380, 10, false);
 
@@ -119,7 +121,6 @@ public class main {
         player.shoot(player.playerBoard);
 
         player.playerBoard.printBoard();*/
-
     }
 }
 

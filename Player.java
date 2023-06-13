@@ -3,11 +3,9 @@ import java.util.Scanner;
 public class Player {
     String playerNick;
     Board playerBoard = new Board();
-
     Player(String playerNick) {
         this.playerNick = playerNick;
     }
-
     public void setBoats() {
         int num_of_4boats = 0;
         int num_of_3boats = 0;
@@ -127,78 +125,44 @@ public class Player {
         }
     }
     public boolean validateBoat(Boat boat, Board board) {
-        if(boat.direction == 0) {
-            if(boat.position.x + boat.length > board.size)
-                return false;
-        }
-
-        if(boat.direction == 1) {
-            if(boat.position.y + boat.length > board.size)
-                return false;
-        }
-
         if(board.Board[boat.position.x][boat.position.y] == 1)
             return false;
-
-        if(boat.length == 1) {
-            if(boat.position.x + 1 < 10 && board.Board[boat.position.x + 1][boat.position.y] == 1)
+        int start = 0, end = 10;
+        if(boat.direction == 0) {
+            if (boat.position.x + boat.length > board.size)
                 return false;
-            if(boat.position.x - 1 >= 0 && board.Board[boat.position.x - 1][boat.position.y] == 1)
-                return false;
-            if(boat.position.y + 1 < 10 && board.Board[boat.position.x][boat.position.y + 1] == 1)
-                return false;
-            if(boat.position.y - 1 >= 0 && board.Board[boat.position.x][boat.position.y - 1] == 1)
-                return false;
-            if(boat.position.x - 1 >= 0 && boat.position.y - 1 >= 0 && board.Board[boat.position.x - 1][boat.position.y - 1] == 1)
-                return false;
-            if(boat.position.x - 1 >= 0 && boat.position.y + 1 < 10 && board.Board[boat.position.x - 1][boat.position.y + 1] == 1)
-                return false;
-            if(boat.position.x + 1 < 10 && boat.position.y - 1 >= 0 && board.Board[boat.position.x + 1][boat.position.y - 1] == 1)
-                return false;
-            if(boat.position.x + 1 < 10 && boat.position.y + 1 < 10 && board.Board[boat.position.x + 1][boat.position.y + 1] == 1)
-                return false;
+            if (boat.position.x - 1 >= 0)
+                start = boat.position.x - 1;
+            if (boat.position.x + boat.length + 1 < 10)
+                end = boat.position.x + boat.length + 1;
+            for (int i = start; i < end; i++) {
+                if (board.Board[i][boat.position.y] == 1)
+                    return false;
+                if (boat.position.y - 1 >= 0)
+                    if (board.Board[i][boat.position.y - 1] == 1)
+                        return false;
+                if (boat.position.y + 1 < 10)
+                    if (board.Board[i][boat.position.y + 1] == 1)
+                        return false;
+            }
         }
-        else{
-            if(boat.direction == 0) {
-                for(int i = 0; i < boat.length; i++) {
-                    if(boat.position.x + 1 + i < 10 && board.Board[boat.position.x + i + 1][boat.position.y] == 1)
+        else {
+            if (boat.position.y + boat.length > board.size)
+                return false;
+            if (boat.position.y - 1 >= 0)
+                start = boat.position.y - 1;
+            if (boat.position.y + boat.length + 1 < 10)
+                end = boat.position.y + boat.length + 1;
+            for (int i = start; i < end; i++) {
+                if (board.Board[boat.position.x][i] == 1)
+                    return false;
+                if (boat.position.x - 1 >= 0)
+                    if (board.Board[boat.position.x - 1][i] == 1)
                         return false;
-                    if(boat.position.x - 1 + i >= 0 && board.Board[boat.position.x + i - 1][boat.position.y] == 1)
-                        return false;
-                    if(boat.position.x + i < 10 && boat.position.y + 1 < 10 && board.Board[boat.position.x + i][boat.position.y + 1] == 1)
-                        return false;
-                    if(boat.position.x + i < 10 && boat.position.y - 1 >= 0 && board.Board[boat.position.x + i][boat.position.y - 1] == 1)
-                        return false;
-                    if(boat.position.x - 1 + i >= 0 && boat.position.y - 1 >= 0 && board.Board[boat.position.x + i - 1][boat.position.y - 1] == 1)
-                        return false;
-                    if(boat.position.x - 1 + i >= 0 && boat.position.y + 1 < 10 && board.Board[boat.position.x + i - 1][boat.position.y + 1] == 1)
-                        return false;
-                    if(boat.position.x + 1 + i < 10 && boat.position.y - 1 >= 0 && board.Board[boat.position.x + i + 1][boat.position.y - 1] == 1)
-                        return false;
-                    if(boat.position.x + i < 10 && boat.position.y + 1 < 10 && board.Board[boat.position.x + i + 1][boat.position.y + 1] == 1)
+                if (boat.position.x + 1 < 10)
+                    if (board.Board[boat.position.x + 1][i] == 1)
                         return false;
                 }
-            }
-            else {
-                for(int i = 0; i < boat.length; i++) {
-                    if(boat.position.x + 1 < 10 && boat.position.y + i < 10 && board.Board[boat.position.x + 1][boat.position.y + i] == 1)
-                        return false;
-                    if(boat.position.x - 1 >= 0 && boat.position.y + i < 10 && board.Board[boat.position.x - 1][boat.position.y + i] == 1)
-                        return false;
-                    if(boat.position.y + i + 1 < 10 && board.Board[boat.position.x][boat.position.y + i + 1] == 1)
-                        return false;
-                    if(boat.position.y + i - 1 >= 0 && board.Board[boat.position.x][boat.position.y + i - 1] == 1)
-                        return false;
-                    if(boat.position.x - 1 >= 0 && boat.position.y + i - 1 >= 0 && board.Board[boat.position.x - 1][boat.position.y + i - 1] == 1)
-                        return false;
-                    if(boat.position.x - 1 >= 0 && boat.position.y + i + 1 < 10 && board.Board[boat.position.x - 1][boat.position.y + i + 1] == 1)
-                        return false;
-                    if(boat.position.x + 1 < 10 && boat.position.y + i - 1 >= 0 && board.Board[boat.position.x + 1][boat.position.y + i - 1] == 1)
-                        return false;
-                    if(boat.position.x + 1 < 10 && boat.position.y + i + 1 < 10 && board.Board[boat.position.x + 1][boat.position.y + i + 1] == 1)
-                        return false;
-                }
-            }
         }
         return true;
     }
