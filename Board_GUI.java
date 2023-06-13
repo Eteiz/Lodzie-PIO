@@ -3,6 +3,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class Board_GUI {
+
     public JPanel Board = new JPanel();
     private ArrayList<Tile> Fields = new ArrayList<Tile>();
 
@@ -38,5 +39,19 @@ public class Board_GUI {
 
     public Tile getTile(int x, int y){
         return Fields.get(x*y+y);
+    }
+
+    public void setTile(int x, int y, Tile.ShotValue val){
+        getTile(x, y).Field.get(0).setVisible(false);
+        getTile(x, y).Field.get(1).setVisible(false);
+        getTile(x, y).Field.get(2).setVisible(false);
+
+        if(val == Tile.ShotValue.NO_SHOT)
+            getTile(x, y).Field.get(0).setVisible(true);
+        else if (val == Tile.ShotValue.MISS)
+            getTile(x, y).Field.get(1).setVisible(true);
+        else if (val == Tile.ShotValue.HIT)
+            getTile(x, y).Field.get(2).setVisible(true);
+
     }
 }

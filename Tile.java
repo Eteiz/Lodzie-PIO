@@ -9,7 +9,7 @@ public class Tile {
     private boolean Big;
     private int pos_x, pos_y;
 
-    public ArrayList<JLabel> Field = new ArrayList<JLabel>();
+    public ArrayList<JButton> Field = new ArrayList<JButton>();
     private ArrayList<ImageIcon> FieldImg = new ArrayList<ImageIcon>();
 
     public JLayeredPane layeredPane = new JLayeredPane();
@@ -55,25 +55,28 @@ public class Tile {
         FieldImg.add(5, new ImageIcon("src/img/Hit_71x71.png"));
     }
 
-    /* Initialising Array of JLabels */
+    /* Initialising Array of JButtons */
     private void FieldInit(int pos_x, int pos_y, int FieldSize){
 
         /* Empty Field */
-        JLabel label1= new JLabel();
-        label1.setBounds(0, 0, FieldSize, FieldSize);
+        JButton efButton= new JButton();
+        efButton.setBounds(0, 0, FieldSize, FieldSize);
+        efButton.setVisible(true);
 
         /* Miss */
-        JLabel label2= new JLabel();
-        label2.setBounds(0, 0, FieldSize, FieldSize);
+        JButton mButton= new JButton();
+        mButton.setBounds(0, 0, FieldSize, FieldSize);
+        mButton.setVisible(false);
 
         /* Hit */
-        JLabel label3= new JLabel();
-        label3.setBounds(0, 0, FieldSize, FieldSize);
+        JButton hButton= new JButton();
+        hButton.setBounds(0, 0, FieldSize, FieldSize);
+        hButton.setVisible(false);
 
         /* Adding to Array */
-        Field.add(0, label1);
-        Field.add(1, label2);
-        Field.add(2, label3);
+        Field.add(0, efButton);
+        Field.add(1, mButton);
+        Field.add(2, hButton);
     }
 
     public JLayeredPane getJLayeredPane(){
