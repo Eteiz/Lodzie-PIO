@@ -19,38 +19,32 @@ public class Board {
             this.Board[boat.position.x][boat.position.y] = 1;
         if(boat.length == 2) {
             if(boat.direction == 0) {
-                this.Board[boat.position.x][boat.position.y] = 1;
-                this.Board[boat.position.x + 1][boat.position.y] = 1;
+                for(int i = 0; i < 2; i++)
+                    this.Board[boat.position.x + i][boat.position.y] = 1;
             }
             else {
-                this.Board[boat.position.x][boat.position.y] = 1;
-                this.Board[boat.position.x][boat.position.y + 1] = 1;
+                for(int i = 0; i < 2; i++)
+                    this.Board[boat.position.x][boat.position.y + i] = 1;
             }
         }
         if(boat.length == 3) {
             if(boat.direction == 0) {
-                this.Board[boat.position.x][boat.position.y] = 1;
-                this.Board[boat.position.x + 1][boat.position.y] = 1;
-                this.Board[boat.position.x + 2][boat.position.y] = 1;
+                for(int i = 0; i < 3; i++)
+                    this.Board[boat.position.x + i][boat.position.y] = 1;
             }
             else {
-                this.Board[boat.position.x][boat.position.y] = 1;
-                this.Board[boat.position.x][boat.position.y + 1] = 1;
-                this.Board[boat.position.x][boat.position.y + 2] = 1;
+                for(int i = 0; i < 3; i++)
+                    this.Board[boat.position.x][boat.position.y + i] = 1;
             }
         }
         if(boat.length == 4) {
             if(boat.direction == 0) {
-                this.Board[boat.position.x][boat.position.y] = 1;
-                this.Board[boat.position.x + 1][boat.position.y] = 1;
-                this.Board[boat.position.x + 2][boat.position.y] = 1;
-                this.Board[boat.position.x + 3][boat.position.y] = 1;
+                for(int i = 0; i < 4; i++)
+                    this.Board[boat.position.x + i][boat.position.y] = 1;
             }
             else {
-                this.Board[boat.position.x][boat.position.y] = 1;
-                this.Board[boat.position.x][boat.position.y + 1] = 1;
-                this.Board[boat.position.x][boat.position.y + 2] = 1;
-                this.Board[boat.position.x][boat.position.y + 3] = 1;
+                for(int i = 0; i < 4; i++)
+                    this.Board[boat.position.x][boat.position.y + i] = 1;
             }
         }
     }
@@ -67,5 +61,4 @@ public class Board {
             System.out.println("This shot was already made!");
         }
     }
-
 }
