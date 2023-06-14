@@ -48,17 +48,54 @@ public class Board {
             }
         }
     }
+    public boolean validateBoat(Boat boat) {
+        if(this.Board[boat.position.x][boat.position.y] == 1)
+            return false;
+        int start = 0, end = 10;
+        if(boat.direction == 0) {
+            if (boat.position.x + boat.length > this.size)
+                return false;
+            if (boat.position.x - 1 >= 0)
+                start = boat.position.x - 1;
+            if (boat.position.x + boat.length + 1 < 10)
+                end = boat.position.x + boat.length + 1;
+            for (int i = start; i < end; i++) {
+                if (this.Board[i][boat.position.y] == 1)
+                    return false;
+                if (boat.position.y - 1 >= 0)
+                    if (this.Board[i][boat.position.y - 1] == 1)
+                        return false;
+                if (boat.position.y + 1 < 10)
+                    if (this.Board[i][boat.position.y + 1] == 1)
+                        return false;
+            }
+        }
+        else {
+            if (boat.position.y + boat.length > this.size)
+                return false;
+            if (boat.position.y - 1 >= 0)
+                start = boat.position.y - 1;
+            if (boat.position.y + boat.length + 1 < 10)
+                end = boat.position.y + boat.length + 1;
+            for (int i = start; i < end; i++) {
+                if (this.Board[boat.position.x][i] == 1)
+                    return false;
+                if (boat.position.x - 1 >= 0)
+                    if (this.Board[boat.position.x - 1][i] == 1)
+                        return false;
+                if (boat.position.x + 1 < 10)
+                    if (this.Board[boat.position.x + 1][i] == 1)
+                        return false;
+            }
+        }
+        return true;
+    }
     public void shootBoat(Point shoot) {
         if(this.Board[shoot.x][shoot.y] == 0) {
-            System.out.println("You missed!");
             this.Board[shoot.x][shoot.y] = 2;
         }
         else if(this.Board[shoot.x][shoot.y] == 1) {
-            System.out.println("You shot a boat!");
             this.Board[shoot.x][shoot.y] = -1;
-        }
-        else if(this.Board[shoot.x][shoot.y] == 2 || this.Board[shoot.x][shoot.y] == -1) {
-            System.out.println("This shot was already made!");
         }
     }
 }
