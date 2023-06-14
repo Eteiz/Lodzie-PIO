@@ -106,7 +106,7 @@ public class BoardGUI extends JPanel implements ActionListener {
                         }
                     }
                     // If the tile was clicked before, it stops being highlighted
-                    if(ChosenX == i && ChosenY == j) {
+                    if(ChosenX == i && ChosenY == j || boardTiles[i][j].tileValue != TileGUI.TileValue.EMPTY) {
                         ChosenX = -1;
                         ChosenY = -1;
                     }
