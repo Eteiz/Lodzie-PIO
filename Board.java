@@ -1,10 +1,12 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+
 public class Board {
 
     final int size = 10;
     int Board[][] = new int[size][size];
+
     public void printBoard() {
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 10; j++)
