@@ -102,7 +102,6 @@ public class GameGUI extends JFrame implements ActionListener {
             if(ShipPanel.chosenShip != null && mainBoardGUI.ChosenX != -1 && mainBoardGUI.ChosenY != -1) {
                 String shipType = ShipPanel.chosenShip;
                 Point placingPoint = new Point(mainBoardGUI.ChosenX,mainBoardGUI.ChosenY);
-
                 if(shipType.equals("1")) mainLogicBoard.setBoats(new Boat(1,0,placingPoint));
                 else if(shipType.equals("2H")) mainLogicBoard.setBoats(new Boat(2,0,placingPoint));
                 else if(shipType.equals("3H")) mainLogicBoard.setBoats(new Boat(3,0,placingPoint));

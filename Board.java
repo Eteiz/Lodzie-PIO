@@ -7,14 +7,9 @@ public class Board {
     final int size = 10;
     int Board[][] = new int[size][size];
 
-    public void printBoard() {
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 10; j++)
-                System.out.print(this.Board[i][j] + " ");
-            System.out.println();
-        }
-    }
-    public void setBoats(Boat boat) {
+    public boolean setBoats(Boat boat) {
+        if(!validateBoat(boat))
+            return false;
         if(boat.length == 1)
             this.Board[boat.position.x][boat.position.y] = 1;
         if(boat.length == 2) {
@@ -47,6 +42,7 @@ public class Board {
                     this.Board[boat.position.x][boat.position.y + i] = 1;
             }
         }
+        return true;
     }
     public boolean validateBoat(Boat boat) {
         if(this.Board[boat.position.x][boat.position.y] == 1)
