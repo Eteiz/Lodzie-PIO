@@ -97,7 +97,7 @@ public class GameGUI extends JFrame implements ActionListener {
         if(e.getSource().equals(placementButton)) {
 
             // For test purposes
-            System.out.println(ShipPanel.chosenShip + " " + mainBoardGUI.ChosenX + " " + mainBoardGUI.ChosenY);
+            //System.out.println(ShipPanel.chosenShip + " " + mainBoardGUI.ChosenX + " " + mainBoardGUI.ChosenY);
 
             if(ShipPanel.chosenShip != null && mainBoardGUI.ChosenX != -1 && mainBoardGUI.ChosenY != -1) {
                 String shipType = ShipPanel.chosenShip;
@@ -114,6 +114,7 @@ public class GameGUI extends JFrame implements ActionListener {
             mainBoardGUI.UpdateBoard(mainLogicBoard);
             ShipPanel.ResetPlacingPanel();
             mainBoardGUI.ResetBoardTiles();
+            ShipPanel.chosenShip = null;
         }
     }
     public static void main(String[] args) throws IOException {

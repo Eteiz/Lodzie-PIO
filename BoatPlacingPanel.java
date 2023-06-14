@@ -157,7 +157,6 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         shipTwoV.setBorderPainted(false);
         shipThreeV.setBorderPainted(false);
         shipFourV.setBorderPainted(false);
-        chosenShip = null;
     }
 
     @Override
@@ -166,6 +165,8 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         if(e.getSource().equals(shipOneH)) {
             // If no ship is picked or other ship is picked, the chosenShip becomes this
             // The button becomes highlighted
+            ResetPlacingPanel();
+
             if(chosenShip == null || !chosenShip.contains("1")) {
                 shipOneH.setBorderPainted(true);
                 chosenShip = "1";
@@ -176,20 +177,13 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
                 shipOneH.setBorderPainted(false);
                 chosenShip = null;
             }
-            // Clearing other buttons' borders
-            shipTwoH.setBorderPainted(false);
-            shipThreeH.setBorderPainted(false);
-            shipFourH.setBorderPainted(false);
-            shipTwoV.setBorderPainted(false);
-            shipThreeV.setBorderPainted(false);
-            shipFourV.setBorderPainted(false);
-
             // Code for test purposes
             //System.out.println(chosenShip);
         }
         // The rest of the buttons follow the same pattern
         // Horizontal
         if(e.getSource().equals(shipTwoH)) {
+            ResetPlacingPanel();
             if(chosenShip == null || !chosenShip.contains("2H")) {
                 shipTwoH.setBorderPainted(true);
                 chosenShip = "2H";
@@ -198,14 +192,9 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
                 shipTwoH.setBorderPainted(false);
                 chosenShip = null;
             }
-            shipOneH.setBorderPainted(false);
-            shipThreeH.setBorderPainted(false);
-            shipFourH.setBorderPainted(false);
-            shipTwoV.setBorderPainted(false);
-            shipThreeV.setBorderPainted(false);
-            shipFourV.setBorderPainted(false);
         }
         if(e.getSource().equals(shipThreeH)) {
+            ResetPlacingPanel();
             if(chosenShip == null || !chosenShip.contains("3H")) {
                 shipThreeH.setBorderPainted(true);
                 chosenShip = "3H";
@@ -214,14 +203,9 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
                 shipThreeH.setBorderPainted(false);
                 chosenShip = null;
             }
-            shipOneH.setBorderPainted(false);
-            shipTwoH.setBorderPainted(false);
-            shipFourH.setBorderPainted(false);
-            shipTwoV.setBorderPainted(false);
-            shipThreeV.setBorderPainted(false);
-            shipFourV.setBorderPainted(false);
         }
         if(e.getSource().equals(shipFourH)) {
+            ResetPlacingPanel();
             if(chosenShip == null || !chosenShip.contains("4H")) {
                 shipFourH.setBorderPainted(true);
                 chosenShip = "4H";
@@ -230,16 +214,11 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
                 shipFourH.setBorderPainted(false);
                 chosenShip = null;
             }
-            shipOneH.setBorderPainted(false);
-            shipTwoH.setBorderPainted(false);
-            shipThreeH.setBorderPainted(false);
-            shipTwoV.setBorderPainted(false);
-            shipThreeV.setBorderPainted(false);
-            shipFourV.setBorderPainted(false);
         }
 
         // Vertical
         if(e.getSource().equals(shipTwoV)) {
+            ResetPlacingPanel();
             if(chosenShip == null || !chosenShip.contains("2V")) {
                 shipTwoV.setBorderPainted(true);
                 chosenShip = "2V";
@@ -248,14 +227,9 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
                 shipTwoV.setBorderPainted(false);
                 chosenShip = null;
             }
-            shipOneH.setBorderPainted(false);
-            shipTwoH.setBorderPainted(false);
-            shipThreeH.setBorderPainted(false);
-            shipFourH.setBorderPainted(false);
-            shipThreeV.setBorderPainted(false);
-            shipFourV.setBorderPainted(false);
         }
         if(e.getSource().equals(shipThreeV)) {
+            ResetPlacingPanel();
             if(chosenShip == null || !chosenShip.contains("3V")) {
                 shipThreeV.setBorderPainted(true);
                 chosenShip = "3V";
@@ -264,14 +238,9 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
                 shipThreeV.setBorderPainted(false);
                 chosenShip = null;
             }
-            shipOneH.setBorderPainted(false);
-            shipTwoH.setBorderPainted(false);
-            shipThreeH.setBorderPainted(false);
-            shipFourH.setBorderPainted(false);
-            shipTwoV.setBorderPainted(false);
-            shipFourV.setBorderPainted(false);
         }
         if(e.getSource().equals(shipFourV)) {
+            ResetPlacingPanel();
             if(chosenShip == null || !chosenShip.contains("4V")) {
                 shipFourV.setBorderPainted(true);
                 chosenShip = "4V";
@@ -280,12 +249,6 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
                 shipFourV.setBorderPainted(false);
                 chosenShip = null;
             }
-            shipOneH.setBorderPainted(false);
-            shipTwoH.setBorderPainted(false);
-            shipThreeH.setBorderPainted(false);
-            shipFourH.setBorderPainted(false);
-            shipTwoV.setBorderPainted(false);
-            shipThreeV.setBorderPainted(false);
         }
     }
 
