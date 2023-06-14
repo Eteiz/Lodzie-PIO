@@ -7,7 +7,13 @@ import java.awt.event.ActionListener;
 // Panel allows user to click on the type of ship they want to place on board
 public class BoatPlacingPanel extends JLabel implements ActionListener {
 
-    // Buttons for picking ship type
+    /** TBA:
+     * - MAKE VARIABLES PRIVATE AND CREATE SETTERS AND GETTERS (chosenShip)
+     * - CONSISTENT NAMING
+     *
+     */
+
+    // Buttons for picking ship type, H stands for horizontal, V stands for vertical
     JButton shipOneH, shipTwoH, shipThreeH, shipFourH, shipTwoV, shipThreeV, shipFourV;
     // Variable that determines which ship is chosen, if no ship is chosen the variable is null
     String chosenShip;
@@ -142,6 +148,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         this.add(shipFourV);
     }
 
+    // Methods makes all ship types not highlighted
     void ResetPlacingPanel() {
         shipOneH.setBorderPainted(false);
         shipTwoH.setBorderPainted(false);
@@ -180,7 +187,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
             // Code for test purposes
             //System.out.println(chosenShip);
         }
-
+        // The rest of the buttons follow the same pattern
         // Horizontal
         if(e.getSource().equals(shipTwoH)) {
             if(chosenShip == null || !chosenShip.contains("2H")) {

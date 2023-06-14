@@ -9,13 +9,14 @@ public class GameGUI extends JFrame implements ActionListener {
 
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
-
     JButton placementButton;
 
     // Player
+    // Each player has its Logic and GUI version of board which are dependent on each other and update accordingly
     BoardGUI mainBoardGUI;
     Board mainLogicBoard;
 
+    // Enemy
     // Player 1
     BoardGUI player1BoardGUI;
     Board player1LogicBoard;
@@ -77,8 +78,12 @@ public class GameGUI extends JFrame implements ActionListener {
 
         //Placing JButton to confirm placing
         placementButton = new JButton("Ustaw statek");
-        placementButton.setBounds(120,350,100,50);
+        placementButton.setBounds(18,350,165,50);
         placementButton.addActionListener(this);
+
+        /** TBA: RESET SHIPS BUTTON
+         * setBounds(188, 350, 165, 50);
+         * **/
 
         add(ShipPanel);
         add(placementButton);
@@ -88,6 +93,7 @@ public class GameGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        // The program registers that button "Place ship" is clicked and checks if any tile (ChosenX, ChosenY) and shipType (chosenShip) is chosen
         if(e.getSource().equals(placementButton)) {
 
             // For test purposes
