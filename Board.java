@@ -3,7 +3,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public class Board {
-
     final int size = 10;
     int Board[][] = new int[size][size];
 
@@ -60,5 +59,9 @@ public class Board {
         else if(this.Board[shoot.x][shoot.y] == 2 || this.Board[shoot.x][shoot.y] == -1) {
             System.out.println("This shot was already made!");
         }
+    }
+
+    public int getSize() {
+        return size;
     }
 }

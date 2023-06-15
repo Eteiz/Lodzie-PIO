@@ -10,6 +10,7 @@ public class GameGUI extends JFrame implements ActionListener {
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
     JButton placementButton;
+    JButton shipResetButton;
 
     // Player
     // Each player has its Logic and GUI version of board which are dependent on each other and update accordingly
@@ -81,12 +82,14 @@ public class GameGUI extends JFrame implements ActionListener {
         placementButton.setBounds(18,350,165,50);
         placementButton.addActionListener(this);
 
-        /** TBA: RESET SHIPS BUTTON
-         * setBounds(188, 350, 165, 50);
-         * **/
+        shipResetButton = new JButton("Usuń statki");
+        shipResetButton.setBounds(188, 350, 165, 50);
+        shipResetButton.addActionListener(this);
 
         add(ShipPanel);
         add(placementButton);
+        add(shipResetButton);
+
         setVisible(true);
     }
 
@@ -116,6 +119,15 @@ public class GameGUI extends JFrame implements ActionListener {
             mainBoardGUI.ResetBoardTiles();
             ShipPanel.chosenShip = null;
         }
+        /* shipResetButton action*/
+        if(e.getSource().equals(shipResetButton)){
+            for(int i = 0; i < mainLogicBoard.getSize(); ++i)
+                for(int j = 0; j < mainLogicBoard.getSize(); ++j)
+                    mainLogicBoard.Board[i][j] = 0;
+
+            mainBoardGUI.UpdateBoard(mainLogicBoard);
+        }
+
     }
     public static void main(String[] args) throws IOException {
         GameGUI test = new GameGUI();
