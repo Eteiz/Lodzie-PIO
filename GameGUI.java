@@ -8,8 +8,7 @@ import java.io.IOException;
 public class GameGUI extends JFrame implements ActionListener {
 
     boolean preparationDone = false;
-    boolean isServerOpen = false;
-    Server server;
+    boolean isDead = false;
 
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
@@ -159,16 +158,5 @@ public class GameGUI extends JFrame implements ActionListener {
     }
     public static void main(String[] args) throws IOException {
         GameGUI test = new GameGUI();
-        /*Timer timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (test.preparationDone) {
-                    System.out.println("done");
-                    ((Timer) e.getSource()).stop(); // Stop the timer when preparationDone is true
-                }
-            }
-        });
-
-        timer.start();*/
     }
 }

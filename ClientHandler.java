@@ -11,6 +11,11 @@ public class ClientHandler implements Runnable {
     private Socket client;
     static Random rand = new Random();
     public final int id = rand.nextInt(100000);
+    public int idPlayer1;
+    public int idPlayer2;
+    public int idPlayer3;
+    public int idPlayer4;
+    public boolean isMyTurn = false;
 
     private BufferedReader in;
     private PrintWriter out;
