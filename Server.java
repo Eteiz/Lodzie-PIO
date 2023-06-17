@@ -279,22 +279,46 @@ public class Server
                     }
 
                 }
-                if(i == 2)
+                if(i == 2) // player 3 shooted
                 {
-                    if(chosen == 0)clients.get(i).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    if(chosen == 0){
+                        clients.get(2).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    }
 
-                    if(chosen == 1)clients.get(i).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    if(chosen == 1){
+                        clients.get(2).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    }
 
-                    if(chosen == 3)clients.get(i).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    if(chosen == 3){
+                        clients.get(2).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    }
 
                 }
                 if(i == 3)
                 {
-                    if(chosen == 0)clients.get(i).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    if(chosen == 0){
+                        clients.get(3).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    }
 
-                    if(chosen == 1)clients.get(i).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    if(chosen == 1){
+                        clients.get(3).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    }
 
-                    if(chosen == 2)clients.get(i).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    if(chosen == 2){
+                        clients.get(3).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                    }
                 }
 
             }
