@@ -3,9 +3,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Random;
 
 public class ClientHandler implements Runnable {
+
+    GameGUI gui = new GameGUI();
     private Socket client;
+    static Random rand = new Random();
+    public final int id = rand.nextInt(100000);
+
     private BufferedReader in;
     private PrintWriter out;
 

@@ -7,6 +7,10 @@ import java.io.IOException;
 // Main GUI Panel on which all boards and options are displayed
 public class GameGUI extends JFrame implements ActionListener {
 
+    boolean preparationDone = false;
+    boolean isServerOpen = false;
+    Server server;
+
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
     JButton placementButton;
@@ -140,18 +144,31 @@ public class GameGUI extends JFrame implements ActionListener {
         }
 
         if(e.getSource().equals(readyButton)) {
-            if(mainLogicBoard.allBoatsSet() == false) {
+            // If every boat is placed
+            if(mainLogicBoard.allBoatsSet()) {
                 // Locking placing buttons
                 ShipPanel.LockButtons();
                 placementButton.setEnabled(false);
                 shipResetButton.setEnabled(false);
 
-                /** TUTAJ MAKSYM MOZESZ DODAC ZACZECIE LACZENIA SIE Z SERWEREM CZY COS **/
+                // TUTAJ MAKSYM MOZESZ DODAC ZACZECIE LACZENIA SIE Z SERWEREM CZY COS
+                preparationDone = true;
             }
         }
 
     }
     public static void main(String[] args) throws IOException {
         GameGUI test = new GameGUI();
+        /*Timer timer = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (test.preparationDone) {
+                    System.out.println("done");
+                    ((Timer) e.getSource()).stop(); // Stop the timer when preparationDone is true
+                }
+            }
+        });
+
+        timer.start();*/
     }
 }

@@ -7,7 +7,9 @@ import java.net.Socket;
 
 public class Client
 {
+
     private static final String SERVER_IP = "127.0.0.1";
+
     private static final int SERVER_PORT = 8098;
 
     public static void main(String[] args) throws IOException
