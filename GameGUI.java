@@ -10,6 +10,8 @@ public class GameGUI extends JFrame implements ActionListener {
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
     JButton placementButton;
+    JButton shipResetButton;
+    JButton readyButton;
 
     // Player
     // Each player has its Logic and GUI version of board which are dependent on each other and update accordingly
@@ -31,7 +33,6 @@ public class GameGUI extends JFrame implements ActionListener {
 
     // Method to call GUI with its first parameters
     public GameGUI() {
-
         this.setTitle("Łodzie");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -41,7 +42,6 @@ public class GameGUI extends JFrame implements ActionListener {
         this.setIconImage(icon.getImage());
         this.getContentPane().setBackground(new Color(0xCCCCCC));
         this.setLayout(null);
-
         DisplayMainGamePanel();
     }
 
@@ -74,19 +74,27 @@ public class GameGUI extends JFrame implements ActionListener {
 
         // Placing BoatPlacingPanel for ships to be chosen
         ShipPanel = new BoatPlacingPanel();
-        ShipPanel.setBounds(18,415,336,328);
+        ShipPanel.setBounds(18,415,336,250);
 
         //Placing JButton to confirm placing
         placementButton = new JButton("Ustaw statek");
         placementButton.setBounds(18,350,165,50);
         placementButton.addActionListener(this);
 
-        /** TBA: RESET SHIPS BUTTON
-         * setBounds(188, 350, 165, 50);
-         * **/
+        shipResetButton = new JButton("Usuń statki");
+        shipResetButton.setBounds(188, 350, 165, 50);
+        shipResetButton.addActionListener(this);
+
+        readyButton = new JButton("Gotowy!");
+        readyButton.setBounds(100,700,165,50);
+        readyButton.addActionListener(this);
+        // To make it on top of panel
 
         add(ShipPanel);
         add(placementButton);
+        add(shipResetButton);
+        add(readyButton);
+
         setVisible(true);
     }
 
@@ -102,18 +110,46 @@ public class GameGUI extends JFrame implements ActionListener {
             if(ShipPanel.chosenShip != null && mainBoardGUI.ChosenX != -1 && mainBoardGUI.ChosenY != -1) {
                 String shipType = ShipPanel.chosenShip;
                 Point placingPoint = new Point(mainBoardGUI.ChosenX,mainBoardGUI.ChosenY);
-                if(shipType.equals("1")) mainLogicBoard.setBoats(new Boat(1,0,placingPoint));
-                else if(shipType.equals("2H")) mainLogicBoard.setBoats(new Boat(2,0,placingPoint));
-                else if(shipType.equals("3H")) mainLogicBoard.setBoats(new Boat(3,0,placingPoint));
-                else if(shipType.equals("4H")) mainLogicBoard.setBoats(new Boat(4,0,placingPoint));
-                else if(shipType.equals("2V")) mainLogicBoard.setBoats(new Boat(2,1,placingPoint));
-                else if(shipType.equals("3V")) mainLogicBoard.setBoats(new Boat(3,1,placingPoint));
-                else if(shipType.equals("4V")) mainLogicBoard.setBoats(new Boat(4,1,placingPoint));
+                Boat newBoat = null;
+
+                if(shipType.equals("2H")) newBoat = new Boat(2,0,placingPoint);
+                else if(shipType.equals("3H")) newBoat = new Boat(3,0,placingPoint);
+                else if(shipType.equals("4H")) newBoat = new Boat(4,0,placingPoint);
+                else if(shipType.equals("2V")) newBoat = new Boat(2,1,placingPoint);
+                else if(shipType.equals("3V")) newBoat = new Boat(3,1,placingPoint);
+                else if(shipType.equals("4V")) newBoat = new Boat(4,1,placingPoint);
+                else newBoat = new Boat(1,0,placingPoint);
+                
+                if(mainLogicBoard.validateBoat(newBoat)) mainLogicBoard.setBoats(newBoat);
             }
             mainBoardGUI.UpdateBoard(mainLogicBoard);
             ShipPanel.ResetPlacingPanel();
             mainBoardGUI.ResetBoardTiles();
+            ShipPanel.chosenShip = null;
         }
+        /* shipResetButton action*/
+        if(e.getSource().equals(shipResetButton)){
+            for(int i = 0; i < mainLogicBoard.getSize(); ++i)
+                for(int j = 0; j < mainLogicBoard.getSize(); ++j)
+                    mainLogicBoard.Board[i][j] = 0;
+
+            mainBoardGUI.UpdateBoard(mainLogicBoard);
+            ShipPanel.ResetPlacingPanel();
+            mainBoardGUI.ResetBoardTiles();
+            ShipPanel.chosenShip = null;
+        }
+
+        if(e.getSource().equals(readyButton)) {
+            if(mainLogicBoard.allBoatsSet() == false) {
+                // Locking placing buttons
+                ShipPanel.LockButtons();
+                placementButton.setEnabled(false);
+                shipResetButton.setEnabled(false);
+
+                /** TUTAJ MAKSYM MOZESZ DODAC ZACZECIE LACZENIA SIE Z SERWEREM CZY COS **/
+            }
+        }
+
     }
     public static void main(String[] args) throws IOException {
         GameGUI test = new GameGUI();

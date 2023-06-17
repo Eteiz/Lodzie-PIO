@@ -1,5 +1,4 @@
 public class Board {
-
     private final int size = 10; //size of game board
     public int Board[][] = new int[size][size]; //game board for placing boats
     public int Boats[] = new int[4]; //array to know how many boats are set
@@ -87,6 +86,9 @@ public class Board {
         }
     }
 
+    public int getSize() {
+        return size;
+    }
     //method to check if all boats are placed
     public boolean allBoatsSet() {
         for(int i = 0; i < this.ControlBoats.length; i++)
@@ -120,5 +122,4 @@ public class Board {
         }
         return true;
     }
-
 }

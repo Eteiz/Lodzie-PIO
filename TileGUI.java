@@ -7,11 +7,15 @@ public class TileGUI extends JButton {
         EMPTY, SHIP_PLACED, MISS, HIT
     }
 
+    TileValue tileValue;
+
     ImageIcon emptyBig, emptySmall, shipPlacedBig, shipPlacedSmall, missBig, missSmall, hitBig, hitSmall;
 
     private boolean bigSize;
 
     TileGUI(boolean bigSize) {
+
+        tileValue = TileValue.EMPTY;
 
         // Icons for player tiles
         emptyBig = new ImageIcon(this.getClass().getResource("src/img/Field_71x71.png"));
@@ -35,6 +39,7 @@ public class TileGUI extends JButton {
         setContentAreaFilled(false);
     }
     void ChangeTile(TileValue status) {
+        tileValue = status;
         if(status == TileValue.EMPTY) {
             if(bigSize) setIcon(emptyBig);
             else setIcon(emptySmall);
