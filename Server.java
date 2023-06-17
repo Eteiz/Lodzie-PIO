@@ -74,6 +74,8 @@ public class Server
         int numberOfLosers = 0;
         while (!isEnd)
         {
+            int chosenX = -1;
+            int chosenY = -1;
             for(int i=0;i<numberOfPlayers;i+=1)
             {
                 // Choosing on which board to shoot
@@ -91,7 +93,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player1BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player1BoardGUI.ChosenY;
+                        //clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 2)
                     {
@@ -100,7 +104,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player2BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player2BoardGUI.ChosenY;
+                        //clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 3)
                     {
@@ -109,7 +115,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player3BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player3BoardGUI.ChosenY;
+                        //clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
                     }
                 }
                 if(i == 1)
@@ -121,7 +129,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player1BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player1BoardGUI.ChosenY;
+                        //clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 2)
                     {
@@ -130,7 +140,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player2BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player2BoardGUI.ChosenY;
+                        //clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 3)
                     {
@@ -139,7 +151,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player3BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player3BoardGUI.ChosenY;
+                        //clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
                     }
                 }
                 if(i == 2)
@@ -151,7 +165,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player1BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player1BoardGUI.ChosenY;
+                        //clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 1)
                     {
@@ -160,7 +176,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player2BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player2BoardGUI.ChosenY;
+                        //clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 3)
                     {
@@ -169,7 +187,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player3BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player3BoardGUI.ChosenY;
+                        //clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
                     }
                 }
                 if(i == 3)
@@ -181,7 +201,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player1BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player1BoardGUI.ChosenY;
+                        //clients.get(i).gui.player1BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 1)
                     {
@@ -190,7 +212,9 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player2BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player2BoardGUI.ChosenY;
+                        //clients.get(i).gui.player2BoardGUI.ResetBoardTiles();
                     }
                     if(chosen == 2)
                     {
@@ -199,12 +223,12 @@ public class Server
                             // Waiting to choose place to shoot
                             continue;
                         }
-                        clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
+                        chosenX = clients.get(i).gui.player3BoardGUI.ChosenX;
+                        chosenY = clients.get(i).gui.player3BoardGUI.ChosenY;
+                        //clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
                     }
                 }
 
-                int chosenX = clients.get(i).gui.mainBoardGUI.ChosenX;
-                int chosenY = clients.get(i).gui.mainBoardGUI.ChosenY;
                 Point pointToShoot = new Point(chosenX,chosenY);
 
                 // shooting on that board
@@ -215,6 +239,11 @@ public class Server
                 int resultValue = mainLogicBoard.Board[chosenX][chosenY];
                 clients.get(chosen).gui.mainBoardGUI.UpdateBoard(mainLogicBoard);
 
+                // check if player on which we shooted did lose
+                if(clients.get(chosen).gui.mainLogicBoard.checkAllBoatsShot())
+                {
+                    numberOfLosers += 1;
+                }
 
                 /*
                 player1 :
@@ -382,7 +411,11 @@ public class Server
                 }
 
             }
-            isEnd = true;
+            if(numberOfLosers == 3)
+            {
+                isEnd = true;
+            }
+
         }
 
     }
