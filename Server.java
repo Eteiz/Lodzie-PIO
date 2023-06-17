@@ -91,6 +91,7 @@ public class Server
                         while(clients.get(i).gui.player1BoardGUI.ChosenX == -1 && clients.get(i).gui.player1BoardGUI.ChosenY == -1)
                         {
                             // Waiting to choose place to shoot
+                            System.out.println("Player: "+ i + " shoot player: " + chosen);
                             continue;
                         }
                         chosenX = clients.get(i).gui.player1BoardGUI.ChosenX;
@@ -102,6 +103,7 @@ public class Server
                         while(clients.get(i).gui.player2BoardGUI.ChosenX == -1 && clients.get(i).gui.player2BoardGUI.ChosenY == -1)
                         {
                             // Waiting to choose place to shoot
+                            System.out.println("Player: "+ i + " shoot player: " + chosen);
                             continue;
                         }
                         chosenX = clients.get(i).gui.player2BoardGUI.ChosenX;
@@ -113,6 +115,7 @@ public class Server
                         while(clients.get(i).gui.player3BoardGUI.ChosenX == -1 && clients.get(i).gui.player3BoardGUI.ChosenY == -1)
                         {
                             // Waiting to choose place to shoot
+                            System.out.println("Player: "+ i + " shoot player: " + chosen);
                             continue;
                         }
                         chosenX = clients.get(i).gui.player3BoardGUI.ChosenX;
@@ -228,7 +231,7 @@ public class Server
                         //clients.get(i).gui.player3BoardGUI.ResetBoardTiles();
                     }
                 }
-
+                System.out.println("Player: "+ i + " shooted in: " + chosenX + " " + chosenY);
                 Point pointToShoot = new Point(chosenX,chosenY);
 
                 // shooting on that board

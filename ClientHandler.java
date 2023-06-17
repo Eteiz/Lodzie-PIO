@@ -20,10 +20,6 @@ public class ClientHandler implements Runnable {
     private BufferedReader in;
     private PrintWriter out;
 
-    public void UpdateEveryGUIBoard(Board referenceLogicBoard)
-    {
-
-    }
 
     public ClientHandler(Socket clientSocket) throws IOException
     {
