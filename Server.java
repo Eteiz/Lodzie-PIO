@@ -242,40 +242,70 @@ public class Server
                 {
                     if(chosen == 1){
                         clients.get(0).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player1BoardGUI.UpdateBoard(clients.get(0).gui.player1LogicBoard);
+
                         clients.get(2).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player2BoardGUI.UpdateBoard(clients.get(2).gui.player2LogicBoard);
+
                         clients.get(3).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player2BoardGUI.UpdateBoard(clients.get(2).gui.player2LogicBoard);
                     }
 
                     if(chosen == 2){
                         clients.get(0).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player2BoardGUI.UpdateBoard(clients.get(0).gui.player2LogicBoard);
+
                         clients.get(1).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player2BoardGUI.UpdateBoard(clients.get(1).gui.player2LogicBoard);
+
                         clients.get(3).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player3BoardGUI.UpdateBoard(clients.get(3).gui.player3LogicBoard);
                     }
 
                     if(chosen == 3){
                         clients.get(0).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player3BoardGUI.UpdateBoard(clients.get(0).gui.player3LogicBoard);
+
                         clients.get(1).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player3BoardGUI.UpdateBoard(clients.get(1).gui.player3LogicBoard);
+
                         clients.get(2).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player3BoardGUI.UpdateBoard(clients.get(2).gui.player3LogicBoard);
                     }
                 }
                 if(i == 1) // player 2 shooted
                 {
                     if(chosen == 0){
                         clients.get(1).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player1BoardGUI.UpdateBoard(clients.get(1).gui.player1LogicBoard);
+
                         clients.get(2).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player1BoardGUI.UpdateBoard(clients.get(2).gui.player1LogicBoard);
+
                         clients.get(3).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player1BoardGUI.UpdateBoard(clients.get(3).gui.player1LogicBoard);
                     }
 
                     if(chosen == 2){
                         clients.get(1).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player2BoardGUI.UpdateBoard(clients.get(1).gui.player2LogicBoard);
+
                         clients.get(0).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player2BoardGUI.UpdateBoard(clients.get(0).gui.player2LogicBoard);
+
                         clients.get(3).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player3BoardGUI.UpdateBoard(clients.get(3).gui.player3LogicBoard);
                     }
 
                     if(chosen == 3){
                         clients.get(1).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player3BoardGUI.UpdateBoard(clients.get(1).gui.player3LogicBoard);
+
                         clients.get(0).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player3BoardGUI.UpdateBoard(clients.get(0).gui.player3LogicBoard);
+
                         clients.get(2).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player3BoardGUI.UpdateBoard(clients.get(2).gui.player3LogicBoard);
                     }
 
                 }
@@ -283,20 +313,35 @@ public class Server
                 {
                     if(chosen == 0){
                         clients.get(2).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player1BoardGUI.UpdateBoard(clients.get(2).gui.player1LogicBoard);
+
                         clients.get(1).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player1BoardGUI.UpdateBoard(clients.get(1).gui.player1LogicBoard);
+
                         clients.get(3).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player1BoardGUI.UpdateBoard(clients.get(3).gui.player1LogicBoard);
                     }
 
                     if(chosen == 1){
                         clients.get(2).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player2BoardGUI.UpdateBoard(clients.get(2).gui.player2LogicBoard);
+
                         clients.get(0).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player1BoardGUI.UpdateBoard(clients.get(0).gui.player1LogicBoard);
+
                         clients.get(3).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player2BoardGUI.UpdateBoard(clients.get(3).gui.player2LogicBoard);
                     }
 
                     if(chosen == 3){
                         clients.get(2).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player3BoardGUI.UpdateBoard(clients.get(2).gui.player3LogicBoard);
+
                         clients.get(0).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player3BoardGUI.UpdateBoard(clients.get(0).gui.player3LogicBoard);
+
                         clients.get(1).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player3BoardGUI.UpdateBoard(clients.get(1).gui.player3LogicBoard);
                     }
 
                 }
@@ -304,20 +349,35 @@ public class Server
                 {
                     if(chosen == 0){
                         clients.get(3).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player1BoardGUI.UpdateBoard(clients.get(3).gui.player1LogicBoard);
+
                         clients.get(1).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player1BoardGUI.UpdateBoard(clients.get(1).gui.player1LogicBoard);
+
                         clients.get(2).gui.player1LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player1BoardGUI.UpdateBoard(clients.get(2).gui.player1LogicBoard);
                     }
 
                     if(chosen == 1){
                         clients.get(3).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player2BoardGUI.UpdateBoard(clients.get(3).gui.player2LogicBoard);
+
                         clients.get(0).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player2BoardGUI.UpdateBoard(clients.get(0).gui.player2LogicBoard);
+
                         clients.get(2).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(2).gui.player2BoardGUI.UpdateBoard(clients.get(2).gui.player2LogicBoard);
                     }
 
                     if(chosen == 2){
                         clients.get(3).gui.player3LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(3).gui.player3BoardGUI.UpdateBoard(clients.get(3).gui.player3LogicBoard);
+
                         clients.get(0).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(0).gui.player2BoardGUI.UpdateBoard(clients.get(0).gui.player2LogicBoard);
+
                         clients.get(1).gui.player2LogicBoard.Board[chosenX][chosenY] = resultValue;
+                        clients.get(1).gui.player2BoardGUI.UpdateBoard(clients.get(1).gui.player2LogicBoard);
                     }
                 }
 
