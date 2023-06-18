@@ -32,7 +32,7 @@ public class Board {
     }
 
     //metod to clear board
-    public void clearBooard() {
+    public void clearBoard() {
         for(int i = 0 ; i < size; i++)
             for(int j = 0; j < size; j++)
                 this.Board[i][j] = 0;
