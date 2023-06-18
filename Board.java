@@ -34,7 +34,7 @@ public class Board {
     //metod to clear board
     public void clearBooard() {
         for(int i = 0 ; i < size; i++)
-            for(int j = 0; j < size; i++)
+            for(int j = 0; j < size; j++)
                 this.Board[i][j] = 0;
     }
 
@@ -120,7 +120,7 @@ public class Board {
     //returns true if no boat left
     public boolean checkAllBoatsShot() {
         for(int i = 0 ; i < size; i++){
-            for(int j = 0; j < size; i++) {
+            for(int j = 0; j < size; j++) {
                 if(this.Board[i][j] == 1)
                     return false;
             }
