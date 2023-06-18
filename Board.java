@@ -36,6 +36,8 @@ public class Board {
         for(int i = 0 ; i < size; i++)
             for(int j = 0; j < size; j++)
                 this.Board[i][j] = 0;
+        for(int i = 0; i < this.ControlBoats.length; i++)
+            this.ControlBoats[i] = 0;
     }
 
     //method to check if boat to place is valid
