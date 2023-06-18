@@ -72,14 +72,24 @@ public class Server
         // GAME LOOP
         boolean isEnd = false;
         int numberOfLosers = 0;
+        int[] Losers = new int[4];
+        Losers[0] = 0;
+        Losers[1] = 0;
+        Losers[2] = 0;
+        Losers[3] = 0;
         while (!isEnd)
         {
             int chosenX = -1;
             int chosenY = -1;
             for(int i=0;i<numberOfPlayers;i+=1)
             {
+                // skipping players that already losed
+                if(Losers[i] == 1)continue;
                 // Choosing on which board to shoot
                 int chosen = GetRandomWithoutOne(i);
+
+                while(Losers[chosen] == 1)chosen = GetRandomWithoutOne(i);
+
 
                 System.out.println("Player: "+ i + " shoot player: " + chosen);
 
@@ -246,6 +256,7 @@ public class Server
                 if(clients.get(chosen).gui.mainLogicBoard.checkAllBoatsShot())
                 {
                     numberOfLosers += 1;
+                    Losers[chosen] = 1;
                 }
 
                 /*
