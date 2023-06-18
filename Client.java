@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.util.Random;
 
 public class Client implements Runnable {
-    private static final String SERVER_IP = "127.0.0.1";
-    public GameGUI gui;
+    private static final String SERVER_IP = "192.168.0.240";
+    public static GameGUI gui = new GameGUI();
     private Socket client;
     static Random rand = new Random();
     public final int id = rand.nextInt(100000);
@@ -21,36 +21,60 @@ public class Client implements Runnable {
         out = new PrintWriter(client.getOutputStream(),true);*/
     }
 
-    public void main() throws IOException {
-        Socket socket = new Socket(SERVER_IP, SERVER_PORT);
-        gui = new GameGUI();
+    public static void main(String args[]) throws IOException {
+        System.out.println("hey");
+    }
+    @Override
+    public void run()
+    {
+        Socket socket = null;
+        try {
+            socket = new Socket(SERVER_IP, SERVER_PORT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        BufferedReader input = null;
+        try {
+            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(socket.getOutputStream(), true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         while (true) {
             System.out.println("Write: ");
-            String command = keyboard.readLine();
+            String command = null;
+            try {
+                command = keyboard.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             if (command.equals("quit")) break;
 
             out.println(command);
 
-            String serverResponse = input.readLine();
+            String serverResponse = null;
+            try {
+                serverResponse = input.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println("Server says: " + serverResponse);
         }
 
-        socket.close();
-        System.exit(0);
-    }
-    @Override
-    public void run()
-    {
         try {
-            main();
+            socket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.exit(0);
     }
 }
