@@ -7,18 +7,20 @@ import java.net.Socket;
 import java.util.Random;
 
 public class Client implements Runnable {
-    private static final String SERVER_IP = "192.168.0.240";
-    public static GameGUI gui = new GameGUI();
+    private static final String SERVER_IP = "127.0.0.1";//"192.168.0.240";
+    public GameGUI gui = new GameGUI();
     private Socket client;
     static Random rand = new Random();
     public final int id = rand.nextInt(100000);
     private static final int SERVER_PORT = 8098;
+    private BufferedReader in;
+    private PrintWriter out;
 
     public Client(Socket clientSocket) throws IOException
     {
         this.client = clientSocket;
-        /*in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        out = new PrintWriter(client.getOutputStream(),true);*/
+        in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        out = new PrintWriter(client.getOutputStream(),true);
     }
 
     public static void main(String args[]) throws IOException {
@@ -76,7 +78,8 @@ public class Client implements Runnable {
     @Override
     public void run()
     {
-        /*Socket socket = null;
+        /*
+        Socket socket = null;
         try {
             socket = new Socket(SERVER_IP, SERVER_PORT);
         } catch (IOException e) {

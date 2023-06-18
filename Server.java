@@ -16,6 +16,7 @@ public class Server
     private static final int PORT = 8098;
     static Random rand = new Random();
     private static ArrayList<Client> clients = new ArrayList<>();
+    private static ArrayList<Socket> client_sockets = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(numberOfPlayers);
 
     private static int GetRandomWithoutOne(int exceptThis)
@@ -38,6 +39,7 @@ public class Server
 
             Client clientThread = new Client(client);
             clients.add(clientThread);
+
             System.out.println("[SERVER] Number of clients: " + clients.size() + " Added " + clientThread.id);
             pool.execute(clientThread);
         }
@@ -51,6 +53,7 @@ public class Server
                 if(clients.get(i).gui.preparationDone)
                 {
                     numOfReady += 1;
+                    System.out.println("Player: " + i + " is ready");
                 }
             }
             if(numOfReady == numberOfPlayers)break;
