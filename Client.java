@@ -23,10 +23,6 @@ public class Client implements Runnable {
 
     public static void main(String args[]) throws IOException {
         System.out.println("hey");
-    }
-    @Override
-    public void run()
-    {
         Socket socket = null;
         try {
             socket = new Socket(SERVER_IP, SERVER_PORT);
@@ -76,5 +72,58 @@ public class Client implements Runnable {
             throw new RuntimeException(e);
         }
         System.exit(0);
+    }
+    @Override
+    public void run()
+    {
+        /*Socket socket = null;
+        try {
+            socket = new Socket(SERVER_IP, SERVER_PORT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        BufferedReader input = null;
+        try {
+            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(socket.getOutputStream(), true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        while (true) {
+            System.out.println("Write: ");
+            String command = null;
+            try {
+                command = keyboard.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            if (command.equals("quit")) break;
+
+            out.println(command);
+
+            String serverResponse = null;
+            try {
+                serverResponse = input.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("Server says: " + serverResponse);
+        }
+
+        try {
+            socket.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.exit(0);*/
     }
 }
