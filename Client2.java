@@ -9,6 +9,8 @@ public class Client2 {
     private BufferedWriter bufferedWriter;
     private String username;
 
+    static GameGUI gui;
+
     public Client2(Socket socket, String username)
     {
         try
@@ -95,6 +97,12 @@ public class Client2 {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username for group chat");
         String username = scanner.nextLine();
+        gui = new GameGUI();
+        while(!gui.preparationDone)
+        {
+            System.out.println(gui.preparationDone);
+        }
+
         Socket socket = new Socket("localhost",1234);
         Client2 client = new Client2(socket,username);
         client.ListenForMessage();
