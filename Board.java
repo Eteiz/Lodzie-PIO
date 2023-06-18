@@ -31,6 +31,13 @@ public class Board {
         return true;
     }
 
+    //metod to clear board
+    public void clearBooard() {
+        for(int i = 0 ; i < size; i++)
+            for(int j = 0; j < size; i++)
+                this.Board[i][j] = 0;
+    }
+
     //method to check if boat to place is valid
     public boolean validateBoat(Boat boat) {
         if(this.Board[boat.position.x][boat.position.y] == 1)
