@@ -15,7 +15,7 @@ public class Server
     private static final int numberOfPlayers = 4;
     private static final int PORT = 8098;
     static Random rand = new Random();
-    private static ArrayList<ClientHandler> clients = new ArrayList<>();
+    private static ArrayList<Client> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(numberOfPlayers);
 
     private static int GetRandomWithoutOne(int exceptThis)
@@ -33,9 +33,10 @@ public class Server
         {
             System.out.println("[SERVER] Waiting for connection...");
             Socket client = listener.accept();
+
             System.out.println("[SERVER] Connected to client!");
 
-            ClientHandler clientThread = new ClientHandler(client);
+            Client clientThread = new Client(client);
             clients.add(clientThread);
             System.out.println("[SERVER] Number of clients: " + clients.size() + " Added " + clientThread.id);
             pool.execute(clientThread);
@@ -56,18 +57,6 @@ public class Server
         }
         System.out.println("Everybody is ready");
 
-        int idPlayer1 = clients.get(0).id;
-        int idPlayer2 = clients.get(1).id;
-        int idPlayer3 = clients.get(2).id;
-        int idPlayer4 = clients.get(3).id;
-
-        for(int i=0;i<numberOfPlayers;i+=1)
-        {
-            clients.get(i).idPlayer1 = idPlayer1;
-            clients.get(i).idPlayer2 = idPlayer2;
-            clients.get(i).idPlayer3 = idPlayer3;
-            clients.get(i).idPlayer4 = idPlayer4;
-        }
 
         // GAME LOOP
         boolean isEnd = false;
@@ -93,7 +82,7 @@ public class Server
 
                 System.out.println("Player: "+ i + " shoot player: " + chosen);
 
-                clients.get(i).isMyTurn = true;
+                //clients.get(i).isMyTurn = true;
                 if(i == 0)
                 {
                     if(chosen == 1)
