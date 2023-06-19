@@ -33,28 +33,26 @@ public class Client2 {
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
-            Scanner scanner = new Scanner(System.in);
+            //Scanner scanner = new Scanner(System.in);
             int chosenX = -1;
             int chosenY = -1;
             while(socket.isConnected())
             {
+                //String messageToSend2 = scanner.nextLine();
                 chosenX = gui.player1BoardGUI.ChosenX;
                 chosenY = gui.player1BoardGUI.ChosenY;
-                String messageToSend2 = scanner.nextLine();
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
-//                if(chosenX != -1 && chosenY != -1)
-//                {
-//                    String messageToSend = chosenX + " " + chosenY;
-//                    bufferedWriter.write(username + ": " + messageToSend + " !");
-//                    bufferedWriter.newLine();
-//                    bufferedWriter.flush();
-//
-//                    gui.player1BoardGUI.ResetBoardTiles();
-//                }
-                bufferedWriter.write(username + ": " + messageToSend2 +":" + chosenX + " " + chosenY);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
+                if(chosenX != -1 && chosenY != -1)
+                {
+                    String messageToSend = chosenX + " " + chosenY;
+                    bufferedWriter.write(username + ": " + messageToSend + " !");
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
+
+                    gui.player1BoardGUI.ResetBoardTiles();
+                }
+//                bufferedWriter.write(username + ": " + messageToSend2 +":" + chosenX + " " + chosenY);
+//                bufferedWriter.newLine();
+//                bufferedWriter.flush();
             }
         }
         catch (IOException e)
