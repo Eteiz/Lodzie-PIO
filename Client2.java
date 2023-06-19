@@ -82,10 +82,20 @@ public class Client2 {
     {
         if(player == 2)
         {
-            System.out.println("w 2");
+            System.out.println("w 2 strzelalem");
             if(this.username.equals("1"))
             {
-                System.out.println("ja 1");
+                System.out.println("ja gracz 1");
+                gui.player1LogicBoard.Board[point.x][point.y] = res;
+                gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
+            }
+        }
+        if(player == 1)
+        {
+            System.out.println("w 1 strzelalem");
+            if(this.username.equals("2"))
+            {
+                System.out.println("ja gracz 2");
                 gui.player1LogicBoard.Board[point.x][point.y] = res;
                 gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
             }
@@ -95,6 +105,12 @@ public class Client2 {
     public int GetLastCharResult(String string)
     {
         String res = string.substring(string.length() - 1);
+        return Integer.parseInt(res);
+    }
+
+    public int GetFirstCharPlayer(String string)
+    {
+        String res = string.substring(0,1);
         return Integer.parseInt(res);
     }
 
@@ -111,16 +127,12 @@ public class Client2 {
                         messageFromGroupChat = bufferedReader.readLine();
                         System.out.println(messageFromGroupChat);
                         String[] parts = null;
-                        if(messageFromGroupChat.startsWith("1:") && messageFromGroupChat.endsWith("!"))
+                        if(messageFromGroupChat.endsWith("!"))
                         {
                             parts = messageFromGroupChat.split(" ");
                             System.out.println(parts[2] + " " + parts[3]);
                         }
-                        if(messageFromGroupChat.startsWith("2:") && messageFromGroupChat.endsWith("!"))
-                        {
-                            parts = messageFromGroupChat.split(" ");
-                            System.out.println(parts[2] + " " + parts[3]);
-                        }
+
                         if(parts != null)
                         {
                             int res = ShootValue(ParseShoot(parts));
@@ -131,13 +143,10 @@ public class Client2 {
                         if(messageFromGroupChat.contains("Shoot res"))
                         {
                             int shoot_res = GetLastCharResult(messageFromGroupChat);
-                            if(messageFromGroupChat.startsWith("2"))
-                            {
-                                if(username.equals("1"))
-                                {
-                                    UpdateBoardBasedOnShoot(new Point(LastChosenX,LastChosenY),shoot_res,2);
-                                }
-                            }
+                            int player = GetFirstCharPlayer(messageFromGroupChat);
+
+                            UpdateBoardBasedOnShoot(new Point(LastChosenX,LastChosenY),shoot_res,player);
+
                         }
                     }
                     catch (IOException e)
