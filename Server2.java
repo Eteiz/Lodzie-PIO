@@ -3,10 +3,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Server2 {
     private static final int PORT = 8098;
     private static final String SERVER_IP = "127.0.0.1";
+
+    private static int numberOfConnetions = 0;
     private ServerSocket serverSocket;
 
     public Server2(ServerSocket serverSocket)
@@ -21,7 +24,8 @@ public class Server2 {
             while (!serverSocket.isClosed())
             {
                 Socket socket = serverSocket.accept();
-                System.out.println("A new client has connected");
+                numberOfConnetions += 1;
+                System.out.println("A new client has connected number: "+ numberOfConnetions);
 
                 ClientHandler clientHandler = new ClientHandler(socket);
 
@@ -53,5 +57,11 @@ public class Server2 {
         ServerSocket serverSocket = new ServerSocket(1234);
         Server2 server = new Server2(serverSocket);
         server.startServer();
+        Scanner scanner = new Scanner(System.in);
+        String message = scanner.nextLine();
+        if(message.equals("quit"))
+        {
+            serverSocket.close();
+        }
     }
 }

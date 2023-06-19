@@ -9,7 +9,7 @@ public class Client2 {
     private BufferedWriter bufferedWriter;
     private String username;
 
-    static GameGUI gui;
+    static GameGUI gui = new GameGUI();
 
     public Client2(Socket socket, String username)
     {
@@ -34,10 +34,25 @@ public class Client2 {
             bufferedWriter.flush();
 
             Scanner scanner = new Scanner(System.in);
+            int chosenX = -1;
+            int chosenY = -1;
             while(socket.isConnected())
             {
-                String messageToSend = scanner.nextLine();
-                bufferedWriter.write(username + ": " + messageToSend);
+                chosenX = gui.player1BoardGUI.ChosenX;
+                chosenY = gui.player1BoardGUI.ChosenY;
+                String messageToSend2 = scanner.nextLine();
+                chosenX = gui.player1BoardGUI.ChosenX;
+                chosenY = gui.player1BoardGUI.ChosenY;
+//                if(chosenX != -1 && chosenY != -1)
+//                {
+//                    String messageToSend = chosenX + " " + chosenY;
+//                    bufferedWriter.write(username + ": " + messageToSend + " !");
+//                    bufferedWriter.newLine();
+//                    bufferedWriter.flush();
+//
+//                    gui.player1BoardGUI.ResetBoardTiles();
+//                }
+                bufferedWriter.write(username + ": " + messageToSend2 +":" + chosenX + " " + chosenY);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
@@ -60,6 +75,16 @@ public class Client2 {
                     try {
                         messageFromGroupChat = bufferedReader.readLine();
                         System.out.println(messageFromGroupChat);
+                        if(messageFromGroupChat.startsWith("1:") && messageFromGroupChat.endsWith("!"))
+                        {
+                            String[] parts = messageFromGroupChat.split(" ");
+                            System.out.println(parts[1] + " " + parts[2]);
+                        }
+                        if(messageFromGroupChat.startsWith("2:") && messageFromGroupChat.endsWith("!"))
+                        {
+                            String[] parts = messageFromGroupChat.split(" ");
+                            System.out.println(parts[1] + " " + parts[2]);
+                        }
                     }
                     catch (IOException e)
                     {
@@ -97,12 +122,11 @@ public class Client2 {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username for group chat");
         String username = scanner.nextLine();
-        gui = new GameGUI();
         while(!gui.preparationDone)
         {
-            System.out.println(gui.preparationDone);
+            System.out.println("Waiting...");
         }
-
+        System.out.println("Ready!");
         Socket socket = new Socket("localhost",1234);
         Client2 client = new Client2(socket,username);
         client.ListenForMessage();
