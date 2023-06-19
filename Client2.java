@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class Client2 {
     private Socket socket;
+    int LastChosenX;
+    int LastChosenY;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String username;
@@ -33,32 +35,67 @@ public class Client2 {
             bufferedWriter.newLine();
             bufferedWriter.flush();
 
-            //Scanner scanner = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
             int chosenX = -1;
             int chosenY = -1;
             while(socket.isConnected())
             {
-                //String messageToSend2 = scanner.nextLine();
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
-                if(chosenX != -1 && chosenY != -1)
+                String messageToSend2 = scanner.nextLine();
+                if(messageToSend2.equals("approve"))
                 {
-                    String messageToSend = chosenX + " " + chosenY;
-                    bufferedWriter.write(username + ": " + messageToSend + " !");
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
+                    chosenX = gui.player1BoardGUI.ChosenX;
+                    chosenY = gui.player1BoardGUI.ChosenY;
+                    if(chosenX != -1 && chosenY != -1)
+                    {
+                        String messageToSend = chosenX + " " + chosenY;
+                        int where_shoot = 2;
+                        bufferedWriter.write(username + ": " + where_shoot + " " + messageToSend + " !");
+                        bufferedWriter.newLine();
+                        bufferedWriter.flush();
 
-                    gui.player1BoardGUI.ResetBoardTiles();
+                        LastChosenX = chosenX;
+                        LastChosenY = chosenY;
+                        gui.player1BoardGUI.ResetBoardTiles();
+                    }
                 }
-//                bufferedWriter.write(username + ": " + messageToSend2 +":" + chosenX + " " + chosenY);
-//                bufferedWriter.newLine();
-//                bufferedWriter.flush();
             }
         }
         catch (IOException e)
         {
             closeEverything(socket,bufferedReader,bufferedWriter);
         }
+    }
+    public Point ParseShoot(String[] parts)
+    {
+        int x = Integer.parseInt(parts[2]);
+        int y = Integer.parseInt(parts[3]);
+        return new Point(x,y);
+    }
+    public int ShootValue(Point point)
+    {
+        gui.mainLogicBoard.shootBoat(point);
+        gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
+        return gui.mainLogicBoard.Board[point.x][point.y];
+    }
+
+    public void UpdateBoardBasedOnShoot(Point point, int res, int player)
+    {
+        if(player == 2)
+        {
+            System.out.println("w 2");
+            if(this.username.equals("1"))
+            {
+                System.out.println("ja 1");
+                gui.player1LogicBoard.Board[point.x][point.y] = res;
+                gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
+            }
+        }
+    }
+
+    public int GetLastCharResult(String string)
+    {
+        String res = string.substring(string.length() - 1);
+        return Integer.parseInt(res);
     }
 
     public void ListenForMessage()
@@ -73,15 +110,34 @@ public class Client2 {
                     try {
                         messageFromGroupChat = bufferedReader.readLine();
                         System.out.println(messageFromGroupChat);
+                        String[] parts = null;
                         if(messageFromGroupChat.startsWith("1:") && messageFromGroupChat.endsWith("!"))
                         {
-                            String[] parts = messageFromGroupChat.split(" ");
-                            System.out.println(parts[1] + " " + parts[2]);
+                            parts = messageFromGroupChat.split(" ");
+                            System.out.println(parts[2] + " " + parts[3]);
                         }
                         if(messageFromGroupChat.startsWith("2:") && messageFromGroupChat.endsWith("!"))
                         {
-                            String[] parts = messageFromGroupChat.split(" ");
-                            System.out.println(parts[1] + " " + parts[2]);
+                            parts = messageFromGroupChat.split(" ");
+                            System.out.println(parts[2] + " " + parts[3]);
+                        }
+                        if(parts != null)
+                        {
+                            int res = ShootValue(ParseShoot(parts));
+                            bufferedWriter.write(username + " Shoot res: " + res);
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                        }
+                        if(messageFromGroupChat.contains("Shoot res"))
+                        {
+                            int shoot_res = GetLastCharResult(messageFromGroupChat);
+                            if(messageFromGroupChat.startsWith("2"))
+                            {
+                                if(username.equals("1"))
+                                {
+                                    UpdateBoardBasedOnShoot(new Point(LastChosenX,LastChosenY),shoot_res,2);
+                                }
+                            }
                         }
                     }
                     catch (IOException e)
