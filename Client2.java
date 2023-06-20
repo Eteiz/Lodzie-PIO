@@ -235,7 +235,7 @@ public class Client2 {
                         int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
                         System.out.println("I: " + username + " Shoot in: " + where_shoot);
                         String messageToSend2 = scanner.nextLine();
-                        if (messageToSend2.equals("approve"))
+                        if (messageToSend2.equals("y"))
                         {
                             Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
                             chosenX = coords.x;
