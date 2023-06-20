@@ -21,6 +21,10 @@ public class Client2 {
     private String username;
 
     int numberOfLosers = 0;
+    boolean Player1Losed = false;
+    boolean Player2Losed = false;
+    boolean Player3Losed = false;
+    boolean Player4Losed = false;
     boolean didILose = false;
 
     static GameGUI gui = new GameGUI();
@@ -39,10 +43,14 @@ public class Client2 {
             closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
-    private static int GetRandomWithoutOneInRange(int exceptThis,int range)
+    public int GetRandomWithoutOneInRange(int exceptThis,int range)
     {
         int chosen = exceptThis;
-        while(chosen == exceptThis)chosen = rand.nextInt(range)+1; // to have not 0 and 1 but 1 and 2
+        while(chosen == exceptThis || (chosen==1 && Player1Losed) || (chosen==2 && Player2Losed) || (chosen==3 && Player3Losed)
+         || (chosen==4 && Player4Losed))
+        {
+            while(chosen == exceptThis)chosen = rand.nextInt(range)+1; // to have not 0 and 1 but 1 and 2
+        }
         return chosen;
     }
 
@@ -58,6 +66,16 @@ public class Client2 {
                 chosenX = gui.player1BoardGUI.ChosenX;
                 chosenY = gui.player1BoardGUI.ChosenY;
             }
+            if(shootedPlayer == 3)
+            {
+                chosenX = gui.player2BoardGUI.ChosenX;
+                chosenY = gui.player2BoardGUI.ChosenY;
+            }
+            if(shootedPlayer == 4)
+            {
+                chosenX = gui.player3BoardGUI.ChosenX;
+                chosenY = gui.player3BoardGUI.ChosenY;
+            }
         }
         if(username.equals("2"))
         {
@@ -66,8 +84,53 @@ public class Client2 {
                 chosenX = gui.player1BoardGUI.ChosenX;
                 chosenY = gui.player1BoardGUI.ChosenY;
             }
+            if(shootedPlayer == 3)
+            {
+                chosenX = gui.player2BoardGUI.ChosenX;
+                chosenY = gui.player2BoardGUI.ChosenY;
+            }
+            if(shootedPlayer == 4)
+            {
+                chosenX = gui.player3BoardGUI.ChosenX;
+                chosenY = gui.player3BoardGUI.ChosenY;
+            }
         }
-
+        if(username.equals("3"))
+        {
+            if(shootedPlayer == 1)
+            {
+                chosenX = gui.player1BoardGUI.ChosenX;
+                chosenY = gui.player1BoardGUI.ChosenY;
+            }
+            if(shootedPlayer == 2)
+            {
+                chosenX = gui.player2BoardGUI.ChosenX;
+                chosenY = gui.player2BoardGUI.ChosenY;
+            }
+            if(shootedPlayer == 4)
+            {
+                chosenX = gui.player3BoardGUI.ChosenX;
+                chosenY = gui.player3BoardGUI.ChosenY;
+            }
+        }
+        if(username.equals("4"))
+        {
+            if(shootedPlayer == 1)
+            {
+                chosenX = gui.player1BoardGUI.ChosenX;
+                chosenY = gui.player1BoardGUI.ChosenY;
+            }
+            if(shootedPlayer == 2)
+            {
+                chosenX = gui.player2BoardGUI.ChosenX;
+                chosenY = gui.player2BoardGUI.ChosenY;
+            }
+            if(shootedPlayer == 3)
+            {
+                chosenX = gui.player3BoardGUI.ChosenX;
+                chosenY = gui.player3BoardGUI.ChosenY;
+            }
+        }
         return new Point(chosenX,chosenY);
     }
 
@@ -77,19 +140,71 @@ public class Client2 {
         bufferedWriter.newLine();
         bufferedWriter.flush();
     }
-    public void ChangePlayerTurn() throws IOException {
 
-        if(Player1Turn)
-        {
-            System.out.println("Now is player 2 turn");
-            Player1Turn = false;
-            Player2Turn = true;
-        }
-        else if(Player2Turn)
+    public void OpenTurnAndBlockOthers(int player)
+    {
+        if(player == 1)
         {
             System.out.println("Now is player 1 turn");
             Player1Turn = true;
             Player2Turn = false;
+            Player3Turn = false;
+            Player4Turn = false;
+        }
+        if(player == 2)
+        {
+            System.out.println("Now is player 2 turn");
+            Player1Turn = false;
+            Player2Turn = true;
+            Player3Turn = false;
+            Player4Turn = false;
+        }
+        if(player == 3)
+        {
+            System.out.println("Now is player 3 turn");
+            Player1Turn = false;
+            Player2Turn = false;
+            Player3Turn = true;
+            Player4Turn = false;
+        }
+        if(player == 4)
+        {
+            System.out.println("Now is player 4 turn");
+            Player1Turn = false;
+            Player2Turn = false;
+            Player3Turn = false;
+            Player4Turn = true;
+        }
+    }
+    public void ChangePlayerTurn() throws IOException {
+
+        if(Player1Turn)
+        {
+            OpenTurnAndBlockOthers(2);
+            if(Player2Losed)OpenTurnAndBlockOthers(3);
+            if(Player3Losed)OpenTurnAndBlockOthers(4);
+            if(Player4Losed)OpenTurnAndBlockOthers(1);
+        }
+        else if(Player2Turn)
+        {
+            OpenTurnAndBlockOthers(3);
+            if(Player3Losed)OpenTurnAndBlockOthers(4);
+            if(Player4Losed)OpenTurnAndBlockOthers(1);
+            if(Player1Losed)OpenTurnAndBlockOthers(2);
+        }
+        else if(Player3Turn)
+        {
+            OpenTurnAndBlockOthers(4);
+            if(Player4Losed)OpenTurnAndBlockOthers(1);
+            if(Player1Losed)OpenTurnAndBlockOthers(2);
+            if(Player2Losed)OpenTurnAndBlockOthers(3);
+        }
+        else if(Player4Turn)
+        {
+            OpenTurnAndBlockOthers(1);
+            if(Player1Losed)OpenTurnAndBlockOthers(2);
+            if(Player2Losed)OpenTurnAndBlockOthers(3);
+            if(Player3Losed)OpenTurnAndBlockOthers(4);
         }
     }
 
@@ -103,7 +218,7 @@ public class Client2 {
             Scanner scanner = new Scanner(System.in);
             int chosenX = -1;
             int chosenY = -1;
-            int range = 2;
+            int range = 4;
             while(socket.isConnected())
             {
                 if(!didILose && numberOfLosers == range - 1)
@@ -112,7 +227,8 @@ public class Client2 {
                 }
                 if(!didILose)
                 {
-                    if (username.equals("1") && Player1Turn || username.equals("2") && Player2Turn)
+                    if ((username.equals("1") && Player1Turn) || (username.equals("2") && Player2Turn) ||
+                            (username.equals("3") && Player3Turn) || (username.equals("4") && Player4Turn))
                     {
                         System.out.println("This is my turn!");
 
@@ -137,8 +253,10 @@ public class Client2 {
                                 gui.player1BoardGUI.ResetBoardTiles();
 
                                 ChangePlayerTurn();
-                                if (username.equals("1")) WriteNextPlayer("2");
-                                if (username.equals("2")) WriteNextPlayer("1");
+                                if(Player1Turn)WriteNextPlayer("1");
+                                else if(Player2Turn)WriteNextPlayer("2");
+                                else if(Player3Turn)WriteNextPlayer("3");
+                                else if(Player4Turn)WriteNextPlayer("4");
                             }
 
                         }
@@ -194,26 +312,43 @@ public class Client2 {
 
     public void UpdateBoardBasedOnShoot(Point point, int res, int player)
     {
-        if(player == 2)
-        {
-            System.out.println("w 2 strzelalem");
-            if(this.username.equals("1"))
-            {
-                System.out.println("ja gracz 1");
-                gui.player1LogicBoard.Board[point.x][point.y] = res;
-                gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
-            }
-        }
-        if(player == 1)
+        if(player == 1 && (username.equals("2") || username.equals("3") || username.equals("4")))
         {
             System.out.println("w 1 strzelalem");
-            if(this.username.equals("2"))
-            {
-                System.out.println("ja gracz 2");
-                gui.player1LogicBoard.Board[point.x][point.y] = res;
-                gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
-            }
+            gui.player1LogicBoard.Board[point.x][point.y] = res;
+            gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
         }
+        if(player == 2 && username.equals("1"))
+        {
+            System.out.println("w 2 strzelalem");
+            gui.player1LogicBoard.Board[point.x][point.y] = res;
+            gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
+        }
+        if(player == 2 && (username.equals("3") || username.equals("4")))
+        {
+            System.out.println("w 2 strzelalem");
+            gui.player2LogicBoard.Board[point.x][point.y] = res;
+            gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
+        }
+        if(player == 3 && (username.equals("1") || username.equals("2")))
+        {
+            System.out.println("w 3 strzelalem");
+            gui.player2LogicBoard.Board[point.x][point.y] = res;
+            gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
+        }
+        if(player == 3 && (username.equals("4")))
+        {
+            System.out.println("w 3 strzelalem");
+            gui.player3LogicBoard.Board[point.x][point.y] = res;
+            gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
+        }
+        if(player == 4 && (username.equals("2") || username.equals("3") || username.equals("1")))
+        {
+            System.out.println("w 4 strzelalem");
+            gui.player3LogicBoard.Board[point.x][point.y] = res;
+            gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
+        }
+
     }
 
     public int GetLastCharResult(String string)
@@ -281,6 +416,10 @@ public class Client2 {
                         }
                         if(messageFromGroupChat.contains("I loosed"))
                         {
+                            if(messageFromGroupChat.startsWith("1"))Player1Losed = true;
+                            if(messageFromGroupChat.startsWith("2"))Player2Losed = true;
+                            if(messageFromGroupChat.startsWith("3"))Player3Losed = true;
+                            if(messageFromGroupChat.startsWith("4"))Player4Losed = true;
                             numberOfLosers += 1;
                         }
                     }
