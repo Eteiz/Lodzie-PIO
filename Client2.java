@@ -224,6 +224,7 @@ public class Client2 {
                 if(!didILose && numberOfLosers == 1)
                 {
                     System.out.println("I won!!!!!");
+                    closeEverything(socket,this.bufferedReader,this.bufferedWriter);
                 }
                 if(didILose)
                 {
