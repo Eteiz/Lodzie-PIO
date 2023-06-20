@@ -221,9 +221,13 @@ public class Client2 {
             int range = 4;
             while(socket.isConnected())
             {
-                if(!didILose && numberOfLosers == range - 1)
+                if(!didILose && numberOfLosers == 1)
                 {
                     System.out.println("I won!!!!!");
+                }
+                if(didILose)
+                {
+                    System.out.println("I am loser!");
                 }
                 if(!didILose)
                 {
