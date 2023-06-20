@@ -121,6 +121,33 @@ public class Board {
         return counter;
     }
 
+    public boolean all1Set()
+    {
+        if(this.Boats[0] < this.ControlBoats[0])
+            return false;
+        return true;
+    }
+
+    public boolean all2Set()
+    {
+        if(this.Boats[1] < this.ControlBoats[1])
+            return false;
+        return true;
+    }
+
+    public boolean all3Set()
+    {
+        if(this.Boats[2] < this.ControlBoats[2])
+            return false;
+        return true;
+    }
+
+    public boolean all4Set()
+    {
+        if(this.Boats[3] < this.ControlBoats[3])
+            return false;
+        return true;
+    }
 
     //this checks if player has boats left on Board, and if you can continue game
     //returns true if no boat left
