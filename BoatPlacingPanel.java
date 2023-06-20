@@ -263,14 +263,37 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
     }
 
     public void LockButtons() {
+        Lock1s();
+        Lock2s();
+        Lock3s();
+        Lock4s();
+    }
+
+    public void Lock1s(){
         shipOneH.setEnabled(false);
+    }
+    public void Lock2s(){
         shipTwoH.setEnabled(false);
-        shipThreeH.setEnabled(false);
-        shipFourH.setEnabled(false);
         shipTwoV.setEnabled(false);
+    }
+    public void Lock3s(){
+        shipThreeH.setEnabled(false);
         shipThreeV.setEnabled(false);
+    }
+    public void Lock4s(){
+        shipFourH.setEnabled(false);
         shipFourV.setEnabled(false);
     }
+    public void UnlockButtons(){
+        shipOneH.setEnabled(true);
+        shipTwoH.setEnabled(true);
+        shipThreeH.setEnabled(true);
+        shipFourH.setEnabled(true);
+        shipTwoV.setEnabled(true);
+        shipThreeV.setEnabled(true);
+        shipFourV.setEnabled(true);
+    }
+
 
     // Method that would display to player how many ships are left to be placed
     void UpdateLabel(Board LogicBoard) {

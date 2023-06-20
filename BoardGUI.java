@@ -61,8 +61,8 @@ public class BoardGUI extends JPanel implements ActionListener {
         }
 
         setVisible(true);
+        setBackground(Color.BLACK);
         setOpaque(true);
-        setBackground(Color.black);
     }
 
     // Method changes look of the tile depending on its state in LogicBoard

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +17,8 @@ public class GameGUI extends JFrame implements ActionListener {
     JButton placementButton;
     JButton shipResetButton;
     JButton readyButton;
-
     JButton shootButton;
+    JLabel info;
 
     // Player
     // Each player has its Logic and GUI version of board which are dependent on each other and update accordingly
@@ -64,18 +65,21 @@ public class GameGUI extends JFrame implements ActionListener {
         player1BoardGUI = new BoardGUI(false, null);
         player1BoardGUI.setBounds(7+45,5,player1BoardGUI.boardWidth + 27,player1BoardGUI.boardHeight + 27);
         player1LogicBoard = new Board();
+        player1BoardGUI.desactiveTiles();
         add(player1BoardGUI);
 
         // Player 2
         player2BoardGUI = new BoardGUI(false, null);
         player2BoardGUI.setBounds(384+45,5, player2BoardGUI.boardWidth + 27, player2BoardGUI.boardHeight + 27);
         player2LogicBoard = new Board();
+        //player2BoardGUI.desactiveTiles();
         add(player2BoardGUI);
 
         // Player 3
         player3BoardGUI = new BoardGUI(false, null);
         player3BoardGUI.setBounds(761+45,5,player3BoardGUI.boardWidth + 27,player3BoardGUI.boardHeight + 27);
         player3LogicBoard = new Board();
+        //player3BoardGUI.desactiveTiles();
         add(player3BoardGUI);
 
         // Placing BoatPlacingPanel for ships to be chosen
@@ -97,15 +101,30 @@ public class GameGUI extends JFrame implements ActionListener {
         readyButton.setEnabled(false);
 
         shootButton = new JButton("Oddaj strzał!");
-        shootButton.setBounds(800,328,200,50);
+        shootButton.setBounds(800+45,350,200,50);
         shootButton.addActionListener(this);
         shootButton.setEnabled(false);
+
+        //Jabel info
+        info = new JLabel("<html>Faza ustawiania statków:<br/>" +
+                "Aby umieścić statek na planszy naciśnij statek, " +
+                "a nastepnie wybierz pole w którym ma sie on znajdować.<br/><br/>" +
+                "Jeżeli sie pomylisz naciśnij przycisk \"Usuń statki\"</html>");
+
+        info.setBounds(800, 450, 325, 250);
+        info.setBackground(new Color(0x969eb9));
+        info.setOpaque(true);
+        info.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+        info.setHorizontalAlignment(SwingConstants.CENTER);
+        info.setVerticalAlignment(SwingConstants.CENTER);
+        info.setBorder(new EmptyBorder( 5,15,5,15));
 
         add(ShipPanel);
         add(placementButton);
         add(shipResetButton);
         add(readyButton);
         add(shootButton);
+        add(info);
 
         setVisible(true);
     }
@@ -138,12 +157,21 @@ public class GameGUI extends JFrame implements ActionListener {
             ShipPanel.ResetPlacingPanel();
             mainBoardGUI.ResetBoardTiles();
             ShipPanel.chosenShip = null;
+
+            if(mainLogicBoard.all1Set())
+                ShipPanel.Lock1s();
+
+            if(mainLogicBoard.all2Set())
+                ShipPanel.Lock2s();
+
+            if(mainLogicBoard.all3Set())
+                ShipPanel.Lock3s();
+
+            if(mainLogicBoard.all4Set())
+                ShipPanel.Lock4s();
+
             if(mainLogicBoard.allBoatsSet()){
-                readyButton.setEnabled(true);
                 ShipPanel.shipLeftToPlace.setBackground(Color.GREEN);
-
-                //Bloku
-
             }
 
 
@@ -152,8 +180,7 @@ public class GameGUI extends JFrame implements ActionListener {
         if(e.getSource().equals(shipResetButton)){
             readyButton.setEnabled(false);
             ShipPanel.shipLeftToPlace.setBackground(Color.RED);
-
-            //Odblokuj
+            ShipPanel.UnlockButtons();
 
             for(int i = 0; i < mainLogicBoard.getSize(); ++i)
                 for(int j = 0; j < mainLogicBoard.getSize(); ++j)
