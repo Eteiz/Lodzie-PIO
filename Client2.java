@@ -239,10 +239,10 @@ public class Client2 {
 
                         int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
                         System.out.println("I: " + username + " Shoot in: " + where_shoot);
-                        //String messageToSend2 = scanner.nextLine();
+                        String messageToSend2 = " ";
                         //if (messageToSend2.equals("y"))
-                        while (!gui.shootReady);
-                        if(gui.shootReady)
+                        if(gui.shootReady)messageToSend2 = "y";
+                        if(messageToSend2.equals("y"))
                         {
 
                             Point coords = CoordinatesBasedOnWhereShoot(where_shoot);

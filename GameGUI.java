@@ -170,7 +170,7 @@ public class GameGUI extends JFrame implements ActionListener {
                         (player3BoardGUI.ChosenX != -1 && player3BoardGUI.ChosenY != -1))) {
             shootReady = true;
 
-            if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
+            /*if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
                 player1LogicBoard.shootBoat(new Point(player1BoardGUI.ChosenX, player1BoardGUI.ChosenY));
                 player1BoardGUI.UpdateBoard(player1LogicBoard);
             }
@@ -184,7 +184,7 @@ public class GameGUI extends JFrame implements ActionListener {
             }
             player1BoardGUI.ResetBoardTiles();
             player2BoardGUI.ResetBoardTiles();
-            player3BoardGUI.ResetBoardTiles();
+            player3BoardGUI.ResetBoardTiles();*/
         }
     }
     public static void main(String[] args) throws IOException {
