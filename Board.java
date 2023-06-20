@@ -88,10 +88,10 @@ public class Board {
     //metod to make shoots on the board
     public void shootBoat(Point shoot) {
         if(this.Board[shoot.x][shoot.y] == 0) {
-            this.Board[shoot.x][shoot.y] = 2;
+            this.Board[shoot.x][shoot.y] = 2; //miss
         }
         else if(this.Board[shoot.x][shoot.y] == 1) {
-            this.Board[shoot.x][shoot.y] = -1;
+            this.Board[shoot.x][shoot.y] = -1; //good shot
         }
     }
 
@@ -120,9 +120,9 @@ public class Board {
         return counter;
     }
 
-    //this checks if player has boats left on Board, and if can continue game
+    //this checks if player has boats left on Board, and if you can continue game
     //returns true if no boat left
-    public boolean checkAllBoatsShot() {
+      public boolean checkAllBoatsShot() {
         for(int i = 0 ; i < size; i++){
             for(int j = 0; j < size; j++) {
                 if(this.Board[i][j] == 1)

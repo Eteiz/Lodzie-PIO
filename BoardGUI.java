@@ -65,7 +65,7 @@ public class BoardGUI extends JPanel implements ActionListener {
         setBackground(Color.black);
     }
 
-    // Method changes look of the tile depending of its state in LogicBoard
+    // Method changes look of the tile depending on its state in LogicBoard
     void UpdateBoard(Board referencedBoard) {
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 10; j++) {
