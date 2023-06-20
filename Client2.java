@@ -146,6 +146,7 @@ public class Client2 {
         if(player == 1)
         {
             System.out.println("Now is player 1 turn");
+            gui.setLabelText("Tura gracza I");
             Player1Turn = true;
             Player2Turn = false;
             Player3Turn = false;
@@ -153,7 +154,7 @@ public class Client2 {
         }
         if(player == 2)
         {
-            System.out.println("Now is player 2 turn");
+            gui.setLabelText("Tura gracza II");
             Player1Turn = false;
             Player2Turn = true;
             Player3Turn = false;
@@ -161,7 +162,7 @@ public class Client2 {
         }
         if(player == 3)
         {
-            System.out.println("Now is player 3 turn");
+            gui.setLabelText("Tura gracza III");
             Player1Turn = false;
             Player2Turn = false;
             Player3Turn = true;
@@ -169,7 +170,7 @@ public class Client2 {
         }
         if(player == 4)
         {
-            System.out.println("Now is player 4 turn");
+            gui.setLabelText("Tura gracza pierwszego IV");
             Player1Turn = false;
             Player2Turn = false;
             Player3Turn = false;
@@ -223,22 +224,22 @@ public class Client2 {
             {
                 if(!didILose && numberOfLosers == 1)
                 {
-                    System.out.println("I won!!!!!");
+                    gui.setLabelText("Wygrałeś");
                     closeEverything(socket,this.bufferedReader,this.bufferedWriter);
                 }
                 if(didILose)
                 {
-                    System.out.println("I am loser :(");
+                    gui.setLabelText("Przegrałeś");
                 }
                 if(!didILose)
                 {
                     if ((username.equals("1") && Player1Turn) || (username.equals("2") && Player2Turn) ||
                             (username.equals("3") && Player3Turn) || (username.equals("4") && Player4Turn))
                     {
-                        System.out.println("This is my turn!");
 
                         int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
-                        System.out.println("I: " + username + " Shoot in: " + where_shoot);
+                        gui.setLabelText("<html>Twoja tura<br/><br/>Strzelasz do gracza: "+ where_shoot +"</html>");
+                        //System.out.println("I: " + username + " Shoot in: " + where_shoot);
                         String messageToSend2 = scanner.nextLine();
 
                         if(messageToSend2.equals("y"))
@@ -272,6 +273,7 @@ public class Client2 {
                     {
                         if (Duration.between(start, Instant.now()).toSeconds() >= 1)
                         {
+                            gui.setLabelText("Oczekiwanie na kolejnego gracza");
                             System.out.println("Waiting for changing turn...");
                             start = Instant.now();
                         }

@@ -36,8 +36,6 @@ public class TileGUI extends JButton {
 
         setBorderPainted(false);
         setFocusPainted(false);
-        //setBackground(new Color(0xc0caec));
-        setForeground(new Color(0xc0caec));
         setOpaque(true);
         setContentAreaFilled(false);
     }
