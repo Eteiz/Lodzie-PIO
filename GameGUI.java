@@ -16,6 +16,8 @@ public class GameGUI extends JFrame implements ActionListener {
     JButton shipResetButton;
     JButton readyButton;
 
+    JButton shootButton;
+
     // Player
     // Each player has its Logic and GUI version of board which are dependent on each other and update accordingly
     BoardGUI mainBoardGUI;
@@ -89,14 +91,18 @@ public class GameGUI extends JFrame implements ActionListener {
         shipResetButton.addActionListener(this);
 
         readyButton = new JButton("Gotowy!");
-        readyButton.setBounds(100,700,165,50);
+        readyButton.setBounds(18,670,336,50);
         readyButton.addActionListener(this);
-        // To make it on top of panel
+
+        shootButton = new JButton("Oddaj strzał!");
+        shootButton.setBounds(800,328,200,50);
+        shootButton.addActionListener(this);
 
         add(ShipPanel);
         add(placementButton);
         add(shipResetButton);
         add(readyButton);
+        add(shootButton);
 
         setVisible(true);
     }
@@ -122,7 +128,7 @@ public class GameGUI extends JFrame implements ActionListener {
                 else if(shipType.equals("3V")) newBoat = new Boat(3,1,placingPoint);
                 else if(shipType.equals("4V")) newBoat = new Boat(4,1,placingPoint);
                 else newBoat = new Boat(1,0,placingPoint);
-                
+
                 if(mainLogicBoard.validateBoat(newBoat)) mainLogicBoard.setBoats(newBoat);
             }
             mainBoardGUI.UpdateBoard(mainLogicBoard);
@@ -144,6 +150,7 @@ public class GameGUI extends JFrame implements ActionListener {
 
         if(e.getSource().equals(readyButton)) {
             // If every boat is placed
+
             if(mainLogicBoard.allBoatsSet()) {
                 // Locking placing buttons
                 ShipPanel.LockButtons();
@@ -155,6 +162,27 @@ public class GameGUI extends JFrame implements ActionListener {
             }
         }
 
+        if(e.getSource().equals(shootButton) && (
+                (player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) ||
+                        (player2BoardGUI.ChosenX != -1 && player2BoardGUI.ChosenY != -1) ||
+                        (player3BoardGUI.ChosenX != -1 && player3BoardGUI.ChosenY != -1))) {
+
+            if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
+                player1LogicBoard.shootBoat(new Point(player1BoardGUI.ChosenX, player1BoardGUI.ChosenY));
+                player1BoardGUI.UpdateBoard(player1LogicBoard);
+            }
+            else if(player2BoardGUI.ChosenX != -1 && player2BoardGUI.ChosenY != -1) {
+                player2LogicBoard.shootBoat(new Point(player2BoardGUI.ChosenX, player2BoardGUI.ChosenY));
+                player2BoardGUI.UpdateBoard(player2LogicBoard);
+            }
+            else if(player3BoardGUI.ChosenX != -1 && player3BoardGUI.ChosenY != -1) {
+                player3LogicBoard.shootBoat(new Point(player3BoardGUI.ChosenX, player3BoardGUI.ChosenY));
+                player3BoardGUI.UpdateBoard(player3LogicBoard);
+            }
+            player1BoardGUI.ResetBoardTiles();
+            player2BoardGUI.ResetBoardTiles();
+            player3BoardGUI.ResetBoardTiles();
+        }
     }
     public static void main(String[] args) throws IOException {
         GameGUI test = new GameGUI();
