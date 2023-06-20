@@ -123,30 +123,22 @@ public class Board {
 
     public boolean all1Set()
     {
-        if(this.Boats[0] < this.ControlBoats[0])
-            return false;
-        return true;
+        return this.Boats[0] >= this.ControlBoats[0];
     }
 
     public boolean all2Set()
     {
-        if(this.Boats[1] < this.ControlBoats[1])
-            return false;
-        return true;
+        return this.Boats[1] >= this.ControlBoats[1];
     }
 
     public boolean all3Set()
     {
-        if(this.Boats[2] < this.ControlBoats[2])
-            return false;
-        return true;
+        return this.Boats[2] >= this.ControlBoats[2];
     }
 
     public boolean all4Set()
     {
-        if(this.Boats[3] < this.ControlBoats[3])
-            return false;
-        return true;
+        return this.Boats[3] >= this.ControlBoats[3];
     }
 
     //this checks if player has boats left on Board, and if you can continue game
