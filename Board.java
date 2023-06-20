@@ -1,5 +1,4 @@
 public class Board {
-
     private final int size = 10; //size of game board
     public int Board[][] = new int[size][size]; //game board for placing boats
     public int Boats[] = new int[4]; //array to know how many boats are set
@@ -89,13 +88,16 @@ public class Board {
     //metod to make shoots on the board
     public void shootBoat(Point shoot) {
         if(this.Board[shoot.x][shoot.y] == 0) {
-            this.Board[shoot.x][shoot.y] = 2;
+            this.Board[shoot.x][shoot.y] = 2; //miss
         }
         else if(this.Board[shoot.x][shoot.y] == 1) {
-            this.Board[shoot.x][shoot.y] = -1;
+            this.Board[shoot.x][shoot.y] = -1; //good shot
         }
     }
 
+    public int getSize() {
+        return size;
+    }
     //method to check if all boats are placed
     public boolean allBoatsSet() {
         for(int i = 0; i < this.ControlBoats.length; i++)
@@ -118,9 +120,9 @@ public class Board {
         return counter;
     }
 
-    //this checks if player has boats left on Board, and if can continue game
+    //this checks if player has boats left on Board, and if you can continue game
     //returns true if no boat left
-    public boolean checkAllBoatsShot() {
+      public boolean checkAllBoatsShot() {
         for(int i = 0 ; i < size; i++){
             for(int j = 0; j < size; j++) {
                 if(this.Board[i][j] == 1)
@@ -129,5 +131,4 @@ public class Board {
         }
         return true;
     }
-
 }
