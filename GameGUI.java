@@ -9,7 +9,7 @@ public class GameGUI extends JFrame implements ActionListener {
 
     boolean preparationDone = false;
     boolean isDead = false;
-    boolean shootReady = false;
+    String shootReady = " ";
 
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
@@ -168,7 +168,7 @@ public class GameGUI extends JFrame implements ActionListener {
                 (player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) ||
                         (player2BoardGUI.ChosenX != -1 && player2BoardGUI.ChosenY != -1) ||
                         (player3BoardGUI.ChosenX != -1 && player3BoardGUI.ChosenY != -1))) {
-            shootReady = true;
+            shootReady = "y";
 
             /*if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
                 player1LogicBoard.shootBoat(new Point(player1BoardGUI.ChosenX, player1BoardGUI.ChosenY));

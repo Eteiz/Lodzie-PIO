@@ -239,12 +239,7 @@ public class Client2 {
 
                         int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
                         System.out.println("I: " + username + " Shoot in: " + where_shoot);
-                        String messageToSend2 = " ";
-                        //if (messageToSend2.equals("y"))
-                        while(messageToSend2.equals(" "))
-                        {
-                            if(gui.shootReady)messageToSend2 = "y";
-                        }
+                        String messageToSend2 = scanner.nextLine();
 
                         if(messageToSend2.equals("y"))
                         {
@@ -270,7 +265,7 @@ public class Client2 {
                                 else if(Player3Turn)WriteNextPlayer("3");
                                 else if(Player4Turn)WriteNextPlayer("4");
                             }
-                            gui.shootReady = false;
+                            gui.shootReady = " ";
                         }
                     }
                     else

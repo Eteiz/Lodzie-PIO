@@ -8,10 +8,10 @@ public class Board {
 
     Board()
     {
-        this.ControlBoats[0] = 4; //game has 4 boats with length 1
-        this.ControlBoats[1] = 3; //game has 3 boats with length 2
-        this.ControlBoats[2] = 2; //game has 2 boats with length 3
-        this.ControlBoats[3] = 1; //game has 1 boat with length 4
+        this.ControlBoats[0] = 1; //game has 4 boats with length 1
+        this.ControlBoats[1] = 0; //game has 3 boats with length 2
+        this.ControlBoats[2] = 0; //game has 2 boats with length 3
+        this.ControlBoats[3] = 0; //game has 1 boat with length 4
     }
 
     //method to place boats
