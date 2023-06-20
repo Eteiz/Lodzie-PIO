@@ -148,10 +148,7 @@ public class GameGUI extends JFrame implements ActionListener {
             mainBoardGUI.ResetBoardTiles();
             ShipPanel.chosenShip = null;
         }
-        if(e.getSource().equals(shootButton))
-        {
-            shootReady = true;
-        }
+
         if(e.getSource().equals(readyButton)) {
             // If every boat is placed
 
@@ -170,6 +167,7 @@ public class GameGUI extends JFrame implements ActionListener {
                 (player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) ||
                         (player2BoardGUI.ChosenX != -1 && player2BoardGUI.ChosenY != -1) ||
                         (player3BoardGUI.ChosenX != -1 && player3BoardGUI.ChosenY != -1))) {
+            shootReady = true;
 
             if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
                 player1LogicBoard.shootBoat(new Point(player1BoardGUI.ChosenX, player1BoardGUI.ChosenY));

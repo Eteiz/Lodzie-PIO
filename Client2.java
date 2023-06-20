@@ -228,7 +228,7 @@ public class Client2 {
                 }
                 if(didILose)
                 {
-                    System.out.println("I am loser!");
+                    System.out.println("I am loser :(");
                 }
                 if(!didILose)
                 {
@@ -241,8 +241,10 @@ public class Client2 {
                         System.out.println("I: " + username + " Shoot in: " + where_shoot);
                         //String messageToSend2 = scanner.nextLine();
                         //if (messageToSend2.equals("y"))
+                        while (!gui.shootReady);
                         if(gui.shootReady)
                         {
+
                             Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
                             chosenX = coords.x;
                             chosenY = coords.y;
