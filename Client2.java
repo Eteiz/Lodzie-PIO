@@ -17,6 +17,9 @@ public class Client2 {
     private BufferedWriter bufferedWriter;
     private String username;
 
+    int numberOfLosers = 0;
+    boolean didILose = false;
+
     static GameGUI gui = new GameGUI();
 
     public Client2(Socket socket, String username)
@@ -99,44 +102,53 @@ public class Client2 {
             int waitingCounter = 0; // Just to not write that much
             while(socket.isConnected())
             {
-                if(username.equals("1") && Player1Turn || username.equals("2") && Player2Turn)
+                if(!didILose && numberOfLosers == range - 1)
                 {
-                    System.out.println("This is my turn!");
-                    waitingCounter = 0;
-
-                    int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
-                    System.out.println("I: " + username + " Shoot in: " + where_shoot);
-                    String messageToSend2 = scanner.nextLine();
-                    if (messageToSend2.equals("approve"))
-                    {
-                        Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
-                        chosenX = coords.x;
-                        chosenY = coords.y;
-                        if (chosenX != -1 && chosenY != -1) {
-                            String messageToSend = chosenX + " " + chosenY;
-
-                            bufferedWriter.write(username + ": " + where_shoot + " " + messageToSend + " !");
-                            bufferedWriter.newLine();
-                            bufferedWriter.flush();
-
-                            LastChosenX = chosenX;
-                            LastChosenY = chosenY;
-                            gui.player1BoardGUI.ResetBoardTiles();
-
-                            ChangePlayerTurn();
-                            if(username.equals("1"))WriteNextPlayer("2");
-                            if(username.equals("2"))WriteNextPlayer("1");
-                        }
-
-                    }
+                    System.out.println("I won!!!!!");
                 }
-                else {
-                    if(waitingCounter >= 1000)
+                if(!didILose)
+                {
+                    if (username.equals("1") && Player1Turn || username.equals("2") && Player2Turn)
                     {
-                        System.out.println("Waiting for changing turn...");
+                        System.out.println("This is my turn!");
                         waitingCounter = 0;
+
+                        int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
+                        System.out.println("I: " + username + " Shoot in: " + where_shoot);
+                        String messageToSend2 = scanner.nextLine();
+                        if (messageToSend2.equals("approve"))
+                        {
+                            Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
+                            chosenX = coords.x;
+                            chosenY = coords.y;
+                            if (chosenX != -1 && chosenY != -1)
+                            {
+                                String messageToSend = chosenX + " " + chosenY;
+
+                                bufferedWriter.write(username + ": " + where_shoot + " " + messageToSend + " !");
+                                bufferedWriter.newLine();
+                                bufferedWriter.flush();
+
+                                LastChosenX = chosenX;
+                                LastChosenY = chosenY;
+                                gui.player1BoardGUI.ResetBoardTiles();
+
+                                ChangePlayerTurn();
+                                if (username.equals("1")) WriteNextPlayer("2");
+                                if (username.equals("2")) WriteNextPlayer("1");
+                            }
+
+                        }
                     }
-                    waitingCounter += 1;
+                    else
+                    {
+                        if (waitingCounter >= 1000)
+                        {
+                            System.out.println("Waiting for changing turn...");
+                            waitingCounter = 0;
+                        }
+                        waitingCounter += 1;
+                    }
                 }
             }
         }
@@ -238,21 +250,36 @@ public class Client2 {
                             System.out.println("Parsed string: " + parts[1] + " " + parts[2] + " " + parts[3]);
                         }
 
-                        if(parts != null)
+                        if(parts != null) // shoot in myself and tell everybody result
                         {
-                            int whoWasShooted = Integer.parseInt(parts[1]);
-                            int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
-                            bufferedWriter.write(username + " Shoot res: " + res);
-                            bufferedWriter.newLine();
-                            bufferedWriter.flush();
+                            if(!didILose)
+                            {
+                                int whoWasShooted = Integer.parseInt(parts[1]);
+                                int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
+                                bufferedWriter.write(username + " Shoot res: " + res);
+                                bufferedWriter.newLine();
+                                bufferedWriter.flush();
+
+                                didILose = gui.mainLogicBoard.checkAllBoatsShot();
+                                if(didILose)
+                                {
+                                    bufferedWriter.write(username + " I loosed");
+                                    bufferedWriter.newLine();
+                                    bufferedWriter.flush();
+                                }
+                            }
                         }
-                        if(messageFromGroupChat.contains("Shoot res"))
+                        if(messageFromGroupChat.contains("Shoot res")) // update board of player that was shooted
                         {
                             int shoot_res = GetLastCharResult(messageFromGroupChat);
                             int player = GetFirstCharPlayer(messageFromGroupChat);
 
                             UpdateBoardBasedOnShoot(new Point(LastChosenX,LastChosenY),shoot_res,player);
 
+                        }
+                        if(messageFromGroupChat.contains("I loosed"))
+                        {
+                            numberOfLosers += 1;
                         }
                     }
                     catch (IOException e)
