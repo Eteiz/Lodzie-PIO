@@ -64,6 +64,13 @@ public class Client2 {
 
         return new Point(chosenX,chosenY);
     }
+
+    public void WriteNextPlayer(String NextPlayer) throws IOException
+    {
+        bufferedWriter.write("> " + NextPlayer);
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+    }
     public void ChangePlayerTurn() throws IOException {
         String nextPlayer = "1";
         if(Player1Turn)
@@ -71,16 +78,15 @@ public class Client2 {
             Player1Turn = false;
             Player2Turn = true;
             nextPlayer = "2";
+            WriteNextPlayer(nextPlayer);
         }
         else if(Player2Turn)
         {
             Player1Turn = true;
             Player2Turn = false;
             nextPlayer = "1";
+            WriteNextPlayer(nextPlayer);
         }
-        bufferedWriter.write("> " + nextPlayer);
-        bufferedWriter.newLine();
-        bufferedWriter.flush();
     }
 
     public void sendMessage()
