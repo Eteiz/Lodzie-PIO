@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Board {
     private final int size = 10; //size of game board
     public int Board[][] = new int[size][size]; //game board for placing boats
@@ -35,8 +37,7 @@ public class Board {
         for(int i = 0 ; i < size; i++)
             for(int j = 0; j < size; j++)
                 this.Board[i][j] = 0;
-        for(int i = 0; i < this.Boats.length; i++)
-            this.Boats[i] = 0;
+        Arrays.fill(this.Boats, 0);
     }
 
     //method to check if boat to place is valid
