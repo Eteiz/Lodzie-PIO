@@ -7,6 +7,10 @@ import java.util.Scanner;
 public class Client2 {
     private Socket socket;
     int LastChosenX;
+    boolean Player1Turn = true;
+    boolean Player2Turn = false;
+    boolean Player3Turn = false;
+    boolean Player4Turn = false;
     int LastChosenY;
     static Random rand = new Random();
     private BufferedReader bufferedReader;
@@ -60,6 +64,24 @@ public class Client2 {
 
         return new Point(chosenX,chosenY);
     }
+    public void ChangePlayerTurn() throws IOException {
+        String nextPlayer = "1";
+        if(Player1Turn)
+        {
+            Player1Turn = false;
+            Player2Turn = true;
+            nextPlayer = "2";
+        }
+        else if(Player2Turn)
+        {
+            Player1Turn = true;
+            Player2Turn = false;
+            nextPlayer = "1";
+        }
+        bufferedWriter.write("> " + nextPlayer);
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+    }
 
     public void sendMessage()
     {
@@ -74,25 +96,32 @@ public class Client2 {
             int range = 2;
             while(socket.isConnected())
             {
-                String messageToSend2 = scanner.nextLine();
-                if(messageToSend2.equals("approve"))
+                if(username.equals("1") && Player1Turn || username.equals("2") && Player2Turn)
                 {
-                    int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username),range);
+                    System.out.println("This is my turn!");
+
+                    int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
                     System.out.println("I: " + username + " Shoot in: " + where_shoot);
-                    Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
-                    chosenX = coords.x;
-                    chosenY = coords.y;
-                    if(chosenX != -1 && chosenY != -1)
+                    String messageToSend2 = scanner.nextLine();
+                    if (messageToSend2.equals("approve"))
                     {
-                        String messageToSend = chosenX + " " + chosenY;
+                        Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
+                        chosenX = coords.x;
+                        chosenY = coords.y;
+                        if (chosenX != -1 && chosenY != -1) {
+                            String messageToSend = chosenX + " " + chosenY;
 
-                        bufferedWriter.write(username + ": " + where_shoot + " " + messageToSend + " !");
-                        bufferedWriter.newLine();
-                        bufferedWriter.flush();
+                            bufferedWriter.write(username + ": " + where_shoot + " " + messageToSend + " !");
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
 
-                        LastChosenX = chosenX;
-                        LastChosenY = chosenY;
-                        gui.player1BoardGUI.ResetBoardTiles();
+                            LastChosenX = chosenX;
+                            LastChosenY = chosenY;
+                            gui.player1BoardGUI.ResetBoardTiles();
+
+                            ChangePlayerTurn();
+                        }
+
                     }
                 }
             }
@@ -184,6 +213,11 @@ public class Client2 {
                         messageFromGroupChat = bufferedReader.readLine();
                         System.out.println(messageFromGroupChat);
                         String[] parts = null;
+                        if(messageFromGroupChat.startsWith(">"))
+                        {
+                            ChangePlayerTurn();
+                        }
+
                         if(messageFromGroupChat.endsWith("!"))
                         {
                             parts = messageFromGroupChat.split(" ");
