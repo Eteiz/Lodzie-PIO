@@ -96,11 +96,13 @@ public class Client2 {
             int chosenX = -1;
             int chosenY = -1;
             int range = 2;
+            int waitingCounter = 0; // Just to not write that much
             while(socket.isConnected())
             {
                 if(username.equals("1") && Player1Turn || username.equals("2") && Player2Turn)
                 {
                     System.out.println("This is my turn!");
+                    waitingCounter = 0;
 
                     int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
                     System.out.println("I: " + username + " Shoot in: " + where_shoot);
@@ -127,6 +129,14 @@ public class Client2 {
                         }
 
                     }
+                }
+                else {
+                    if(waitingCounter >= 1000)
+                    {
+                        System.out.println("Waiting for changing turn...");
+                        waitingCounter = 0;
+                    }
+                    waitingCounter += 1;
                 }
             }
         }
