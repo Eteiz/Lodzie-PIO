@@ -363,6 +363,20 @@ public class Client2 {
         return Integer.parseInt(res);
     }
 
+    public void TellOthersShootRes(int res) throws IOException
+    {
+        bufferedWriter.write(username + " Shoot res: " + res);
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
+
+        didILose = gui.mainLogicBoard.checkAllBoatsShot();
+        if(didILose)
+        {
+            bufferedWriter.write(username + " I loosed");
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        }
+    }
     public void ListenForMessage()
     {
         new Thread(new Runnable() {
@@ -392,17 +406,25 @@ public class Client2 {
                             if(!didILose)
                             {
                                 int whoWasShooted = Integer.parseInt(parts[1]);
-                                int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
-                                bufferedWriter.write(username + " Shoot res: " + res);
-                                bufferedWriter.newLine();
-                                bufferedWriter.flush();
-
-                                didILose = gui.mainLogicBoard.checkAllBoatsShot();
-                                if(didILose)
+                                if(username.equals("1") && whoWasShooted == 1)
                                 {
-                                    bufferedWriter.write(username + " I loosed");
-                                    bufferedWriter.newLine();
-                                    bufferedWriter.flush();
+                                    int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
+                                    TellOthersShootRes(res);
+                                }
+                                if(username.equals("2") && whoWasShooted == 2)
+                                {
+                                    int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
+                                    TellOthersShootRes(res);
+                                }
+                                if(username.equals("3") && whoWasShooted == 3)
+                                {
+                                    int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
+                                    TellOthersShootRes(res);
+                                }
+                                if(username.equals("4") && whoWasShooted == 4)
+                                {
+                                    int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
+                                    TellOthersShootRes(res);
                                 }
                             }
                         }
