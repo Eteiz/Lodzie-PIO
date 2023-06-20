@@ -113,9 +113,12 @@ public class Board {
 
     //this checks if player has boats left on Board, and if you can continue game
     //returns true if no boat left
-    public boolean checkAllBoatsShot() {
-        for(int i = 0 ; i < size; i++){
-            for(int j = 0; j < size; i++) {
+    public boolean checkAllBoatsShot()
+    {
+        for(int i = 0 ; i < size; i+=1)
+        {
+            for(int j = 0; j < size; j++)
+            {
                 if(this.Board[i][j] == 1)
                     return false;
             }
