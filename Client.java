@@ -561,7 +561,7 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username for group chat");
         String username = scanner.nextLine();
-        if(!gui.preparationDone)
+        while(!gui.preparationDone)
         {
             gui.setLabelText("Oczekiwanie na graczy...");
         }
