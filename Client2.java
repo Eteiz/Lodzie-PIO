@@ -397,8 +397,10 @@ public class Client2 {
 
                         if(messageFromGroupChat.endsWith("!"))
                         {
-                            parts = messageFromGroupChat.split(" ");
+                            parts = messageFromGroupChat.split(" "); // on who x y
                             System.out.println("Parsed string: " + parts[1] + " " + parts[2] + " " + parts[3]);
+                            LastChosenX = Integer.parseInt(parts[2]);
+                            LastChosenY = Integer.parseInt(parts[3]);
                         }
 
                         if(parts != null) // shoot in myself and tell everybody result
