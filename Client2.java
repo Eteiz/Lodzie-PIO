@@ -1,10 +1,13 @@
 import java.io.*;
 import java.net.Socket;
 import java.nio.channels.ScatteringByteChannel;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Client2 {
+    Instant start = Instant.now();
     private Socket socket;
     int LastChosenX;
     boolean Player1Turn = true;
@@ -78,11 +81,13 @@ public class Client2 {
 
         if(Player1Turn)
         {
+            System.out.println("Now is player 2 turn");
             Player1Turn = false;
             Player2Turn = true;
         }
         else if(Player2Turn)
         {
+            System.out.println("Now is player 1 turn");
             Player1Turn = true;
             Player2Turn = false;
         }
@@ -99,7 +104,6 @@ public class Client2 {
             int chosenX = -1;
             int chosenY = -1;
             int range = 2;
-            int waitingCounter = 0; // Just to not write that much
             while(socket.isConnected())
             {
                 if(!didILose && numberOfLosers == range - 1)
@@ -111,7 +115,6 @@ public class Client2 {
                     if (username.equals("1") && Player1Turn || username.equals("2") && Player2Turn)
                     {
                         System.out.println("This is my turn!");
-                        waitingCounter = 0;
 
                         int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username), range);
                         System.out.println("I: " + username + " Shoot in: " + where_shoot);
@@ -142,12 +145,11 @@ public class Client2 {
                     }
                     else
                     {
-                        if (waitingCounter >= 1000)
+                        if (Duration.between(start, Instant.now()).toSeconds() >= 1)
                         {
                             System.out.println("Waiting for changing turn...");
-                            waitingCounter = 0;
+                            start = Instant.now();
                         }
-                        waitingCounter += 1;
                     }
                 }
             }
