@@ -30,6 +30,15 @@ public class Board {
         return true;
     }
 
+    //metod to clear board
+    public void clearBoard() {
+        for(int i = 0 ; i < size; i++)
+            for(int j = 0; j < size; j++)
+                this.Board[i][j] = 0;
+        for(int i = 0; i < this.Boats.length; i++)
+            this.Boats[i] = 0;
+    }
+
     //method to check if boat to place is valid
     public boolean validateBoat(Boat boat) {
         if(this.Board[boat.position.x][boat.position.y] == 1)
@@ -113,12 +122,9 @@ public class Board {
 
     //this checks if player has boats left on Board, and if you can continue game
     //returns true if no boat left
-    public boolean checkAllBoatsShot()
-    {
-        for(int i = 0 ; i < size; i+=1)
-        {
-            for(int j = 0; j < size; j++)
-            {
+      public boolean checkAllBoatsShot() {
+        for(int i = 0 ; i < size; i++){
+            for(int j = 0; j < size; j++) {
                 if(this.Board[i][j] == 1)
                     return false;
             }
