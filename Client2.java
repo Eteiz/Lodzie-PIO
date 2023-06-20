@@ -241,7 +241,11 @@ public class Client2 {
                         System.out.println("I: " + username + " Shoot in: " + where_shoot);
                         String messageToSend2 = " ";
                         //if (messageToSend2.equals("y"))
-                        if(gui.shootReady)messageToSend2 = "y";
+                        while(messageToSend2.equals(" "))
+                        {
+                            if(gui.shootReady)messageToSend2 = "y";
+                        }
+
                         if(messageToSend2.equals("y"))
                         {
 
@@ -496,7 +500,7 @@ public class Client2 {
             System.out.println("Waiting...");
         }
         System.out.println("Ready!");
-        Socket socket = new Socket("localhost",1234);
+        Socket socket = new Socket("192.168.36.76",1234);
         Client2 client = new Client2(socket,username);
         client.ListenForMessage();
         client.sendMessage();
