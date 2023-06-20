@@ -1,12 +1,14 @@
 import java.io.*;
 import java.net.Socket;
 import java.nio.channels.ScatteringByteChannel;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Client2 {
     private Socket socket;
     int LastChosenX;
     int LastChosenY;
+    static Random rand = new Random();
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String username;
@@ -27,6 +29,37 @@ public class Client2 {
             closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
+    private static int GetRandomWithoutOneInRange(int exceptThis,int range)
+    {
+        int chosen = exceptThis;
+        while(chosen == exceptThis)chosen = rand.nextInt(range)+1; // to have not 0 and 1 but 1 and 2
+        return chosen;
+    }
+
+    public Point CoordinatesBasedOnWhereShoot(int shootedPlayer)
+    {
+        int chosenX = -1;
+        int chosenY = -1;
+
+        if(username.equals("1"))
+        {
+            if(shootedPlayer == 2)
+            {
+                chosenX = gui.player1BoardGUI.ChosenX;
+                chosenY = gui.player1BoardGUI.ChosenY;
+            }
+        }
+        if(username.equals("2"))
+        {
+            if(shootedPlayer == 1)
+            {
+                chosenX = gui.player1BoardGUI.ChosenX;
+                chosenY = gui.player1BoardGUI.ChosenY;
+            }
+        }
+
+        return new Point(chosenX,chosenY);
+    }
 
     public void sendMessage()
     {
@@ -38,17 +71,21 @@ public class Client2 {
             Scanner scanner = new Scanner(System.in);
             int chosenX = -1;
             int chosenY = -1;
+            int range = 2;
             while(socket.isConnected())
             {
                 String messageToSend2 = scanner.nextLine();
                 if(messageToSend2.equals("approve"))
                 {
-                    chosenX = gui.player1BoardGUI.ChosenX;
-                    chosenY = gui.player1BoardGUI.ChosenY;
+                    int where_shoot = GetRandomWithoutOneInRange(Integer.parseInt(username),range);
+                    System.out.println("I: " + username + " Shoot in: " + where_shoot);
+                    Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
+                    chosenX = coords.x;
+                    chosenY = coords.y;
                     if(chosenX != -1 && chosenY != -1)
                     {
                         String messageToSend = chosenX + " " + chosenY;
-                        int where_shoot = 2;
+
                         bufferedWriter.write(username + ": " + where_shoot + " " + messageToSend + " !");
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
@@ -65,17 +102,37 @@ public class Client2 {
             closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
-    public Point ParseShoot(String[] parts)
+    public Point ParseShootPoint(String[] parts)
     {
         int x = Integer.parseInt(parts[2]);
         int y = Integer.parseInt(parts[3]);
         return new Point(x,y);
     }
-    public int ShootValue(Point point)
+    public int ShootValue(Point point,int whoWasShooted)
     {
+        if(username.equals("1") && whoWasShooted == 1)
+        {
+            gui.mainLogicBoard.shootBoat(point);
+            gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
+            return gui.mainLogicBoard.Board[point.x][point.y];
+        }
+        if(username.equals("2") && whoWasShooted == 2)
+        {
+            gui.mainLogicBoard.shootBoat(point);
+            gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
+            return gui.mainLogicBoard.Board[point.x][point.y];
+        }
+        if(username.equals("3") && whoWasShooted == 3)
+        {
+            gui.mainLogicBoard.shootBoat(point);
+            gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
+            return gui.mainLogicBoard.Board[point.x][point.y];
+        }
+         // "4" && 4
         gui.mainLogicBoard.shootBoat(point);
         gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
         return gui.mainLogicBoard.Board[point.x][point.y];
+
     }
 
     public void UpdateBoardBasedOnShoot(Point point, int res, int player)
@@ -130,12 +187,13 @@ public class Client2 {
                         if(messageFromGroupChat.endsWith("!"))
                         {
                             parts = messageFromGroupChat.split(" ");
-                            System.out.println(parts[2] + " " + parts[3]);
+                            System.out.println("Parsed string: " + parts[1] + " " + parts[2] + " " + parts[3]);
                         }
 
                         if(parts != null)
                         {
-                            int res = ShootValue(ParseShoot(parts));
+                            int whoWasShooted = Integer.parseInt(parts[1]);
+                            int res = ShootValue(ParseShootPoint(parts),whoWasShooted);
                             bufferedWriter.write(username + " Shoot res: " + res);
                             bufferedWriter.newLine();
                             bufferedWriter.flush();
