@@ -54,7 +54,7 @@ public class Client {
         return chosen;
     }
 
-    public Point CoordinatesBasedOnWhereShoot(int shootedPlayer)
+    public PointLogic CoordinatesBasedOnWhereShoot(int shootedPlayer)
     {
         int chosenX = -1;
         int chosenY = -1;
@@ -131,7 +131,7 @@ public class Client {
                 chosenY = gui.player3BoardGUI.ChosenY;
             }
         }
-        return new Point(chosenX,chosenY);
+        return new PointLogic(chosenX,chosenY);
     }
 
     public void WriteNextPlayer(String NextPlayer) throws IOException
@@ -253,7 +253,7 @@ public class Client {
 
                         if(gui.shootReady.equals("y"))
                         {
-                            Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
+                            PointLogic coords = CoordinatesBasedOnWhereShoot(where_shoot);
                             chosenX = coords.x;
                             chosenY = coords.y;
                             if (chosenX != -1 && chosenY != -1)
@@ -298,36 +298,36 @@ public class Client {
             closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
-    public Point ParseShootPoint(String[] parts)
+    public PointLogic ParseShootPoint(String[] parts)
     {
         int x = Integer.parseInt(parts[2]);
         int y = Integer.parseInt(parts[3]);
-        return new Point(x,y);
+        return new PointLogic(x,y);
     }
-    public int ShootValue(Point point,int whoWasShooted)
+    public int ShootValue(PointLogic point, int whoWasShooted)
     {
         if(username.equals("1") && whoWasShooted == 1)
         {
-            gui.mainLogicBoard.shootBoat(point);
+            gui.mainLogicBoard.ShootBoat(point);
             gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-            return gui.mainLogicBoard.Board[point.x][point.y];
+            return gui.mainLogicBoard.logicBoard[point.x][point.y];
         }
         if(username.equals("2") && whoWasShooted == 2)
         {
-            gui.mainLogicBoard.shootBoat(point);
+            gui.mainLogicBoard.ShootBoat(point);
             gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-            return gui.mainLogicBoard.Board[point.x][point.y];
+            return gui.mainLogicBoard.logicBoard[point.x][point.y];
         }
         if(username.equals("3") && whoWasShooted == 3)
         {
-            gui.mainLogicBoard.shootBoat(point);
+            gui.mainLogicBoard.ShootBoat(point);
             gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-            return gui.mainLogicBoard.Board[point.x][point.y];
+            return gui.mainLogicBoard.logicBoard[point.x][point.y];
         }
          // "4" && 4
-        gui.mainLogicBoard.shootBoat(point);
+        gui.mainLogicBoard.ShootBoat(point);
         gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-        return gui.mainLogicBoard.Board[point.x][point.y];
+        return gui.mainLogicBoard.logicBoard[point.x][point.y];
 
     }
 
@@ -382,48 +382,48 @@ public class Client {
         }
     }
 
-    public void UpdateBoardBasedOnShoot(Point point, int res, int player)
+    public void UpdateBoardBasedOnShoot(PointLogic point, int res, int player)
     {
         if(player == 1 && (username.equals("2") || username.equals("3") || username.equals("4")))
         {
             System.out.println("w 1 strzelalem");
 
-            gui.player1LogicBoard.Board[point.x][point.y] = res;
+            gui.player1LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
         }
         if(player == 2 && username.equals("1"))
         {
             System.out.println("w 2 strzelalem");
 
-            gui.player1LogicBoard.Board[point.x][point.y] = res;
+            gui.player1LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
         }
         if(player == 2 && (username.equals("3") || username.equals("4")))
         {
             System.out.println("w 2 strzelalem");
 
-            gui.player2LogicBoard.Board[point.x][point.y] = res;
+            gui.player2LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
         }
         if(player == 3 && (username.equals("1") || username.equals("2")))
         {
             System.out.println("w 3 strzelalem");
 
-            gui.player2LogicBoard.Board[point.x][point.y] = res;
+            gui.player2LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
         }
         if(player == 3 && (username.equals("4")))
         {
             System.out.println("w 3 strzelalem");
 
-            gui.player3LogicBoard.Board[point.x][point.y] = res;
+            gui.player3LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
         }
         if(player == 4 && (username.equals("2") || username.equals("3") || username.equals("1")))
         {
             System.out.println("w 4 strzelalem");
 
-            gui.player3LogicBoard.Board[point.x][point.y] = res;
+            gui.player3LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
         }
 
@@ -447,7 +447,7 @@ public class Client {
         bufferedWriter.newLine();
         bufferedWriter.flush();
 
-        didILose = gui.mainLogicBoard.checkAllBoatsShot();
+        didILose = gui.mainLogicBoard.CheckAllBoatsShot();
         if(didILose)
         {
             bufferedWriter.write(username + " I loosed");
@@ -513,7 +513,7 @@ public class Client {
                             int shoot_res = GetLastCharResult(messageFromGroupChat);
                             int player = GetFirstCharPlayer(messageFromGroupChat);
 
-                            UpdateBoardBasedOnShoot(new Point(LastChosenX,LastChosenY),shoot_res,player);
+                            UpdateBoardBasedOnShoot(new PointLogic(LastChosenX,LastChosenY),shoot_res,player);
 
                         }
                         if(messageFromGroupChat.contains("I loosed"))

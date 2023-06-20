@@ -66,13 +66,13 @@ public class BoardGUI extends JPanel implements ActionListener {
     }
 
     // Method changes look of the tile depending on its state in LogicBoard
-    void UpdateBoard(Board referencedBoard) {
+    void UpdateBoard(BoardLogic referencedBoard) {
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 10; j++) {
-                if(referencedBoard.Board[i][j] == 1) boardTiles[i][j].ChangeTile(TileGUI.TileValue.SHIP_PLACED);
-                else if(referencedBoard.Board[i][j] == 0) boardTiles[i][j].ChangeTile(TileGUI.TileValue.EMPTY);
-                else if(referencedBoard.Board[i][j] == 2) boardTiles[i][j].ChangeTile(TileGUI.TileValue.MISS);
-                else if(referencedBoard.Board[i][j] == -1) boardTiles[i][j].ChangeTile(TileGUI.TileValue.HIT);
+                if(referencedBoard.logicBoard[i][j] == 1) boardTiles[i][j].ChangeTile(TileGUI.TileValue.SHIP_PLACED);
+                else if(referencedBoard.logicBoard[i][j] == 0) boardTiles[i][j].ChangeTile(TileGUI.TileValue.EMPTY);
+                else if(referencedBoard.logicBoard[i][j] == 2) boardTiles[i][j].ChangeTile(TileGUI.TileValue.MISS);
+                else if(referencedBoard.logicBoard[i][j] == -1) boardTiles[i][j].ChangeTile(TileGUI.TileValue.HIT);
                 boardTiles[i][j].setBorderPainted(false);
             }
         }

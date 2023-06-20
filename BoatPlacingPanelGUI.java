@@ -5,13 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // Panel allows user to click on the type of ship they want to place on board
-public class BoatPlacingPanel extends JLabel implements ActionListener {
-
-    /** TBA:
-     * - MAKE VARIABLES PRIVATE AND CREATE SETTERS AND GETTERS (chosenShip)
-     * - CONSISTENT NAMING
-     *
-     */
+public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
 
     // Buttons for picking ship type, H stands for horizontal, V stands for vertical
     JButton shipOneH, shipTwoH, shipThreeH, shipFourH, shipTwoV, shipThreeV, shipFourV;
@@ -21,7 +15,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
     // Variable that determines which ship is chosen, if no ship is chosen the variable is null
     String chosenShip;
 
-    BoatPlacingPanel() {
+    BoatPlacingPanelGUI() {
 
         chosenShip = null;
 
@@ -30,11 +24,9 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         this.setSize(336,250);
         this.setLayout(null);
 
-        // TBA: CHANGE THE SIZE OF PANEL
-
         // Setting the main panel
         this.setBackground(Color.decode("#D0D0D2"));
-        Border panelBorder = BorderFactory.createLineBorder(Color.BLACK);
+        Border panelBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
         this.setBorder(panelBorder);
         this.setOpaque(true);
 
@@ -50,7 +42,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship1ImageH = new ImageIcon(scaledImage);
 
         shipOneH = new JButton(ship1ImageH);
-        shipOneH.setBounds(10,10,40,40);
+        shipOneH.setBounds(10+40,10,40,40);
 
         Border border = BorderFactory.createLineBorder(Color.RED,3);
         shipOneH.setBorder(border);
@@ -66,7 +58,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship2ImageH = new ImageIcon(scaledImage);
 
         shipTwoH = new JButton(ship2ImageH);
-        shipTwoH.setBounds(10,55,80,40);
+        shipTwoH.setBounds(10+40,55,80,40);
 
         shipTwoH.setBorder(border);
         shipTwoH.setBorderPainted(false);
@@ -81,7 +73,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship3ImageH = new ImageIcon(scaledImage);
 
         shipThreeH = new JButton(ship3ImageH);
-        shipThreeH.setBounds(10,100,120,40);
+        shipThreeH.setBounds(10+40,100,120,40);
 
         shipThreeH.setBorder(border);
         shipThreeH.setBorderPainted(false);
@@ -96,7 +88,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship4ImageH = new ImageIcon(scaledImage);
 
         shipFourH = new JButton(ship4ImageH);
-        shipFourH.setBounds(10,145,160,40);
+        shipFourH.setBounds(10+40,145,160,40);
 
         shipFourH.setBorder(border);
         shipFourH.setBorderPainted(false);
@@ -112,7 +104,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship2ImageV = new ImageIcon(scaledImage);
 
         shipTwoV = new JButton(ship2ImageV);
-        shipTwoV.setBounds(95,10,40,80);
+        shipTwoV.setBounds(95+40,10,40,80);
 
         shipTwoV.setBorder(border);
         shipTwoV.setBorderPainted(false);
@@ -127,7 +119,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship3ImageV = new ImageIcon(scaledImage);
 
         shipThreeV = new JButton(ship3ImageV);
-        shipThreeV.setBounds(140,10,40,120);
+        shipThreeV.setBounds(140+40,10,40,120);
 
         shipThreeV.setBorder(border);
         shipThreeV.setBorderPainted(false);
@@ -142,7 +134,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship4ImageV = new ImageIcon(scaledImage);
 
         shipFourV = new JButton(ship4ImageV);
-        shipFourV.setBounds(185,10,40,160);
+        shipFourV.setBounds(185+40,10,40,160);
 
         shipFourV.setBorder(border);
         shipFourV.setBorderPainted(false);
@@ -262,29 +254,29 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         }
     }
 
-    public void LockButtons() {
-        Lock1s();
-        Lock2s();
-        Lock3s();
-        Lock4s();
+    public void LockShipButtons() {
+        LockShip1Button();
+        LockShip2Button();
+        LockShip3Button();
+        LockShip4Button();
     }
 
-    public void Lock1s(){
+    public void LockShip1Button(){
         shipOneH.setEnabled(false);
     }
-    public void Lock2s(){
+    public void LockShip2Button() {
         shipTwoH.setEnabled(false);
         shipTwoV.setEnabled(false);
     }
-    public void Lock3s(){
+    public void LockShip3Button() {
         shipThreeH.setEnabled(false);
         shipThreeV.setEnabled(false);
     }
-    public void Lock4s(){
+    public void LockShip4Button() {
         shipFourH.setEnabled(false);
         shipFourV.setEnabled(false);
     }
-    public void UnlockButtons(){
+    public void UnlockAllShipButtons() {
         shipOneH.setEnabled(true);
         shipTwoH.setEnabled(true);
         shipThreeH.setEnabled(true);
@@ -296,7 +288,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
 
 
     // Method that would display to player how many ships are left to be placed
-    void UpdateLabel(Board LogicBoard) {
+    void UpdateLabel(BoardLogic LogicBoard) {
         /** METHOD TO GET NUMBER IS NEEDED **/
         shipLeftToPlace.setText("1S: x/1 2S: x/2 3S: x/3 4S: x/4");
     }
