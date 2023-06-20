@@ -198,12 +198,13 @@ public class GameGUI extends JFrame implements ActionListener {
         }
 
         if(e.getSource().equals(readyButton)) {
-            // If every boat is placed
-            shootButton.setEnabled(true);
-            readyButton.setEnabled(false);
-
 
             if(mainLogicBoard.allBoatsSet()) {
+                // If every boat is placed
+                shootButton.setEnabled(true);
+                readyButton.setEnabled(false);
+                mainBoardGUI.desactiveTiles();
+
                 // Locking placing buttons
                 ShipPanel.LockButtons();
                 placementButton.setEnabled(false);

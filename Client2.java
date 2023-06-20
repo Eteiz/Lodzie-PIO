@@ -324,36 +324,67 @@ public class Client2 {
         if(player == 1 && (username.equals("2") || username.equals("3") || username.equals("4")))
         {
             System.out.println("w 1 strzelalem");
+
+            gui.player1BoardGUI.activeTiles();
+            gui.player2BoardGUI.desactiveTiles();
+            gui.player3BoardGUI.desactiveTiles();
+
             gui.player1LogicBoard.Board[point.x][point.y] = res;
             gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
         }
         if(player == 2 && username.equals("1"))
         {
             System.out.println("w 2 strzelalem");
+
+            gui.player1BoardGUI.activeTiles();
+            gui.player2BoardGUI.desactiveTiles();
+            gui.player3BoardGUI.desactiveTiles();
+
             gui.player1LogicBoard.Board[point.x][point.y] = res;
             gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
         }
         if(player == 2 && (username.equals("3") || username.equals("4")))
         {
             System.out.println("w 2 strzelalem");
+
+
+            gui.player2BoardGUI.activeTiles();
+            gui.player1BoardGUI.desactiveTiles();
+            gui.player3BoardGUI.desactiveTiles();
+
             gui.player2LogicBoard.Board[point.x][point.y] = res;
             gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
         }
         if(player == 3 && (username.equals("1") || username.equals("2")))
         {
             System.out.println("w 3 strzelalem");
+
+            gui.player2BoardGUI.activeTiles();
+            gui.player1BoardGUI.desactiveTiles();
+            gui.player3BoardGUI.desactiveTiles();
+
             gui.player2LogicBoard.Board[point.x][point.y] = res;
             gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
         }
         if(player == 3 && (username.equals("4")))
         {
             System.out.println("w 3 strzelalem");
+
+            gui.player3BoardGUI.activeTiles();
+            gui.player2BoardGUI.desactiveTiles();
+            gui.player1BoardGUI.desactiveTiles();
+
             gui.player3LogicBoard.Board[point.x][point.y] = res;
             gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
         }
         if(player == 4 && (username.equals("2") || username.equals("3") || username.equals("1")))
         {
             System.out.println("w 4 strzelalem");
+
+            gui.player3BoardGUI.activeTiles();
+            gui.player2BoardGUI.desactiveTiles();
+            gui.player1BoardGUI.desactiveTiles();
+
             gui.player3LogicBoard.Board[point.x][point.y] = res;
             gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
         }
