@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Board {
     private final int size = 10; //size of game board
     public int Board[][] = new int[size][size]; //game board for placing boats
@@ -6,10 +8,10 @@ public class Board {
 
     Board()
     {
-        this.ControlBoats[0] = 4; //game has 4 boats with length 1
-        this.ControlBoats[1] = 3; //game has 3 boats with length 2
-        this.ControlBoats[2] = 2; //game has 2 boats with length 3
-        this.ControlBoats[3] = 1; //game has 1 boat with length 4
+        this.ControlBoats[0] = 0; //game has 4 boats with length 1
+        this.ControlBoats[1] = 0; //game has 3 boats with length 2
+        this.ControlBoats[2] = 1; //game has 2 boats with length 3
+        this.ControlBoats[3] = 0; //game has 1 boat with length 4
     }
 
     //method to place boats
@@ -35,8 +37,7 @@ public class Board {
         for(int i = 0 ; i < size; i++)
             for(int j = 0; j < size; j++)
                 this.Board[i][j] = 0;
-        for(int i = 0; i < this.Boats.length; i++)
-            this.Boats[i] = 0;
+        Arrays.fill(this.Boats, 0);
     }
 
     //method to check if boat to place is valid
@@ -88,10 +89,10 @@ public class Board {
     //metod to make shoots on the board
     public void shootBoat(Point shoot) {
         if(this.Board[shoot.x][shoot.y] == 0) {
-            this.Board[shoot.x][shoot.y] = 2;
+            this.Board[shoot.x][shoot.y] = 2; //miss
         }
         else if(this.Board[shoot.x][shoot.y] == 1) {
-            this.Board[shoot.x][shoot.y] = -1;
+            this.Board[shoot.x][shoot.y] = -1; //good shot
         }
     }
 
@@ -120,9 +121,29 @@ public class Board {
         return counter;
     }
 
-    //this checks if player has boats left on Board, and if can continue game
+    public boolean all1Set()
+    {
+        return this.Boats[0] >= this.ControlBoats[0];
+    }
+
+    public boolean all2Set()
+    {
+        return this.Boats[1] >= this.ControlBoats[1];
+    }
+
+    public boolean all3Set()
+    {
+        return this.Boats[2] >= this.ControlBoats[2];
+    }
+
+    public boolean all4Set()
+    {
+        return this.Boats[3] >= this.ControlBoats[3];
+    }
+
+    //this checks if player has boats left on Board, and if you can continue game
     //returns true if no boat left
-    public boolean checkAllBoatsShot() {
+      public boolean checkAllBoatsShot() {
         for(int i = 0 ; i < size; i++){
             for(int j = 0; j < size; j++) {
                 if(this.Board[i][j] == 1)

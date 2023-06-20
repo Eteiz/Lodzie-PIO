@@ -36,6 +36,7 @@ public class TileGUI extends JButton {
 
         setBorderPainted(false);
         setFocusPainted(false);
+        setOpaque(true);
         setContentAreaFilled(false);
     }
     void ChangeTile(TileValue status) {

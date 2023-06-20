@@ -51,7 +51,7 @@ public class BoardGUI extends JPanel implements ActionListener {
                 boardTiles[i][j].setBounds( (boardWidth/10 + 3)*i, (boardHeight/10 + 3)*j,boardWidth/10, boardHeight/10);
 
                 // Tile border for when is it chosen
-                Border panelBorder = BorderFactory.createLineBorder(Color.red);
+                Border panelBorder = BorderFactory.createLineBorder(Color.red, 2);
                 boardTiles[i][j].setBorder(panelBorder);
                 boardTiles[i][j].setBorderPainted(false);
 
@@ -61,11 +61,11 @@ public class BoardGUI extends JPanel implements ActionListener {
         }
 
         setVisible(true);
+        setBackground(Color.BLACK);
         setOpaque(true);
-        setBackground(Color.black);
     }
 
-    // Method changes look of the tile depending of its state in LogicBoard
+    // Method changes look of the tile depending on its state in LogicBoard
     void UpdateBoard(Board referencedBoard) {
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 10; j++) {
@@ -122,14 +122,10 @@ public class BoardGUI extends JPanel implements ActionListener {
     }
 
     public void desactiveTiles(){
-        for(int i = 0; i < 10; ++i)
-            for(int j = 0; j < 10; ++j)
-                boardTiles[i][j].setEnabled(false);
+        setBackground(Color.BLACK);
     }
 
     public void activeTiles(){
-        for(int i = 0; i < 10; ++i)
-            for(int j = 0; j < 10; ++j)
-                boardTiles[i][j].setEnabled(true);
+        setBackground(new Color(0x198580));
     }
 }

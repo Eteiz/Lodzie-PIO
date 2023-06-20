@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,14 +7,23 @@ import java.io.IOException;
 
 // Main GUI Panel on which all boards and options are displayed
 public class GameGUI extends JFrame implements ActionListener {
+    final private String start = "<html>Faza ustawiania statków:<br/><br/>" +
+            "Aby umieścić statek na planszy naciśnij statek, " +
+            "a nastepnie wybierz pole na którym ma sie znajdować. " +
+            "Gdy ustawisz wszystkie statki czerwony pasek zamieni " +
+            "się na zielony.<br/>" +
+            "Jeżeli się pomylisz naciśnij przycisk \"Usuń statki\"</html>";
+    boolean preparationDone = false;
+    boolean isDead = false;
+    String shootReady = " ";
 
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
     JButton placementButton;
     JButton shipResetButton;
     JButton readyButton;
-
     JButton shootButton;
+    JLabel info;
 
     // Player
     // Each player has its Logic and GUI version of board which are dependent on each other and update accordingly
@@ -54,24 +64,28 @@ public class GameGUI extends JFrame implements ActionListener {
         mainBoardGUI = new BoardGUI(true, null);
         mainBoardGUI.setBounds(384,328, mainBoardGUI.boardWidth + 27,mainBoardGUI.boardHeight + 27);
         mainLogicBoard = new Board();
+        mainBoardGUI.activeTiles();
         add(mainBoardGUI);
 
         // Player 1
         player1BoardGUI = new BoardGUI(false, null);
-        player1BoardGUI.setBounds(7,5,player1BoardGUI.boardWidth + 27,player1BoardGUI.boardHeight + 27);
+        player1BoardGUI.setBounds(7+45,5,player1BoardGUI.boardWidth + 27,player1BoardGUI.boardHeight + 27);
         player1LogicBoard = new Board();
+        player1BoardGUI.desactiveTiles();
         add(player1BoardGUI);
 
         // Player 2
         player2BoardGUI = new BoardGUI(false, null);
-        player2BoardGUI.setBounds(384,5, player2BoardGUI.boardWidth + 27, player2BoardGUI.boardHeight + 27);
+        player2BoardGUI.setBounds(384+45,5, player2BoardGUI.boardWidth + 27, player2BoardGUI.boardHeight + 27);
         player2LogicBoard = new Board();
+        player2BoardGUI.desactiveTiles();
         add(player2BoardGUI);
 
         // Player 3
         player3BoardGUI = new BoardGUI(false, null);
-        player3BoardGUI.setBounds(761,5,player3BoardGUI.boardWidth + 27,player3BoardGUI.boardHeight + 27);
+        player3BoardGUI.setBounds(761+45,5,player3BoardGUI.boardWidth + 27,player3BoardGUI.boardHeight + 27);
         player3LogicBoard = new Board();
+        player3BoardGUI.desactiveTiles();
         add(player3BoardGUI);
 
         // Placing BoatPlacingPanel for ships to be chosen
@@ -90,16 +104,30 @@ public class GameGUI extends JFrame implements ActionListener {
         readyButton = new JButton("Gotowy!");
         readyButton.setBounds(18,670,336,50);
         readyButton.addActionListener(this);
+        readyButton.setEnabled(false);
 
         shootButton = new JButton("Oddaj strzał!");
-        shootButton.setBounds(800,328,200,50);
+        shootButton.setBounds(800+45,350,200,50);
         shootButton.addActionListener(this);
+        shootButton.setEnabled(false);
+
+        //Jabel info
+        info = new JLabel();
+        setLabelText(start);
+        info.setBounds(800, 420, 325, 300);
+        info.setBackground(new Color(0x969eb9));
+        info.setOpaque(true);
+        info.setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+        info.setHorizontalAlignment(SwingConstants.CENTER);
+        info.setVerticalAlignment(SwingConstants.CENTER);
+        info.setBorder(new EmptyBorder( 0,15,0,15));
 
         add(ShipPanel);
         add(placementButton);
         add(shipResetButton);
         add(readyButton);
         add(shootButton);
+        add(info);
 
         setVisible(true);
     }
@@ -132,13 +160,37 @@ public class GameGUI extends JFrame implements ActionListener {
             ShipPanel.ResetPlacingPanel();
             mainBoardGUI.ResetBoardTiles();
             ShipPanel.chosenShip = null;
+
+            if(mainLogicBoard.all1Set())
+                ShipPanel.Lock1s();
+
+            if(mainLogicBoard.all2Set())
+                ShipPanel.Lock2s();
+
+            if(mainLogicBoard.all3Set())
+                ShipPanel.Lock3s();
+
+            if(mainLogicBoard.all4Set())
+                ShipPanel.Lock4s();
+
+            if(mainLogicBoard.allBoatsSet()){
+                ShipPanel.shipLeftToPlace.setBackground(Color.GREEN);
+                readyButton.setEnabled(true);
+            }
+
+
         }
         /* shipResetButton action*/
         if(e.getSource().equals(shipResetButton)){
+            readyButton.setEnabled(false);
+            ShipPanel.shipLeftToPlace.setBackground(Color.RED);
+            ShipPanel.UnlockButtons();
+
             for(int i = 0; i < mainLogicBoard.getSize(); ++i)
                 for(int j = 0; j < mainLogicBoard.getSize(); ++j)
                     mainLogicBoard.Board[i][j] = 0;
 
+            mainLogicBoard.clearBoard();
             mainBoardGUI.UpdateBoard(mainLogicBoard);
             ShipPanel.ResetPlacingPanel();
             mainBoardGUI.ResetBoardTiles();
@@ -146,11 +198,20 @@ public class GameGUI extends JFrame implements ActionListener {
         }
 
         if(e.getSource().equals(readyButton)) {
+
             if(mainLogicBoard.allBoatsSet()) {
+                // If every boat is placed
+                shootButton.setEnabled(true);
+                readyButton.setEnabled(false);
+                mainBoardGUI.desactiveTiles();
+
                 // Locking placing buttons
                 ShipPanel.LockButtons();
                 placementButton.setEnabled(false);
                 shipResetButton.setEnabled(false);
+
+                // TUTAJ MAKSYM MOZESZ DODAC ZACZECIE LACZENIA SIE Z SERWEREM CZY COS
+                preparationDone = true;
             }
         }
 
@@ -158,8 +219,9 @@ public class GameGUI extends JFrame implements ActionListener {
                 (player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) ||
                         (player2BoardGUI.ChosenX != -1 && player2BoardGUI.ChosenY != -1) ||
                         (player3BoardGUI.ChosenX != -1 && player3BoardGUI.ChosenY != -1))) {
+            shootReady = "y";
 
-            if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
+            /*if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
                 player1LogicBoard.shootBoat(new Point(player1BoardGUI.ChosenX, player1BoardGUI.ChosenY));
                 player1BoardGUI.UpdateBoard(player1LogicBoard);
             }
@@ -173,8 +235,12 @@ public class GameGUI extends JFrame implements ActionListener {
             }
             player1BoardGUI.ResetBoardTiles();
             player2BoardGUI.ResetBoardTiles();
-            player3BoardGUI.ResetBoardTiles();
+            player3BoardGUI.ResetBoardTiles();*/
         }
+    }
+
+    void setLabelText(String str){
+        info.setText(str);
     }
     public static void main(String[] args) throws IOException {
         GameGUI test = new GameGUI();
