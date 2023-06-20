@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Client {
     Instant start = Instant.now();
+    Instant shoot_start = Instant.now();
     private Socket socket;
     int LastChosenX;
     boolean Player1Turn = true;
@@ -240,11 +241,18 @@ public class Client {
                         gui.setLabelText("<html>Twoja tura<br/><br/>Strzelasz do gracza: "+ where_shoot +"</html>");
                         ChangeViewOfBoard(where_shoot);
                         //System.out.println("I: " + username + " Shoot in: " + where_shoot);
-                        String messageToSend2 = scanner.nextLine();
-
-                        if(messageToSend2.equals("y"))
+                        //String messageToSend2 = scanner.nextLine();
+                        while(!gui.shootReady.equals("y"))
                         {
+                            if (Duration.between(shoot_start, Instant.now()).toSeconds() >= 1)
+                            {
+                                System.out.println("Waiting for button");
+                                shoot_start = Instant.now();
+                            }
+                        }
 
+                        if(gui.shootReady.equals("y"))
+                        {
                             Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
                             chosenX = coords.x;
                             chosenY = coords.y;
