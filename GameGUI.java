@@ -143,6 +143,7 @@ public class GameGUI extends JFrame implements ActionListener {
                 for(int j = 0; j < mainLogicBoard.getSize(); ++j)
                     mainLogicBoard.Board[i][j] = 0;
 
+            mainLogicBoard.clearBoard();
             mainBoardGUI.UpdateBoard(mainLogicBoard);
             ShipPanel.ResetPlacingPanel();
             mainBoardGUI.ResetBoardTiles();
