@@ -9,6 +9,7 @@ public class GameGUI extends JFrame implements ActionListener {
 
     boolean preparationDone = false;
     boolean isDead = false;
+    boolean shootReady = false;
 
     // Main Game Panel
     BoatPlacingPanel ShipPanel;
@@ -147,7 +148,10 @@ public class GameGUI extends JFrame implements ActionListener {
             mainBoardGUI.ResetBoardTiles();
             ShipPanel.chosenShip = null;
         }
-
+        if(e.getSource().equals(shootButton))
+        {
+            shootReady = true;
+        }
         if(e.getSource().equals(readyButton)) {
             // If every boat is placed
 
