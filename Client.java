@@ -553,9 +553,9 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username for group chat");
         String username = scanner.nextLine();
-        while(!gui.preparationDone)
+        if(!gui.preparationDone)
         {
-            System.out.println("Waiting...");
+            gui.setLabelText("Oczekiwanie na graczy...");
         }
         System.out.println("Ready!");
         Socket socket = new Socket("192.168.36.76",1234);
