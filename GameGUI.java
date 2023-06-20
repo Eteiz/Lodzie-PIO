@@ -62,19 +62,19 @@ public class GameGUI extends JFrame implements ActionListener {
 
         // Player 1
         player1BoardGUI = new BoardGUI(false, null);
-        player1BoardGUI.setBounds(7,5,player1BoardGUI.boardWidth + 27,player1BoardGUI.boardHeight + 27);
+        player1BoardGUI.setBounds(7+45,5,player1BoardGUI.boardWidth + 27,player1BoardGUI.boardHeight + 27);
         player1LogicBoard = new Board();
         add(player1BoardGUI);
 
         // Player 2
         player2BoardGUI = new BoardGUI(false, null);
-        player2BoardGUI.setBounds(384,5, player2BoardGUI.boardWidth + 27, player2BoardGUI.boardHeight + 27);
+        player2BoardGUI.setBounds(384+45,5, player2BoardGUI.boardWidth + 27, player2BoardGUI.boardHeight + 27);
         player2LogicBoard = new Board();
         add(player2BoardGUI);
 
         // Player 3
         player3BoardGUI = new BoardGUI(false, null);
-        player3BoardGUI.setBounds(761,5,player3BoardGUI.boardWidth + 27,player3BoardGUI.boardHeight + 27);
+        player3BoardGUI.setBounds(761+45,5,player3BoardGUI.boardWidth + 27,player3BoardGUI.boardHeight + 27);
         player3LogicBoard = new Board();
         add(player3BoardGUI);
 
@@ -94,10 +94,12 @@ public class GameGUI extends JFrame implements ActionListener {
         readyButton = new JButton("Gotowy!");
         readyButton.setBounds(18,670,336,50);
         readyButton.addActionListener(this);
+        readyButton.setEnabled(false);
 
         shootButton = new JButton("Oddaj strzał!");
         shootButton.setBounds(800,328,200,50);
         shootButton.addActionListener(this);
+        shootButton.setEnabled(false);
 
         add(ShipPanel);
         add(placementButton);
@@ -136,9 +138,23 @@ public class GameGUI extends JFrame implements ActionListener {
             ShipPanel.ResetPlacingPanel();
             mainBoardGUI.ResetBoardTiles();
             ShipPanel.chosenShip = null;
+            if(mainLogicBoard.allBoatsSet()){
+                readyButton.setEnabled(true);
+                ShipPanel.shipLeftToPlace.setBackground(Color.GREEN);
+
+                //Bloku
+
+            }
+
+
         }
         /* shipResetButton action*/
         if(e.getSource().equals(shipResetButton)){
+            readyButton.setEnabled(false);
+            ShipPanel.shipLeftToPlace.setBackground(Color.RED);
+
+            //Odblokuj
+
             for(int i = 0; i < mainLogicBoard.getSize(); ++i)
                 for(int j = 0; j < mainLogicBoard.getSize(); ++j)
                     mainLogicBoard.Board[i][j] = 0;
@@ -152,6 +168,9 @@ public class GameGUI extends JFrame implements ActionListener {
 
         if(e.getSource().equals(readyButton)) {
             // If every boat is placed
+            shootButton.setEnabled(true);
+            readyButton.setEnabled(false);
+
 
             if(mainLogicBoard.allBoatsSet()) {
                 // Locking placing buttons

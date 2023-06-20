@@ -121,6 +121,7 @@ public class Board {
         return counter;
     }
 
+
     //this checks if player has boats left on Board, and if you can continue game
     //returns true if no boat left
       public boolean checkAllBoatsShot() {
