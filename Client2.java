@@ -170,7 +170,7 @@ public class Client2 {
         }
         if(player == 4)
         {
-            gui.setLabelText("Tura gracza pierwszego IV");
+            gui.setLabelText("Tura gracza IV");
             Player1Turn = false;
             Player2Turn = false;
             Player3Turn = false;
@@ -266,6 +266,10 @@ public class Client2 {
                                 else if(Player2Turn)WriteNextPlayer("2");
                                 else if(Player3Turn)WriteNextPlayer("3");
                                 else if(Player4Turn)WriteNextPlayer("4");
+
+                                gui.player1BoardGUI.desactiveTiles();
+                                gui.player2BoardGUI.desactiveTiles();
+                                gui.player3BoardGUI.desactiveTiles();
                             }
                             gui.shootReady = " ";
                         }
@@ -274,7 +278,7 @@ public class Client2 {
                     {
                         if (Duration.between(start, Instant.now()).toSeconds() >= 1)
                         {
-                            gui.setLabelText("Oczekiwanie na kolejnego gracza");
+                            //gui.setLabelText("Oczekiwanie na kolejnego gracza");
                             System.out.println("Waiting for changing turn...");
                             start = Instant.now();
                         }
