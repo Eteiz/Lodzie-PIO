@@ -72,20 +72,16 @@ public class Client2 {
         bufferedWriter.flush();
     }
     public void ChangePlayerTurn() throws IOException {
-        String nextPlayer = "1";
+
         if(Player1Turn)
         {
             Player1Turn = false;
             Player2Turn = true;
-            nextPlayer = "2";
-            WriteNextPlayer(nextPlayer);
         }
         else if(Player2Turn)
         {
             Player1Turn = true;
             Player2Turn = false;
-            nextPlayer = "1";
-            WriteNextPlayer(nextPlayer);
         }
     }
 
@@ -126,6 +122,8 @@ public class Client2 {
                             gui.player1BoardGUI.ResetBoardTiles();
 
                             ChangePlayerTurn();
+                            if(username.equals("1"))WriteNextPlayer("2");
+                            if(username.equals("2"))WriteNextPlayer("1");
                         }
 
                     }
