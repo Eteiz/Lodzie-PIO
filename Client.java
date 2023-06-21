@@ -54,7 +54,7 @@ public class Client {
         return chosen;
     }
 
-    public Point CoordinatesBasedOnWhereShoot(int shootedPlayer)
+    public PointLogic CoordinatesBasedOnWhereShoot(int shootedPlayer)
     {
         int chosenX = -1;
         int chosenY = -1;
@@ -63,75 +63,75 @@ public class Client {
         {
             if(shootedPlayer == 2)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 3)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 4)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
         if(username.equals("2"))
         {
             if(shootedPlayer == 1)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 3)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 4)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
         if(username.equals("3"))
         {
             if(shootedPlayer == 1)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 2)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 4)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
         if(username.equals("4"))
         {
             if(shootedPlayer == 1)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 2)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 3)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
-        return new Point(chosenX,chosenY);
+        return new PointLogic(chosenX,chosenY);
     }
 
     public void WriteNextPlayer(String NextPlayer) throws IOException
@@ -253,7 +253,7 @@ public class Client {
 
                         if(gui.shootReady.equals("y"))
                         {
-                            Point coords = CoordinatesBasedOnWhereShoot(where_shoot);
+                            PointLogic coords = CoordinatesBasedOnWhereShoot(where_shoot);
                             chosenX = coords.x;
                             chosenY = coords.y;
                             if (chosenX != -1 && chosenY != -1)
@@ -274,9 +274,9 @@ public class Client {
                                 else if(Player3Turn)WriteNextPlayer("3");
                                 else if(Player4Turn)WriteNextPlayer("4");
 
-                                gui.player1BoardGUI.desactiveTiles();
-                                gui.player2BoardGUI.desactiveTiles();
-                                gui.player3BoardGUI.desactiveTiles();
+                                gui.player1BoardGUI.DeactivateTiles();
+                                gui.player2BoardGUI.DeactivateTiles();
+                                gui.player3BoardGUI.DeactivateTiles();
                             }
                             gui.shootReady = " ";
                         }
@@ -298,36 +298,36 @@ public class Client {
             closeEverything(socket,bufferedReader,bufferedWriter);
         }
     }
-    public Point ParseShootPoint(String[] parts)
+    public PointLogic ParseShootPoint(String[] parts)
     {
         int x = Integer.parseInt(parts[2]);
         int y = Integer.parseInt(parts[3]);
-        return new Point(x,y);
+        return new PointLogic(x,y);
     }
-    public int ShootValue(Point point,int whoWasShooted)
+    public int ShootValue(PointLogic point, int whoWasShooted)
     {
         if(username.equals("1") && whoWasShooted == 1)
         {
-            gui.mainLogicBoard.shootBoat(point);
+            gui.mainLogicBoard.ShootBoat(point);
             gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-            return gui.mainLogicBoard.Board[point.x][point.y];
+            return gui.mainLogicBoard.logicBoard[point.x][point.y];
         }
         if(username.equals("2") && whoWasShooted == 2)
         {
-            gui.mainLogicBoard.shootBoat(point);
+            gui.mainLogicBoard.ShootBoat(point);
             gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-            return gui.mainLogicBoard.Board[point.x][point.y];
+            return gui.mainLogicBoard.logicBoard[point.x][point.y];
         }
         if(username.equals("3") && whoWasShooted == 3)
         {
-            gui.mainLogicBoard.shootBoat(point);
+            gui.mainLogicBoard.ShootBoat(point);
             gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-            return gui.mainLogicBoard.Board[point.x][point.y];
+            return gui.mainLogicBoard.logicBoard[point.x][point.y];
         }
          // "4" && 4
-        gui.mainLogicBoard.shootBoat(point);
+        gui.mainLogicBoard.ShootBoat(point);
         gui.mainBoardGUI.UpdateBoard(gui.mainLogicBoard);
-        return gui.mainLogicBoard.Board[point.x][point.y];
+        return gui.mainLogicBoard.logicBoard[point.x][point.y];
 
     }
 
@@ -335,21 +335,21 @@ public class Client {
     {
         if(whoToActivate == 1)
         {
-            gui.player1BoardGUI.activeTiles();
-            gui.player2BoardGUI.desactiveTiles();
-            gui.player3BoardGUI.desactiveTiles();
+            gui.player1BoardGUI.ActiveTiles();
+            gui.player2BoardGUI.DeactivateTiles();
+            gui.player3BoardGUI.DeactivateTiles();
         }
         if(whoToActivate == 2)
         {
-            gui.player2BoardGUI.activeTiles();
-            gui.player1BoardGUI.desactiveTiles();
-            gui.player3BoardGUI.desactiveTiles();
+            gui.player2BoardGUI.ActiveTiles();
+            gui.player1BoardGUI.DeactivateTiles();
+            gui.player3BoardGUI.DeactivateTiles();
         }
         if(whoToActivate == 3)
         {
-            gui.player3BoardGUI.activeTiles();
-            gui.player2BoardGUI.desactiveTiles();
-            gui.player1BoardGUI.desactiveTiles();
+            gui.player3BoardGUI.ActiveTiles();
+            gui.player2BoardGUI.DeactivateTiles();
+            gui.player1BoardGUI.DeactivateTiles();
         }
 
     }
@@ -382,48 +382,48 @@ public class Client {
         }
     }
 
-    public void UpdateBoardBasedOnShoot(Point point, int res, int player)
+    public void UpdateBoardBasedOnShoot(PointLogic point, int res, int player)
     {
         if(player == 1 && (username.equals("2") || username.equals("3") || username.equals("4")))
         {
             System.out.println("w 1 strzelalem");
 
-            gui.player1LogicBoard.Board[point.x][point.y] = res;
+            gui.player1LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
         }
         if(player == 2 && username.equals("1"))
         {
             System.out.println("w 2 strzelalem");
 
-            gui.player1LogicBoard.Board[point.x][point.y] = res;
+            gui.player1LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player1BoardGUI.UpdateBoard(gui.player1LogicBoard);
         }
         if(player == 2 && (username.equals("3") || username.equals("4")))
         {
             System.out.println("w 2 strzelalem");
 
-            gui.player2LogicBoard.Board[point.x][point.y] = res;
+            gui.player2LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
         }
         if(player == 3 && (username.equals("1") || username.equals("2")))
         {
             System.out.println("w 3 strzelalem");
 
-            gui.player2LogicBoard.Board[point.x][point.y] = res;
+            gui.player2LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player2BoardGUI.UpdateBoard(gui.player2LogicBoard);
         }
         if(player == 3 && (username.equals("4")))
         {
             System.out.println("w 3 strzelalem");
 
-            gui.player3LogicBoard.Board[point.x][point.y] = res;
+            gui.player3LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
         }
         if(player == 4 && (username.equals("2") || username.equals("3") || username.equals("1")))
         {
             System.out.println("w 4 strzelalem");
 
-            gui.player3LogicBoard.Board[point.x][point.y] = res;
+            gui.player3LogicBoard.logicBoard[point.x][point.y] = res;
             gui.player3BoardGUI.UpdateBoard(gui.player3LogicBoard);
         }
 
@@ -447,7 +447,7 @@ public class Client {
         bufferedWriter.newLine();
         bufferedWriter.flush();
 
-        didILose = gui.mainLogicBoard.checkAllBoatsShot();
+        didILose = gui.mainLogicBoard.CheckAllBoatsShot();
         if(didILose)
         {
             bufferedWriter.write(username + " I loosed");
@@ -513,7 +513,7 @@ public class Client {
                             int shoot_res = GetLastCharResult(messageFromGroupChat);
                             int player = GetFirstCharPlayer(messageFromGroupChat);
 
-                            UpdateBoardBasedOnShoot(new Point(LastChosenX,LastChosenY),shoot_res,player);
+                            UpdateBoardBasedOnShoot(new PointLogic(LastChosenX,LastChosenY),shoot_res,player);
 
                         }
                         if(messageFromGroupChat.contains("I loosed"))
@@ -566,7 +566,7 @@ public class Client {
             gui.setLabelText("Oczekiwanie na graczy...");
         }
         System.out.println("Ready!");
-        Socket socket = new Socket("192.168.36.76",1234);
+        Socket socket = new Socket("localhost",1234);
         Client client = new Client(socket,username);
         client.ListenForMessage();
         client.sendMessage();

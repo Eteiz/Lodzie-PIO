@@ -2,16 +2,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.*;
 public class TileGUI extends JButton {
-
     public enum TileValue {
         EMPTY, SHIP_PLACED, MISS, HIT
     }
-
     TileValue tileValue;
-
-    ImageIcon emptyBig, emptySmall, shipPlacedBig, shipPlacedSmall, missBig, missSmall, hitBig, hitSmall;
-
-    private boolean bigSize;
+    private final ImageIcon emptyBig, emptySmall, shipPlacedBig, shipPlacedSmall, missBig, missSmall, hitBig, hitSmall;
+    private final boolean bigSize;
 
     TileGUI(boolean bigSize) {
 
@@ -39,6 +35,8 @@ public class TileGUI extends JButton {
         setOpaque(true);
         setContentAreaFilled(false);
     }
+
+    // Method changes the texture of the tile depending on action and tile's status
     void ChangeTile(TileValue status) {
         tileValue = status;
         if(status == TileValue.EMPTY) {

@@ -5,36 +5,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // Panel allows user to click on the type of ship they want to place on board
-public class BoatPlacingPanel extends JLabel implements ActionListener {
-
-    /** TBA:
-     * - MAKE VARIABLES PRIVATE AND CREATE SETTERS AND GETTERS (chosenShip)
-     * - CONSISTENT NAMING
-     *
-     */
+public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
 
     // Buttons for picking ship type, H stands for horizontal, V stands for vertical
     JButton shipOneH, shipTwoH, shipThreeH, shipFourH, shipTwoV, shipThreeV, shipFourV;
-
     JLabel shipLeftToPlace;
 
     // Variable that determines which ship is chosen, if no ship is chosen the variable is null
-    String chosenShip;
+    private String chosenShip;
+    public String GetChosenShip() { return chosenShip; }
+    public void SetChosenShip(String chosenShip) { this.chosenShip = chosenShip; }
 
-    BoatPlacingPanel() {
+    BoatPlacingPanelGUI() {
 
-        chosenShip = null;
+        SetChosenShip(null);
 
         // 451 x 401 - original image size
         // 336 x 328 - preferred image size
         this.setSize(336,250);
         this.setLayout(null);
 
-        // TBA: CHANGE THE SIZE OF PANEL
-
         // Setting the main panel
         this.setBackground(Color.decode("#D0D0D2"));
-        Border panelBorder = BorderFactory.createLineBorder(Color.BLACK);
+        Border panelBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
         this.setBorder(panelBorder);
         this.setOpaque(true);
 
@@ -50,7 +43,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship1ImageH = new ImageIcon(scaledImage);
 
         shipOneH = new JButton(ship1ImageH);
-        shipOneH.setBounds(10,10,40,40);
+        shipOneH.setBounds(10+40,10,40,40);
 
         Border border = BorderFactory.createLineBorder(Color.RED,3);
         shipOneH.setBorder(border);
@@ -66,7 +59,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship2ImageH = new ImageIcon(scaledImage);
 
         shipTwoH = new JButton(ship2ImageH);
-        shipTwoH.setBounds(10,55,80,40);
+        shipTwoH.setBounds(10+40,55,80,40);
 
         shipTwoH.setBorder(border);
         shipTwoH.setBorderPainted(false);
@@ -81,7 +74,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship3ImageH = new ImageIcon(scaledImage);
 
         shipThreeH = new JButton(ship3ImageH);
-        shipThreeH.setBounds(10,100,120,40);
+        shipThreeH.setBounds(10+40,100,120,40);
 
         shipThreeH.setBorder(border);
         shipThreeH.setBorderPainted(false);
@@ -96,7 +89,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship4ImageH = new ImageIcon(scaledImage);
 
         shipFourH = new JButton(ship4ImageH);
-        shipFourH.setBounds(10,145,160,40);
+        shipFourH.setBounds(10+40,145,160,40);
 
         shipFourH.setBorder(border);
         shipFourH.setBorderPainted(false);
@@ -112,7 +105,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship2ImageV = new ImageIcon(scaledImage);
 
         shipTwoV = new JButton(ship2ImageV);
-        shipTwoV.setBounds(95,10,40,80);
+        shipTwoV.setBounds(95+40,10,40,80);
 
         shipTwoV.setBorder(border);
         shipTwoV.setBorderPainted(false);
@@ -127,7 +120,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship3ImageV = new ImageIcon(scaledImage);
 
         shipThreeV = new JButton(ship3ImageV);
-        shipThreeV.setBounds(140,10,40,120);
+        shipThreeV.setBounds(140+40,10,40,120);
 
         shipThreeV.setBorder(border);
         shipThreeV.setBorderPainted(false);
@@ -142,7 +135,7 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         ship4ImageV = new ImageIcon(scaledImage);
 
         shipFourV = new JButton(ship4ImageV);
-        shipFourV.setBounds(185,10,40,160);
+        shipFourV.setBounds(185+40,10,40,160);
 
         shipFourV.setBorder(border);
         shipFourV.setBorderPainted(false);
@@ -152,9 +145,12 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
 
         // JLabel informing how many ships left are to be placed
         shipLeftToPlace = new JLabel();
-        shipLeftToPlace.setBackground(Color.RED);
-        shipLeftToPlace.setOpaque(true);
-        shipLeftToPlace.setBounds(3,200,330,45);
+        shipLeftToPlace.setFont(new Font("Arial", Font.BOLD, 20));
+        shipLeftToPlace.setForeground(Color.BLACK);
+
+        shipLeftToPlace.setBounds(0,200,330,45);
+        shipLeftToPlace.setHorizontalAlignment(SwingConstants.CENTER);
+        shipLeftToPlace.setVerticalAlignment(SwingConstants.CENTER);
         this.add(shipLeftToPlace);
     }
 
@@ -177,15 +173,15 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
             // The button becomes highlighted
             ResetPlacingPanel();
 
-            if(chosenShip == null || !chosenShip.contains("1")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("1")) {
                 shipOneH.setBorderPainted(true);
-                chosenShip = "1";
+                SetChosenShip("1");
             }
             // If this ship has already been chosen, the chosenShip becomes null
             // The button stops being highlighted
             else {
                 shipOneH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
             // Code for test purposes
             //System.out.println(chosenShip);
@@ -194,97 +190,97 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
         // Horizontal
         if(e.getSource().equals(shipTwoH)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("2H")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("2H")) {
                 shipTwoH.setBorderPainted(true);
-                chosenShip = "2H";
+                SetChosenShip("2H");
             }
             else {
                 shipTwoH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipThreeH)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("3H")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("3H")) {
                 shipThreeH.setBorderPainted(true);
-                chosenShip = "3H";
+                SetChosenShip("3H");
             }
             else {
                 shipThreeH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipFourH)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("4H")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("4H")) {
                 shipFourH.setBorderPainted(true);
-                chosenShip = "4H";
+                SetChosenShip("4H");
             }
             else {
                 shipFourH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
 
         // Vertical
         if(e.getSource().equals(shipTwoV)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("2V")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("2V")) {
                 shipTwoV.setBorderPainted(true);
-                chosenShip = "2V";
+                SetChosenShip("2V");
             }
             else {
                 shipTwoV.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipThreeV)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("3V")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("3V")) {
                 shipThreeV.setBorderPainted(true);
-                chosenShip = "3V";
+                SetChosenShip("3V");
             }
             else {
                 shipThreeV.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipFourV)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("4V")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("4V")) {
                 shipFourV.setBorderPainted(true);
-                chosenShip = "4V";
+                SetChosenShip("4V");
             }
             else {
                 shipFourV.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
     }
 
-    public void LockButtons() {
-        Lock1s();
-        Lock2s();
-        Lock3s();
-        Lock4s();
+    public void LockShipButtons() {
+        LockShip1Button();
+        LockShip2Button();
+        LockShip3Button();
+        LockShip4Button();
     }
 
-    public void Lock1s(){
+    public void LockShip1Button(){
         shipOneH.setEnabled(false);
     }
-    public void Lock2s(){
+    public void LockShip2Button() {
         shipTwoH.setEnabled(false);
         shipTwoV.setEnabled(false);
     }
-    public void Lock3s(){
+    public void LockShip3Button() {
         shipThreeH.setEnabled(false);
         shipThreeV.setEnabled(false);
     }
-    public void Lock4s(){
+    public void LockShip4Button() {
         shipFourH.setEnabled(false);
         shipFourV.setEnabled(false);
     }
-    public void UnlockButtons(){
+    public void UnlockAllShipButtons() {
         shipOneH.setEnabled(true);
         shipTwoH.setEnabled(true);
         shipThreeH.setEnabled(true);
@@ -296,9 +292,14 @@ public class BoatPlacingPanel extends JLabel implements ActionListener {
 
 
     // Method that would display to player how many ships are left to be placed
-    void UpdateLabel(Board LogicBoard) {
-        /** METHOD TO GET NUMBER IS NEEDED **/
-        shipLeftToPlace.setText("1S: x/1 2S: x/2 3S: x/3 4S: x/4");
+    void UpdateShipLabel(BoardLogic LogicBoard) {
+        int shipOne = LogicBoard.boats[0];
+        int shipTwo = LogicBoard.boats[1];
+        int shipThree = LogicBoard.boats[2];
+        int shipFour =  LogicBoard.boats[3];
+        shipLeftToPlace.setText("■: " + shipOne + "/4 " +
+                "■■: " + shipTwo + "/3 " +
+                "■■■: " + shipThree + "/2 " +
+                "■■■■: " + shipFour + "/1");
     }
-
 }
