@@ -145,7 +145,7 @@ public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
 
         // JLabel informing how many ships left are to be placed
         shipLeftToPlace = new JLabel();
-        shipLeftToPlace.setFont(new Font("Arial", Font.BOLD, 22));
+        shipLeftToPlace.setFont(new Font("Arial", Font.BOLD, 20));
         shipLeftToPlace.setForeground(Color.BLACK);
 
         shipLeftToPlace.setBounds(0,200,330,45);

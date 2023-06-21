@@ -64,17 +64,17 @@ public class Client {
             if(shootedPlayer == 2)
             {
                 chosenX = gui.player1BoardGUI.GetChosenX();
-                chosenY = gui.player1BoardGUI.SetChosenY();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 3)
             {
                 chosenX = gui.player2BoardGUI.GetChosenX();
-                chosenY = gui.player2BoardGUI.SetChosenY();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 4)
             {
                 chosenX = gui.player3BoardGUI.GetChosenX();
-                chosenY = gui.player3BoardGUI.SetChosenY();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
         if(username.equals("2"))
@@ -82,17 +82,17 @@ public class Client {
             if(shootedPlayer == 1)
             {
                 chosenX = gui.player1BoardGUI.GetChosenX();
-                chosenY = gui.player1BoardGUI.SetChosenY();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 3)
             {
                 chosenX = gui.player2BoardGUI.GetChosenX();
-                chosenY = gui.player2BoardGUI.SetChosenY();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 4)
             {
                 chosenX = gui.player3BoardGUI.GetChosenX();
-                chosenY = gui.player3BoardGUI.SetChosenY();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
         if(username.equals("3"))
@@ -100,17 +100,17 @@ public class Client {
             if(shootedPlayer == 1)
             {
                 chosenX = gui.player1BoardGUI.GetChosenX();
-                chosenY = gui.player1BoardGUI.SetChosenY();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 2)
             {
                 chosenX = gui.player2BoardGUI.GetChosenX();
-                chosenY = gui.player2BoardGUI.SetChosenY();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 4)
             {
                 chosenX = gui.player3BoardGUI.GetChosenX();
-                chosenY = gui.player3BoardGUI.SetChosenY();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
         if(username.equals("4"))
@@ -118,17 +118,17 @@ public class Client {
             if(shootedPlayer == 1)
             {
                 chosenX = gui.player1BoardGUI.GetChosenX();
-                chosenY = gui.player1BoardGUI.SetChosenY();
+                chosenY = gui.player1BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 2)
             {
                 chosenX = gui.player2BoardGUI.GetChosenX();
-                chosenY = gui.player2BoardGUI.SetChosenY();
+                chosenY = gui.player2BoardGUI.GetChosenY();
             }
             if(shootedPlayer == 3)
             {
                 chosenX = gui.player3BoardGUI.GetChosenX();
-                chosenY = gui.player3BoardGUI.SetChosenY();
+                chosenY = gui.player3BoardGUI.GetChosenY();
             }
         }
         return new PointLogic(chosenX,chosenY);
@@ -566,7 +566,7 @@ public class Client {
             gui.setLabelText("Oczekiwanie na graczy...");
         }
         System.out.println("Ready!");
-        Socket socket = new Socket("192.168.36.76",1234);
+        Socket socket = new Socket("localhost",1234);
         Client client = new Client(socket,username);
         client.ListenForMessage();
         client.sendMessage();

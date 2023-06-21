@@ -20,7 +20,7 @@ public class BoardGUI extends JPanel implements ActionListener {
     public int GetChosenX() { return ChosenX; }
     public void SetChosenX(int chosenX) { ChosenX = chosenX; }
     private int ChosenY = -1;
-    public int SetChosenY() { return ChosenY; }
+    public int GetChosenY() { return ChosenY; }
     public void SetChosenY(int chosenY) { ChosenY = chosenY; }
 
     BoardGUI(boolean bigSize) {
@@ -101,7 +101,7 @@ public class BoardGUI extends JPanel implements ActionListener {
                         }
                     }
                     // If the tile was clicked before, it stops being highlighted
-                    if(GetChosenX() == i && SetChosenY() == j || boardTiles[i][j].tileValue != TileGUI.TileValue.EMPTY) {
+                    if(GetChosenX() == i && GetChosenY() == j || boardTiles[i][j].tileValue != TileGUI.TileValue.EMPTY) {
                         SetChosenX(-1);
                         SetChosenY(-1);
                     }

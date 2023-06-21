@@ -157,9 +157,9 @@ public class GameGUI extends JFrame implements ActionListener {
             // For test purposes
             //System.out.println(ShipPanel.chosenShip + " " + mainBoardGUI.ChosenX + " " + mainBoardGUI.ChosenY);
 
-            if(shipPanel.GetChosenShip() != null && mainBoardGUI.GetChosenX() != -1 && mainBoardGUI.SetChosenY() != -1) {
+            if(shipPanel.GetChosenShip() != null && mainBoardGUI.GetChosenX() != -1 && mainBoardGUI.GetChosenY() != -1) {
                 String shipType = shipPanel.GetChosenShip();
-                PointLogic placingPoint = new PointLogic(mainBoardGUI.GetChosenX(), mainBoardGUI.SetChosenY());
+                PointLogic placingPoint = new PointLogic(mainBoardGUI.GetChosenX(), mainBoardGUI.GetChosenY());
                 BoatLogic newBoat = null;
 
                 if(shipType.equals("2H")) newBoat = new BoatLogic(2,0,placingPoint);
@@ -235,9 +235,9 @@ public class GameGUI extends JFrame implements ActionListener {
         }
 
         if(e.getSource().equals(shootButton) && (
-                (player1BoardGUI.GetChosenX() != -1 && player1BoardGUI.SetChosenY() != -1) ||
-                        (player2BoardGUI.GetChosenX() != -1 && player2BoardGUI.SetChosenY() != -1) ||
-                        (player3BoardGUI.GetChosenX() != -1 && player3BoardGUI.SetChosenY() != -1))) {
+                (player1BoardGUI.GetChosenX() != -1 && player1BoardGUI.GetChosenY() != -1) ||
+                        (player2BoardGUI.GetChosenX() != -1 && player2BoardGUI.GetChosenY() != -1) ||
+                        (player3BoardGUI.GetChosenX() != -1 && player3BoardGUI.GetChosenY() != -1))) {
             shootReady = "y";
 
             /*if(player1BoardGUI.ChosenX != -1 && player1BoardGUI.ChosenY != -1) {
