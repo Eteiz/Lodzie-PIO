@@ -6,38 +6,38 @@ import javax.swing.border.Border;
 
 public class BoardGUI extends JPanel implements ActionListener {
 
-    /** TBA:
-     * - MAKE VARIABLES PRIVATE AND CREATE SETTERS AND GETTERS
-     * - CONSISTENT NAMING
-     *
-     */
-
-    JLabel playerName;
     // Two-dimensional array for tiles to ease accessing them
-    private TileGUI[][] boardTiles = new TileGUI[10][10];
+    private final TileGUI[][] boardTiles = new TileGUI[10][10];
 
     // Board Width and Weight used to determine board's size
     // 360x360 for player's board
     // 270x270 for enemy's board
-    public int boardWidth;
-    public int boardHeight;
+    public int boardWidth, boardHeight;
 
     // Coordinates of tiles that are chosen by clicking at them
     // Value -1 means no tile was chosen
-    public int ChosenX = -1;
-    public int ChosenY = -1;
+    private int ChosenX = -1;
+    public int GetChosenX() { return ChosenX; }
+    public void SetChosenX(int chosenX) { ChosenX = chosenX; }
+    private int ChosenY = -1;
+    public int SetChosenY() { return ChosenY; }
+    public void SetChosenY(int chosenY) { ChosenY = chosenY; }
 
-    BoardGUI(boolean bigSize, String playerName) {
+    BoardGUI(boolean bigSize) {
 
+        // Offset to generate border around board
+        int offset = 0;
         // bigSize - variable that determines if board is for player or enemy
         if(bigSize) {
             boardWidth = 360;
             boardHeight = 360;
         }
         else {
-            boardWidth = 270;
-            boardHeight = 270;
+            boardWidth = 270 + 8;
+            boardHeight = 270 + 8;
+            offset = 4;
         }
+
 
         // +27 for spacing between tiles (9x3)
         setPreferredSize(new Dimension(boardWidth + 27,boardHeight + 27));
@@ -48,7 +48,7 @@ public class BoardGUI extends JPanel implements ActionListener {
             for(int j = 0; j < 10; j++) {
                 boardTiles[i][j] = new TileGUI(bigSize);
                 boardTiles[i][j].ChangeTile(TileGUI.TileValue.EMPTY);
-                boardTiles[i][j].setBounds( (boardWidth/10 + 3)*i, (boardHeight/10 + 3)*j,boardWidth/10, boardHeight/10);
+                boardTiles[i][j].setBounds( (boardWidth/10 + 3)*i + offset, (boardHeight/10 + 3)*j + offset,boardWidth/10, boardHeight/10);
 
                 // Tile border for when is it chosen
                 Border panelBorder = BorderFactory.createLineBorder(Color.red, 2);
@@ -59,7 +59,6 @@ public class BoardGUI extends JPanel implements ActionListener {
                 add(boardTiles[i][j]);
             }
         }
-
         setVisible(true);
         setBackground(Color.BLACK);
         setOpaque(true);
@@ -85,12 +84,8 @@ public class BoardGUI extends JPanel implements ActionListener {
                 boardTiles[k][l].setBorderPainted(false);
             }
         }
-        ChosenX = -1;
-        ChosenY = -1;
-    }
-
-    TileGUI GetBoardTile(int x, int y) {
-        return boardTiles[x][y];
+        SetChosenX(-1);
+        SetChosenY(-1);
     }
 
     @Override
@@ -106,26 +101,25 @@ public class BoardGUI extends JPanel implements ActionListener {
                         }
                     }
                     // If the tile was clicked before, it stops being highlighted
-                    if(ChosenX == i && ChosenY == j || boardTiles[i][j].tileValue != TileGUI.TileValue.EMPTY) {
-                        ChosenX = -1;
-                        ChosenY = -1;
+                    if(GetChosenX() == i && SetChosenY() == j || boardTiles[i][j].tileValue != TileGUI.TileValue.EMPTY) {
+                        SetChosenX(-1);
+                        SetChosenY(-1);
                     }
                     // If the tile was not chosen before, it starts being highlighted
                     else {
                         boardTiles[i][j].setBorderPainted(true);
-                        ChosenX = i;
-                        ChosenY = j;
+                        SetChosenX(i);
+                        SetChosenY(j);
                     }
                 }
             }
         }
     }
 
-    public void desactiveTiles(){
+    public void DeactivateTiles(){
         setBackground(Color.BLACK);
     }
-
-    public void activeTiles(){
+    public void ActiveTiles(){
         setBackground(new Color(0x198580));
     }
 }

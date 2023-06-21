@@ -9,15 +9,16 @@ public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
 
     // Buttons for picking ship type, H stands for horizontal, V stands for vertical
     JButton shipOneH, shipTwoH, shipThreeH, shipFourH, shipTwoV, shipThreeV, shipFourV;
-
     JLabel shipLeftToPlace;
 
     // Variable that determines which ship is chosen, if no ship is chosen the variable is null
-    String chosenShip;
+    private String chosenShip;
+    public String GetChosenShip() { return chosenShip; }
+    public void SetChosenShip(String chosenShip) { this.chosenShip = chosenShip; }
 
     BoatPlacingPanelGUI() {
 
-        chosenShip = null;
+        SetChosenShip(null);
 
         // 451 x 401 - original image size
         // 336 x 328 - preferred image size
@@ -144,9 +145,12 @@ public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
 
         // JLabel informing how many ships left are to be placed
         shipLeftToPlace = new JLabel();
-        shipLeftToPlace.setBackground(Color.RED);
-        shipLeftToPlace.setOpaque(true);
-        shipLeftToPlace.setBounds(3,200,330,45);
+        shipLeftToPlace.setFont(new Font("Arial", Font.BOLD, 22));
+        shipLeftToPlace.setForeground(Color.BLACK);
+
+        shipLeftToPlace.setBounds(0,200,330,45);
+        shipLeftToPlace.setHorizontalAlignment(SwingConstants.CENTER);
+        shipLeftToPlace.setVerticalAlignment(SwingConstants.CENTER);
         this.add(shipLeftToPlace);
     }
 
@@ -169,15 +173,15 @@ public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
             // The button becomes highlighted
             ResetPlacingPanel();
 
-            if(chosenShip == null || !chosenShip.contains("1")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("1")) {
                 shipOneH.setBorderPainted(true);
-                chosenShip = "1";
+                SetChosenShip("1");
             }
             // If this ship has already been chosen, the chosenShip becomes null
             // The button stops being highlighted
             else {
                 shipOneH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
             // Code for test purposes
             //System.out.println(chosenShip);
@@ -186,70 +190,70 @@ public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
         // Horizontal
         if(e.getSource().equals(shipTwoH)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("2H")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("2H")) {
                 shipTwoH.setBorderPainted(true);
-                chosenShip = "2H";
+                SetChosenShip("2H");
             }
             else {
                 shipTwoH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipThreeH)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("3H")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("3H")) {
                 shipThreeH.setBorderPainted(true);
-                chosenShip = "3H";
+                SetChosenShip("3H");
             }
             else {
                 shipThreeH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipFourH)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("4H")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("4H")) {
                 shipFourH.setBorderPainted(true);
-                chosenShip = "4H";
+                SetChosenShip("4H");
             }
             else {
                 shipFourH.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
 
         // Vertical
         if(e.getSource().equals(shipTwoV)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("2V")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("2V")) {
                 shipTwoV.setBorderPainted(true);
-                chosenShip = "2V";
+                SetChosenShip("2V");
             }
             else {
                 shipTwoV.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipThreeV)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("3V")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("3V")) {
                 shipThreeV.setBorderPainted(true);
-                chosenShip = "3V";
+                SetChosenShip("3V");
             }
             else {
                 shipThreeV.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
         if(e.getSource().equals(shipFourV)) {
             ResetPlacingPanel();
-            if(chosenShip == null || !chosenShip.contains("4V")) {
+            if(GetChosenShip() == null || !GetChosenShip().contains("4V")) {
                 shipFourV.setBorderPainted(true);
-                chosenShip = "4V";
+                SetChosenShip("4V");
             }
             else {
                 shipFourV.setBorderPainted(false);
-                chosenShip = null;
+                SetChosenShip(null);
             }
         }
     }
@@ -288,9 +292,14 @@ public class BoatPlacingPanelGUI extends JLabel implements ActionListener {
 
 
     // Method that would display to player how many ships are left to be placed
-    void UpdateLabel(BoardLogic LogicBoard) {
-        /** METHOD TO GET NUMBER IS NEEDED **/
-        shipLeftToPlace.setText("1S: x/1 2S: x/2 3S: x/3 4S: x/4");
+    void UpdateShipLabel(BoardLogic LogicBoard) {
+        int shipOne = LogicBoard.boats[0];
+        int shipTwo = LogicBoard.boats[1];
+        int shipThree = LogicBoard.boats[2];
+        int shipFour =  LogicBoard.boats[3];
+        shipLeftToPlace.setText("■: " + shipOne + "/4 " +
+                "■■: " + shipTwo + "/3 " +
+                "■■■: " + shipThree + "/2 " +
+                "■■■■: " + shipFour + "/1");
     }
-
 }

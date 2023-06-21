@@ -63,72 +63,72 @@ public class Client {
         {
             if(shootedPlayer == 2)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 3)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 4)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.SetChosenY();
             }
         }
         if(username.equals("2"))
         {
             if(shootedPlayer == 1)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 3)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 4)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.SetChosenY();
             }
         }
         if(username.equals("3"))
         {
             if(shootedPlayer == 1)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 2)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 4)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.SetChosenY();
             }
         }
         if(username.equals("4"))
         {
             if(shootedPlayer == 1)
             {
-                chosenX = gui.player1BoardGUI.ChosenX;
-                chosenY = gui.player1BoardGUI.ChosenY;
+                chosenX = gui.player1BoardGUI.GetChosenX();
+                chosenY = gui.player1BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 2)
             {
-                chosenX = gui.player2BoardGUI.ChosenX;
-                chosenY = gui.player2BoardGUI.ChosenY;
+                chosenX = gui.player2BoardGUI.GetChosenX();
+                chosenY = gui.player2BoardGUI.SetChosenY();
             }
             if(shootedPlayer == 3)
             {
-                chosenX = gui.player3BoardGUI.ChosenX;
-                chosenY = gui.player3BoardGUI.ChosenY;
+                chosenX = gui.player3BoardGUI.GetChosenX();
+                chosenY = gui.player3BoardGUI.SetChosenY();
             }
         }
         return new PointLogic(chosenX,chosenY);
@@ -274,9 +274,9 @@ public class Client {
                                 else if(Player3Turn)WriteNextPlayer("3");
                                 else if(Player4Turn)WriteNextPlayer("4");
 
-                                gui.player1BoardGUI.desactiveTiles();
-                                gui.player2BoardGUI.desactiveTiles();
-                                gui.player3BoardGUI.desactiveTiles();
+                                gui.player1BoardGUI.DeactivateTiles();
+                                gui.player2BoardGUI.DeactivateTiles();
+                                gui.player3BoardGUI.DeactivateTiles();
                             }
                             gui.shootReady = " ";
                         }
@@ -335,21 +335,21 @@ public class Client {
     {
         if(whoToActivate == 1)
         {
-            gui.player1BoardGUI.activeTiles();
-            gui.player2BoardGUI.desactiveTiles();
-            gui.player3BoardGUI.desactiveTiles();
+            gui.player1BoardGUI.ActiveTiles();
+            gui.player2BoardGUI.DeactivateTiles();
+            gui.player3BoardGUI.DeactivateTiles();
         }
         if(whoToActivate == 2)
         {
-            gui.player2BoardGUI.activeTiles();
-            gui.player1BoardGUI.desactiveTiles();
-            gui.player3BoardGUI.desactiveTiles();
+            gui.player2BoardGUI.ActiveTiles();
+            gui.player1BoardGUI.DeactivateTiles();
+            gui.player3BoardGUI.DeactivateTiles();
         }
         if(whoToActivate == 3)
         {
-            gui.player3BoardGUI.activeTiles();
-            gui.player2BoardGUI.desactiveTiles();
-            gui.player1BoardGUI.desactiveTiles();
+            gui.player3BoardGUI.ActiveTiles();
+            gui.player2BoardGUI.DeactivateTiles();
+            gui.player1BoardGUI.DeactivateTiles();
         }
 
     }

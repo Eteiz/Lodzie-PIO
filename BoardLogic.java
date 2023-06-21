@@ -7,10 +7,10 @@ public class BoardLogic {
     private final int[] controlBoats = new int[4]; //array to define how many boats of specified length are to be placed
 
     BoardLogic() {
-        this.controlBoats[0] = 0; //game has 4 boats with length 1
-        this.controlBoats[1] = 0; //game has 3 boats with length 2
-        this.controlBoats[2] = 1; //game has 2 boats with length 3
-        this.controlBoats[3] = 0; //game has 1 boat with length 4
+        this.controlBoats[0] = 4; //game has 4 boats with length 1
+        this.controlBoats[1] = 3; //game has 3 boats with length 2
+        this.controlBoats[2] = 2; //game has 2 boats with length 3
+        this.controlBoats[3] = 1; //game has 1 boat with length 4
     }
 
     //method to place boats
