@@ -2,6 +2,8 @@ import java.io.*;
 import java.net.Socket;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class Client {
     boolean Player4Turn = false;
     int LastChosenY;
     static Random rand = new Random();
+    List<String> shootChoice;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String username;
@@ -33,6 +36,11 @@ public class Client {
     {
         try
         {
+            shootChoice = new ArrayList<String>();
+            shootChoice.add("1");
+            shootChoice.add("2");
+            shootChoice.add("3");
+            shootChoice.add("4");
             this.socket = socket;
             this.username = username;
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -45,12 +53,24 @@ public class Client {
     }
     public int GetRandomWithoutOneInRange(int exceptThis,int range)
     {
-        int chosen = exceptThis;
-        while(chosen == exceptThis || (chosen==1 && Player1Losed) || (chosen==2 && Player2Losed) || (chosen==3 && Player3Losed)
-         || (chosen==4 && Player4Losed))
+        if(shootChoice.size() == 0)
         {
-            while(chosen == exceptThis)chosen = rand.nextInt(range)+1; // to have not 0 and 1 but 1 and 2
+            shootChoice.add("1");
+            shootChoice.add("2");
+            shootChoice.add("3");
+            shootChoice.add("4");
         }
+        shootChoice.remove(this.username);
+
+        int chosen = exceptThis;
+        String chosenStr = Integer.toString(chosen);
+        while(chosen == exceptThis || (chosen==1 && Player1Losed) || (chosen==2 && Player2Losed) || (chosen==3 && Player3Losed)
+                || (chosen==4 && Player4Losed) || !shootChoice.contains(chosenStr))
+        {
+            chosen = rand.nextInt(range)+1; // to have not 0 and 1 but 1 and 2
+            chosenStr = Integer.toString(chosen);
+        }
+        shootChoice.remove(chosenStr);
         return chosen;
     }
 
